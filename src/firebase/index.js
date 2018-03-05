@@ -9,5 +9,4 @@ export {
   auth,
   db,
   firebase,
-
 };

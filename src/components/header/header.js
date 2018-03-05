@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import PropTypes from 'prop-types';
-import GoogleButton from '../Auth/googleButton'
+
 
 
 const Header = (props, { authUser }) =>

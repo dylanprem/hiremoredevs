@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { auth } from '../../firebase/firebase';
+import { auth } from '../../firebase';
 import * as routes from '../../constants/routes';
-import GoogleButton from './googleButton';
+
 
 const SignInPage = ({ history }) =>
   <div>
@@ -40,7 +40,7 @@ class SignInForm extends Component {
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        history.push(routes.LANDING);
+        history.push(routes.CURRENT_FEED);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
@@ -97,9 +97,7 @@ class SignInForm extends Component {
           </div>
       </div>
     </div>
-    <div className='col-md-6 col-md-offset-3'>
-      <GoogleButton />
-    </div>
+
   </div>
     );
   }

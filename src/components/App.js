@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, } from 'react-router-dom';
 import Header from './header/header';
 import SignUpPage from './Auth/register';
 import SignInPage from './Auth/login';
-import JobFeed from './feeds/JobFeed';
+import DualFeed from './feeds/dualFeed';
 
 
 
@@ -20,7 +20,7 @@ const App = () =>
       <Header />
       <Route exact path={routes.REGISTER} component={() => <SignUpPage />} />
       <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-      <Route exact path={routes.JOB_FEED} component={() => <JobFeed />} />
+      <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
     </div>
   </Router>
 
