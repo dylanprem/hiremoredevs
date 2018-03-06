@@ -25,8 +25,12 @@ const NavigationAuth = () =>
 				<nav className="navbar navbar-default">
 				  <div className="container-fluid">
 				    <div className="navbar-header">
-				      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
+				      <Link to="/latest" className="navbar-brand">HireMoreDevs</Link>
 				    </div>
+				    <ul className='nav navbar-nav navbar-right'>	
+				    	<li><Link to='/pw-change'><span className='glyphicon glyphicon-cog'></span></Link></li>
+				    	<li><Link to='/post-job-seeker'>POST</Link></li>
+				    </ul>
 					<button className='btn btn-danger navbar-btn btn-sm navbar-right' type="button" onClick={auth.doSignOut}><span className='glyphicon glyphicon-log-out'></span>  Logout</button>
 				  </div>
 				</nav> 

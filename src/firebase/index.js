@@ -4,7 +4,6 @@ import * as firebase from './firebase';
 
 
 
-
 export {
   auth,
   db,

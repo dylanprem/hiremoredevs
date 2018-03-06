@@ -9,7 +9,8 @@ const SignUpPage = ({ history }) =>
   </div>
 
 const INITIAL_STATE = {
-  username: '',
+  firstName: '',
+  lastName: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -29,7 +30,8 @@ class SignUpForm extends Component {
 
   onSubmit = (event) => {
     const {
-      username,
+      firstName,
+      lastName,
       email,
       passwordOne,
     } = this.state;
@@ -42,10 +44,10 @@ class SignUpForm extends Component {
       .then(authUser => {
 
         // Create a user in your own accessible Firebase Database too
-        db.doCreateUser(authUser.uid, username, email)
+        db.doCreateUser(authUser.uid, firstName, lastName, email)
           .then(() => {
             this.setState(() => ({ ...INITIAL_STATE }));
-            history.push(routes.LANDING);
+            history.push(routes.CURRENT_FEED);
           })
           .catch(error => {
             this.setState(byPropKey('error', error));
@@ -61,7 +63,8 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      username,
+      firstName,
+      lastName,
       email,
       passwordOne,
       passwordTwo,
@@ -72,7 +75,8 @@ class SignUpForm extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
       email === '' ||
-      username === '';
+      firstName === '' ||
+      lastName === '';
 
     return (
       <div className='col-md-6 col-md-offset-3'>
@@ -84,10 +88,19 @@ class SignUpForm extends Component {
               <form onSubmit={this.onSubmit}>
                 <div className='form-group'>
                 <input
-                  value={username}
-                  onChange={event => this.setState(byPropKey('username', event.target.value))}
+                  value={firstName}
+                  onChange={event => this.setState(byPropKey('firstName', event.target.value))}
                   type="text"
-                  placeholder="Full Name"
+                  placeholder="First Name"
+                  className='form-control input-lg'
+                />
+                </div>
+                <div className='form-group'>
+                <input
+                  value={lastName}
+                  onChange={event => this.setState(byPropKey('lastName', event.target.value))}
+                  type="text"
+                  placeholder="Last Name"
                   className='form-control input-lg'
                 />
                 </div>

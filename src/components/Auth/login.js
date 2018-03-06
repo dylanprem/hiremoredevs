@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { auth } from '../../firebase';
+import { withRouter, Link } from 'react-router-dom';
+import { auth, provider } from '../../firebase';
 import * as routes from '../../constants/routes';
 
 
@@ -18,6 +18,7 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   error: null,
+  
 };
 
 class SignInForm extends Component {
@@ -25,6 +26,8 @@ class SignInForm extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+
+    
   }
 
   onSubmit = (event) => {
@@ -48,6 +51,11 @@ class SignInForm extends Component {
 
     event.preventDefault();
   }
+
+
+
+
+
 
   render() {
     const {
@@ -86,6 +94,7 @@ class SignInForm extends Component {
                     className="form-control input-lg"
                   />
                 </div>
+
                 <button className='btn btn-success' disabled={isInvalid} type="submit">
                   Sign In
                 </button>
@@ -96,6 +105,9 @@ class SignInForm extends Component {
             
           </div>
       </div>
+    </div>
+    <div className='col-md-6 col-md-offset-3 text-center'>
+      <Link to='/pw-forget' className='btn btn-primary'>Forgot Password</Link>
     </div>
 
   </div>

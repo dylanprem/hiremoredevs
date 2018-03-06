@@ -6,7 +6,9 @@ import Header from './header/header';
 import SignUpPage from './Auth/register';
 import SignInPage from './Auth/login';
 import DualFeed from './feeds/dualFeed';
-
+import PasswordForgetForm from './Auth/forgotpw';
+import PasswordChangeForm from './Auth/changepw';
+import PostJobSeeker from './jobseekers/PostJobSeeker';
 
 
 import * as routes from '../constants/routes';
@@ -20,7 +22,10 @@ const App = () =>
       <Header />
       <Route exact path={routes.REGISTER} component={() => <SignUpPage />} />
       <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+      <Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetForm />} />
+      <Route exact path={routes.PASSWORD_CHANGE} component={() => <PasswordChangeForm />} />
       <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
+      <Route exact path={routes.POST_JOB_SEEKER} component={() => <PostJobSeeker />} />
     </div>
   </Router>
 
