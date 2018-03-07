@@ -14,9 +14,11 @@ class PostJobSeekerForm extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-	    firstName: '',
-	    lastName: '',
-	    email: '',
+    	users:[],
+    	uid:'',
+    	firstName:'',
+    	lastName:'',
+    	email:'',
 	    position: '',
 	    state: '',
 	    city: '',
@@ -40,10 +42,13 @@ class PostJobSeekerForm extends Component {
   handleSubmit(e) {
   e.preventDefault();
   const JobSeekersRef = firebase.database().ref('JobSeekerPosts');
-  const JobSeekerPosts = {
-    firstName: this.state.firstName,
-    lastName: this.state.lastName,
-    email: this.state.email,
+  const usersRef = firebase.database().ref('users/' + this.state.authUser.uid);
+  
+  const JobSeekerPosts = { 
+  	uid: this.state.authUser.uid,
+  	firstName: this.state.firstName,
+  	lastName: this.state.lastName,
+  	email: this.state.email,
     position: this.state.position,
     state: this.state.state,
     city: this.state.city,
@@ -56,9 +61,9 @@ class PostJobSeekerForm extends Component {
 
   JobSeekersRef.push(JobSeekerPosts);
   this.setState({
-    firstName: '',
-    lastName: '',
-    email: '',
+  	firstName:'',
+  	lastName:'',
+  	email:'',
     position: '',
     state: '',
     city: '',
@@ -80,19 +85,8 @@ componentDidMount(){
 	render(){
 		return(
 			<div className='col-md-6 col-md-offset-3'>
+
 				<form onSubmit={this.handleSubmit}>
-					<div className='form-group'>
-						<label>First Name</label>
-						<input className='form-control' name='firstName' onChange={this.handleChange} value={this.state.firstName} />
-					</div>
-					<div className='form-group'>
-						<label>Last Name Name</label>
-						<input className='form-control' name='lastName' onChange={this.handleChange} value={this.state.lastName} />
-					</div>
-					<div className='form-group'>
-						<label>Email Address</label>
-						<input className='form-control' name='email' onChange={this.handleChange} value={this.state.email}/>
-					</div>
 					<div className='form-group'>
 						<label>I am a:</label>
 						<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { auth, db } from '../../firebase';
 import * as routes from '../../constants/routes';
+import PostJobSeeker from '../jobseekers/PostJobSeeker';
 
 const SignUpPage = ({ history }) =>
   <div>
@@ -131,7 +132,7 @@ class SignUpForm extends Component {
                   className='form-control input-lg'
                 />
                 </div>
-
+                
                 <button className='btn btn-success' disabled={isInvalid} type="submit">
                   Sign Up
                 </button>
@@ -140,6 +141,7 @@ class SignUpForm extends Component {
 
             </form>
       </div>
+      
           </div>
         </div>
       </div>

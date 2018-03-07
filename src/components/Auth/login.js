@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { auth, provider } from '../../firebase';
 import * as routes from '../../constants/routes';
+import DualFeed from '../feeds/dualFeed';
+import PropTypes from 'prop-types';
+import * as firebase from 'firebase';
 
-
-const SignInPage = ({ history }) =>
+const SignInPage = (props, { history,  authUser }) =>
   <div>
-    <SignInForm history={history} />
+    { authUser
+     ? <SignInForm history={history} />
+     : <DualFeed />
+    }
     
   </div>
 

@@ -9,6 +9,7 @@ import DualFeed from './feeds/dualFeed';
 import PasswordForgetForm from './Auth/forgotpw';
 import PasswordChangeForm from './Auth/changepw';
 import PostJobSeeker from './jobseekers/PostJobSeeker';
+import PostJob from './jobs/PostJob';
 
 
 import * as routes from '../constants/routes';
@@ -26,6 +27,7 @@ const App = () =>
       <Route exact path={routes.PASSWORD_CHANGE} component={() => <PasswordChangeForm />} />
       <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
       <Route exact path={routes.POST_JOB_SEEKER} component={() => <PostJobSeeker />} />
+      <Route exact path={routes.POST_JOB} component={() => <PostJob />} />
     </div>
   </Router>
 

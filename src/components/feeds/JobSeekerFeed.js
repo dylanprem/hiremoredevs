@@ -13,6 +13,7 @@ class JobSeekers extends Component {
 	
 	componentDidMount() {
 	   const JobSeekersRef = firebase.database().ref('JobSeekerPosts');
+
 	   JobSeekersRef.on('value', (snapshot) => {
 	    let JobSeekerPosts = snapshot.val();
 	    let newState = [];
@@ -35,9 +36,9 @@ class JobSeekers extends Component {
 	      JobSeekerPosts: newState
 	    });
 	  });
-	}
+  }
 
-	render(){
+	render() {
 		return(
 			<div>
 			<h1 className="text-center">JOB SEEKERS</h1>
