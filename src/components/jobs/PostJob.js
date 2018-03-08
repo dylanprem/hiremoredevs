@@ -26,6 +26,9 @@ class PostJobForm extends Component {
 	    apply:'',
 	    phone:'',
 	    applyLink:'',
+	    reqOne:'',
+	    reqTwo:'',
+	    reqThree:'',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +52,10 @@ class PostJobForm extends Component {
     about: this.state.about,
     address: this.state.address,
     phone: this.state.phone,
-    applyLink: this.state.applyLink
+    applyLink: this.state.applyLink,
+    reqOne:this.state.reqOne,
+	reqTwo:this.state.reqTwo,
+	reqThree:this.state.reqThree,
   }
 
 
@@ -61,7 +67,10 @@ class PostJobForm extends Component {
     address:'',
     about: '',
     phone:'',
-    applyLink:''
+    applyLink:'',
+    reqOne:'',
+	reqTwo:'',
+	reqThree:'',
   });
 
   geocodeByAddress(this.state.address)
@@ -128,7 +137,12 @@ componentDidMount(){
 						</div>
 						<small className='text-danger'>* URL must include https://</small>	
 					</div>
-					
+					<div className='form-group'>
+						<label>Top 3 Job Requirements</label>
+						<input placeholder='React JS' className='form-control' name='reqOne' onChange={this.handleChange} value={this.state.reqOne}/>
+						<input placeholder='Java' className='form-control' name='reqTwo' onChange={this.handleChange} value={this.state.reqTwo}/>
+						<input placeholder='Bootstrap' className='form-control' name='reqThree' onChange={this.handleChange} value={this.state.reqThree}/>
+					</div>
 
 					<input type='submit' className='btn btn-primary btn-block' value='Post' />
 				</form>

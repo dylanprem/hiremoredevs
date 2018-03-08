@@ -10,10 +10,8 @@ const DualFeed = (props, { authUser }) =>
 
   	<div className='container-fluid'>
   		<p>{authUser.firstName} {authUser.lastName}</p>
-		<div className='col-md-6'>
-			<JobSeekers />
-		</div>
-		<div className='col-md-6'>
+		
+		<div className='col-md-12'>
 			<JobFeed />
 		</div>
 	</div>

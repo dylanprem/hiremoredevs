@@ -38,26 +38,32 @@ class JobFeed extends Component {
 			<div>
 			<h1 className="text-center">JOB FEED</h1>
 
-			<div className='col-md-8 col-md-offset-2 text-center'>
-			{this.state.JobPosts.map((post) => {
-    		  return(
-			    <div className='panel-group' key={post.id}>
-			      <div className='panel panel-info'>
-			      	<div className='panel-heading'>
-	                  <h3>{post.companyName}</h3>
-	                </div>
-	                <div className='panel-body'>
-	                  <p className='text-muted'>{post.email}</p>
-	                  <p className='text-warning'>{post.phone}</p>
-	                  <p className='text-muted'>{post.position}</p>
-	                  <p className='text-info'><strong>{post.address}</strong></p>
-	                  <p className='text-info'>{post.about}</p>
-	             	  <Link className='btn btn-primary' target='_blank' to={`${post.applyLink}`}>Apply</Link>
-	                </div>
-                  </div>
-                </div>
-                    );
-      			})}
+			<div className='col-md-12'>
+			
+
+			<table className="table">
+				    <thead>
+				      <tr>
+				      	<th>Company</th>
+				        <th>Position</th>
+				        <th>Address</th>
+				        <th>View Details</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    {this.state.JobPosts.map((post) => {
+    		  			return(
+					    <tr className='info' key={post.id}>
+	                      <td className='text-warning'>{post.companyName}</td>
+	                      <td>{post.position}</td>
+	                      <td>{post.address}</td>
+	                      <td><Link className='btn btn-success btn-sm' to={`job/${post.id}`}>View Details</Link></td>
+	                      
+	                    </tr>
+		                    );
+	          			})}         
+				    </tbody>
+				</table>
 			</div>
 			</div>
 		);
