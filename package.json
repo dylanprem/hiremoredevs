@@ -19,6 +19,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "firebase": "^4.10.1"
+    "firebase": "^4.10.1",
+    "react-bootstrap": "^0.32.1"
   }
 }

@@ -84,7 +84,7 @@ componentDidMount(){
 }
 	render(){
 		return(
-			<div className='col-md-6 col-md-offset-3'>
+			<div className='col-md-6'>
 
 				<form onSubmit={this.handleSubmit}>
 					<div className='form-group'>
@@ -97,7 +97,7 @@ componentDidMount(){
 						</select>
 					</div>
 					<div className='form-group'>
-						<label>I'm looking for a job in:</label>
+						<label>I'm located in:</label>
 						<p>State</p>
 						<select required className='form-control' name='state' onChange={this.handleChange} value={this.state.state}>
 							<option value="" disabled selected>Select an option</option>
@@ -185,6 +185,7 @@ componentDidMount(){
 					</div>
 					<input type='submit' className='btn btn-primary btn-block' value='Post' />
 				</form>
+
 			</div>
 		);
 	}

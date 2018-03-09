@@ -30,7 +30,7 @@ const NavigationAuth = () =>
 				    <button className='btn btn-danger navbar-btn btn-sm' type="button" onClick={auth.doSignOut}><span className='glyphicon glyphicon-log-out'></span>  Logout</button>
 				    <ul className='nav navbar-nav navbar-right'>
 				    	<li><Link to='/post-job'><button className='btn btn-default btn-sm'><span className='glyphicon glyphicon-list-alt'></span> Post Job Ad</button></Link></li>
-						<li><Link to='/post-job-seeker'><button className='btn btn-warning btn-sm'><span className='glyphicon glyphicon-pencil'></span> Post</button></Link></li>	
+							
 				    	<li><Link to='/pw-change'><button className='btn btn-info btn-sm'><span className='glyphicon glyphicon-cog'></span> Settings</button></Link></li>
 				    </ul>
 
