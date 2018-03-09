@@ -6,13 +6,9 @@ import DualFeed from '../feeds/dualFeed';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 
-const SignInPage = (props, { history,  authUser }) =>
+const SignInPage = (props, { history}) =>
   <div>
-    { authUser
-     ? <SignInForm history={history} />
-     : <DualFeed />
-    }
-    
+    <SignInForm  />
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
