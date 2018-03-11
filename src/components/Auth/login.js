@@ -1,57 +1,48 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import { auth, provider } from '../../firebase';
+import { withRouter, history, Link } from 'react-router-dom';
+import { auth, provider } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
 import DualFeed from '../feeds/dualFeed';
-import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
+import './auth.css';
 
-const SignInPage = (props, { history}) =>
+
+const SignInPage = ({ history }) =>
   <div>
-    <SignInForm  />
+    <SignInForm history={history} />
   </div>
 
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null,
-  
-};
 
 class SignInForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = {
+      authUser:null,
+    }
 
-    
+    this.loginWithGoogle = this.loginWithGoogle.bind(this);    
   }
 
-  onSubmit = (event) => {
-    const {
-      email,
-      password,
-    } = this.state;
+  loginWithGoogle() {
+      const {
+      displayName,
+      email
+      } = this.state;
 
-    const {
-      history,
-    } = this.props;
+      auth.signInWithPopup(provider) 
+        .then((result) => {
+          const token = result.credential.accessToken;
+          const authUser = result.authUser;
+          this.props.history.push(routes.CURRENT_FEED);
+          this.setState({
+            authUser
+          });
+        });
+    }
 
-    auth.doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        history.push(routes.CURRENT_FEED);
-      })
-      .catch(error => {
-        this.setState(byPropKey('error', error));
-      });
 
-    event.preventDefault();
-  }
 
 
 
@@ -59,58 +50,21 @@ class SignInForm extends Component {
 
 
   render() {
-    const {
-      email,
-      password,
-      error,
-    } = this.state;
-
-    const isInvalid =
-      password === '' ||
-      email === '';
 
     return (
-    <div className='row'>
-      <div className='col-md-6 col-md-offset-3'>
+    <div className='row dark-bg-login'>
+      <div className='col-md-6 col-md-offset-3 login'>
         <div className='panel-group'>
-          <div className='panel panel-primary'>
-            <div className='panel-heading'><h5>Already have an account? Login</h5></div>
-            <div className='panel-body'>
-              <form onSubmit={this.onSubmit}>
-                <div className='form-group'>
-                  <input
-                    value={email}
-                    onChange={event => this.setState(byPropKey('email', event.target.value))}
-                    type="text"
-                    placeholder="Email Address"
-                    className="form-control input-lg"
-                  />
-                </div>
-                <div className='form-group'>
-                  <input
-                    value={password}
-                    onChange={event => this.setState(byPropKey('password', event.target.value))}
-                    type="password"
-                    placeholder="Password"
-                    className="form-control input-lg"
-                  />
-                </div>
-
-                <button className='btn btn-success' disabled={isInvalid} type="submit">
-                  Sign In
-                </button>
-
-                { error && <p>{error.message}</p> }
-              </form>
+          <div className='panel'>
+            <div className='panel-heading'><h3 className='text-center'>Sign In</h3></div>
+            <div className='panel-body text-center'>
+             
+                <button className="btn btn-danger google-btn" onClick={this.loginWithGoogle}>Login With Gmail</button>
             </div>
             
           </div>
       </div>
     </div>
-    <div className='col-md-6 col-md-offset-3 text-center'>
-      <Link to='/pw-forget' className='btn btn-primary'>Forgot Password</Link>
-    </div>
-
   </div>
     );
   }

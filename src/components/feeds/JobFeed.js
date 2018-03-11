@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Link } from 'react-router-dom';
+import './feeds.css';
 
 class JobFeed extends Component {
 	constructor(){
@@ -35,13 +36,13 @@ class JobFeed extends Component {
 }
 	render(){
 		return(
-			<div>
-			<h1 className="text-center">JOB FEED</h1>
-
-			<div className='col-md-12'>
+			<div className='row dark-bg-feed'>
 			
 
-			<table className="table">
+			<div className='col-md-12 jobs-container'>
+			<h1 className="text-center">JOB FEED</h1>
+
+			<table className="table jobs-table">
 				    <thead>
 				      <tr>
 				      	<th>Company</th>
@@ -53,11 +54,11 @@ class JobFeed extends Component {
 				    <tbody>
 				    {this.state.JobPosts.map((post) => {
     		  			return(
-					    <tr className='info' key={post.id}>
+					    <tr className='active' key={post.id}>
 	                      <td className='text-warning'>{post.companyName}</td>
 	                      <td>{post.position}</td>
 	                      <td>{post.address}</td>
-	                      <td><Link className='btn btn-success btn-sm' to={`job/${post.id}`}>View Details</Link></td>
+	                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td>
 	                      
 	                    </tr>
 		                    );

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
-
+import './style.css';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import LoggedInAs from './LoggedInAs';
 
 const Header = (props, { authUser }) =>
   <div>
@@ -22,35 +24,49 @@ Header.contextTypes = {
 
 const NavigationAuth = () =>
 			<div>
-				<nav className="navbar navbar-default">
-				  <div className="container-fluid">
-				    <div className="navbar-header">
+				<Navbar inverse collapseOnSelect>
+				  <Navbar.Header>
+				    <Navbar.Brand>
 				      <Link to="/latest" className="navbar-brand">HireMoreDevs</Link>
-				    </div>
-				    <button className='btn btn-danger navbar-btn btn-sm' type="button" onClick={auth.doSignOut}><span className='glyphicon glyphicon-log-out'></span>  Logout</button>
-				    <ul className='nav navbar-nav navbar-right'>
-				    	<li><Link to='/post-job'><button className='btn btn-default btn-sm'><span className='glyphicon glyphicon-list-alt'></span> Post Job Ad</button></Link></li>
-							
-				    	<li><Link to='/pw-change'><button className='btn btn-info btn-sm'><span className='glyphicon glyphicon-cog'></span> Settings</button></Link></li>
-				    </ul>
+				    </Navbar.Brand>
+				    <Navbar.Toggle />
+				  </Navbar.Header>
+				  <Navbar.Collapse>
 
-				  </div>
-				</nav> 
+				    <LoggedInAs />
+				    <Nav pullRight>
+				      <NavItem eventKey={1}>
+				        <Link to='/post-job' className='signup-link'> Post Job Ad</Link>
+				      </NavItem>
+				      <NavItem eventKey={2} onClick={auth.doSignOut}>
+				        <button className='btn yellow-button logged-in-as'>Logout</button>
+				      </NavItem>
+				    </Nav>
+				  </Navbar.Collapse>
+				</Navbar>
 			</div>
 
 const NavigationNonAuth = () =>	
 			<div>
-				<nav className="navbar navbar-default">
-				  <div className="container-fluid">
-				    <div className="navbar-header">
+				<Navbar inverse collapseOnSelect>
+				  <Navbar.Header>
+				    <Navbar.Brand>
 				      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
-				    </div>
-				    <ul className="nav navbar-nav navbar-right">
-				      <li><Link to="/register"><span className="glyphicon glyphicon-user"></span> Sign Up</Link></li>
-				      <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>
-				    </ul>
-				  </div>
-				</nav> 
+				    </Navbar.Brand>
+				    <Navbar.Toggle />
+				  </Navbar.Header>
+				  <Navbar.Collapse>
+				    <Nav pullRight>
+				      <NavItem eventKey={2} to='/login'>
+				        <Link to='/login' className='login-link'> Login</Link>
+				      </NavItem>
+				    </Nav>
+				  </Navbar.Collapse>
+				</Navbar> 
 			</div>
+
+
+
+
 
 export default Header;

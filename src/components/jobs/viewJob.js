@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import JobFeed from '../feeds/JobFeed';
-import PostJobSeeker from '../jobseekers/PostJobSeeker';
 import { Modal } from 'react-bootstrap';
 import './style.css'
 
@@ -19,8 +18,8 @@ class ViewJob extends Component{
 			postsFromUsers:[],
 			currentJob: props.match.params.viewJob,
 			uid:'',
-	    	firstName:'',
-	    	lastName:'',
+			pic:'',
+	    	name:'',
 	    	email:'',
 		    position: '',
 		    state: '',
@@ -29,24 +28,21 @@ class ViewJob extends Component{
 		    about: '',
 		    github:'',
 	    	linkedin:'',
-	    	show: false
+	    	show: false,
+	    	authUser:null
 		}
 		this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
-    	this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+    	
 	}
-
-		handleClose() {
-	    this.setState({ show: false });
-	  }
-
-	  handleShow() {
-	    this.setState({ show: true });
+	  removeItem(postId) {
+	    const postRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + `/postsFromUsers/${postId}`);
+	    postRef.remove();
+	    window.location.reload();
 	  }
 
 
-		handleChange(e) {
+	 handleChange(e) {
 	    this.setState({
 	    	[e.target.name]: e.target.value
 	    });
@@ -59,8 +55,8 @@ class ViewJob extends Component{
 	  
 	  const postsFromUsers = { 
 	  	uid: this.state.authUser.uid,
-	  	firstName: this.state.firstName,
-	  	lastName: this.state.lastName,
+	  	pic: this.state.authUser.photoURL,
+	  	name: this.state.authUser.displayName,
 	  	email: this.state.authUser.email,
 	    position: this.state.position,
 	    state: this.state.state,
@@ -73,8 +69,8 @@ class ViewJob extends Component{
 
 	  JobPostsCandidatesRef.push(postsFromUsers);
 	  this.setState({
-	  	firstName:'',
-	  	lastName:'',
+	  	pic:'',
+	  	displayName:'',
 	  	email:'',
 	    position: '',
 	    state: '',
@@ -117,8 +113,8 @@ class ViewJob extends Component{
 		for (let post in postsFromUsers) {
 	      newState.push({
 	        id: post,
-	        firstName: postsFromUsers[post].firstName,
-		    lastName: postsFromUsers[post].lastName,
+	        pic:postsFromUsers[post].pic,
+	        name: postsFromUsers[post].name,
 		    email: postsFromUsers[post].email,
 		    position: postsFromUsers[post].position,
 		    state: postsFromUsers[post].state,
@@ -126,7 +122,8 @@ class ViewJob extends Component{
 		    relocate: postsFromUsers[post].relocate,
 		    about: postsFromUsers[post].about,
 		    github: postsFromUsers[post].github,
-		    linkedin: postsFromUsers[post].linkedin
+		    linkedin: postsFromUsers[post].linkedin,
+		    authUser: postsFromUsers[post].authUser
 	      });
 	    }
 		this.setState({
@@ -145,29 +142,31 @@ class ViewJob extends Component{
 
 	render(){
 		return(
-			<div>
-				<div className='col-md-12 bg-primary company-info'>
+			<div className='row'>
+				{this.state.authUser ?
+				<div>
+				<div className='col-md-12 dark-bg-company-info company-info'>
 					{this.state.JobPosts.map((post) => {
 				    		return(
 		                    <div className="success text-center" key={post.id}>
 						       <h3>Company: </h3>
-						       <p>{post.companyName}</p>
+						       <p className='job-text'>{post.companyName}</p>
 						       
 						       <h3>Email:</h3>
-						       <p>{post.email}</p>
+						       <p className='job-text'>{post.email}</p>
 
 						       <h3>Phone:</h3>
-						       <p>{post.phone}</p>
+						       <p className='job-text'>{post.phone}</p>
 
 						       <h3>Position</h3>
-						       <p>{post.position}</p>
+						       <p className='job-text'>{post.position}</p>
 
 						       <h3>Job Location</h3>
-						       <p>{post.address}</p>
+						       <p className='job-text'>{post.address}</p>
 
 						       <h3>About the Job:</h3>
-						       <p>{post.about}</p>
-						       <Link target='_new' className='btn btn-info' to={`${post.applyLink}`}>Apply</Link>
+						       <p className='job-text'>{post.about}</p>
+						       <Link target='_new' className='btn yellow-button' to={`${post.applyLink}`}>Apply</Link>
 					        </div>
 
 					         );
@@ -177,14 +176,6 @@ class ViewJob extends Component{
 				<div className='col-md-12 post-box'>
 					<h3 className='text-center'>Interested in this job? Tell us about yourself.</h3>
 					<form className='col-md-4 col-md-offset-4' onSubmit={this.handleSubmit}>
-						<div className='form-group'>
-							<label>First Name:</label>
-							<input name='firstName' type='text' onChange={this.handleChange} value={this.state.firstName} className='form-control' />
-						</div>
-						<div className='form-group'>
-							<label>Last Name:</label>
-							<input name='lastName' type='text' onChange={this.handleChange} value={this.state.lastName} className='form-control' />
-						</div>
 						<div className='form-group'>
 							<label>I am a:</label>
 							<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>
@@ -261,7 +252,7 @@ class ViewJob extends Component{
 							<select required className='form-control' name='relocate' onChange={this.handleChange} value={this.state.relocate}>
 								<option value="" disabled selected>Select an option</option>
 								<option value="Willing to relocate">Willing to relocate.</option>
-								<option value="Willing to relocate">Does not want to relocate.</option>
+								<option value="Not Willing to relocate">Does not want to relocate.</option>
 							</select>
 						</div>
 
@@ -286,10 +277,11 @@ class ViewJob extends Component{
 
 				</div> 
 				<div className='col-md-12 members-posted'>
-					<h1 className='text-center text-primary'>Members interested in this job:</h1>
-					<table className="table">
+					<h1 className='text-center'>Members interested in this job:</h1>
+					<table className="table table-text">
 						    <thead>
 						      <tr>
+						      	<th></th>
 						      	<th>Name</th>
 						        <th>Email</th>
 						        <th>Position</th>
@@ -297,27 +289,37 @@ class ViewJob extends Component{
 						        <th>Details</th>
 						        <th>GitHub</th>
 						        <th>LinkedIn</th>
+						        <th></th>
 						      </tr>
 						    </thead>
 						    <tbody>
 						    {this.state.postsFromUsers.map((post) => {
 		    		  			return(
-							    <tr className='info' key={post.id}>
-			                      <td className='text-warning'>{post.firstName} {post.lastName}</td>
+							    <tr className='active' key={post.id}>
+							      <td><img style={{with:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={post.pic} /></td>
+			                      <td className='text-warning'>{post.name}</td>
 			                      <td><strong className='text-primary'>{post.email}</strong></td>
 			                      <td>{post.position}</td>
 			                      <td>{post.city}, {post.state}</td>
 			                      <td><button className='btn btn-info btn-sm'>View Details</button></td>
 			                      <td><Link target='_new' className='btn btn-primary btn-sm' to={`${post.github}`}><small>GitHub</small></Link></td>
-							      <td><Link target='_new' className='btn btn-primary btn-sm' to={`${post.linkedin}`}><small>LinkedIn</small></Link></td>  
+							      <td><Link target='_new' className='btn btn-primary btn-sm' to={`${post.linkedin}`}><small>LinkedIn</small></Link></td>
+							      <td>{post.email === this.state.authUser.email ?
+               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>X</button> : null}
+               					  </td>  
 			                    </tr>
 			                    
 				                    );
 			          			})}         
 						    </tbody>
 		            </table>		  	
-		    		  	
+		    		</div>  	
 				</div>
+				:
+				<div className='text-center'>
+					<h1>Please Login</h1>
+				</div>
+				}
 			</div>
 		);
 	}

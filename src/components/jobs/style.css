@@ -7,3 +7,17 @@
 	color:#fff;
 	background-color: 	#FF8C00;
 }
+
+.job-text{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 18px;
+}
+
+.dark-bg-company-info{
+	background-color:  #363738;
+}
+
+.table-text{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 18px;	
+}

@@ -1,0 +1,35 @@
+.dark-bg{
+	background-color: #363738;
+	height: 100%;
+}
+
+.dark-bg-login{
+	background-color: #363738;
+	height: 100%;
+	padding-bottom: 10%;
+}
+
+.register, .login, .forgot-pw, .forgot-password-button {
+	padding-top: 7%;
+	padding-bottom: 7%;
+}
+
+.black-button{
+	color: 	#DAA520 !important;
+	background-color: #363738;
+}
+
+
+.yellow-button{
+	color: #363738 !important ;
+	background-color: #DAA520;
+}
+
+.forgot-pw-btn{
+	margin-left:10px;
+}
+
+.google-btn{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 18px;
+}
