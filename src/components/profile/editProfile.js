@@ -10,7 +10,7 @@ class editProfile extends Component {
 		super(props);
 		this.state = {
 			authUser:null,
-			currentProfile: this.props.match.params.editProfile,
+			currentProfile: this.props.match.params.profile,
 			uid:'',
 			about:'',
 			frameworkOne:'',

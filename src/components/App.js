@@ -29,7 +29,7 @@ const App = () =>
       <Route exact path={routes.POST_JOB} component={() => <PostJob />} />
       <Route exact path="/job/:viewJob" component={viewJob} />
       <Route exact path={routes.VIEW_PROFILE} component={viewProfile} />
-      <Route exact path="/profile/:editProfile" component={editProfile} />
+      <Route exact path="/profile/:profile" component={editProfile} />
 
     </div>
   </Router>
