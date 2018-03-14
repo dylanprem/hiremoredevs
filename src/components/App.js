@@ -28,8 +28,8 @@ const App = () =>
       <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
       <Route exact path={routes.POST_JOB} component={() => <PostJob />} />
       <Route exact path="/job/:viewJob" component={viewJob} />
-      <Route exact path="/profile/:viewProfile" component={viewProfile} />
-      <Route exact path="/edit-profile/:id" component={editProfile} />
+      <Route exact path={routes.VIEW_PROFILE} component={viewProfile} />
+      <Route exact path="/profile/:editProfile" component={editProfile} />
 
     </div>
   </Router>

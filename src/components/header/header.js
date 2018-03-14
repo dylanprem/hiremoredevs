@@ -46,6 +46,9 @@ const NavigationAuth = () =>
 				      <NavItem eventKey={2} onClick={auth.doSignOut}>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>
 				      </NavItem>
+				      <NavItem eventKey={3}>
+				        <Link to={routes.EDIT_PROFILE} className='signup-link'><span className='glyphicon glyphicon-cog'></span></Link>
+				      </NavItem>
 				    </Nav>
 				    <LoggedInAs />
 				  </Navbar.Collapse>

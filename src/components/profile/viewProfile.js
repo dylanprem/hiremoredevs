@@ -11,7 +11,7 @@ class viewProfile extends Component {
 		super(props);
 		this.state = {
 			authUser:null,
-			profileInfo:[],
+			Profiles:[],
 		}
 	}
 
@@ -20,21 +20,21 @@ class viewProfile extends Component {
 
 
 		const user = firebase.auth().currentUser;		
-		const profilesRef = firebase.database().ref('Profiles/' + this.state.uid + '/profileInfo/' );
+		const profilesRef = firebase.database().ref('Profiles/' );
 		profilesRef.once('value', (snapshot) => {
-	    let profileInfo = snapshot.val();
+	    let Profiles = snapshot.val();
 	    let newState = [];
-	    for (let profile in profileInfo){
+	    for (let profile in Profiles){
 	      newState.push({
-	        id: profileInfo[profile].id,
-	        about: profileInfo[profile].about,
-	        frameworkOne:profileInfo[profile].frameworkOne,
-			frameworkTwo:profileInfo[profile].frameworkTwo,
-			frameworkThree:profileInfo[profile].frameworkThree,
-			projectName:profileInfo[profile].projectName,
-			projectLink:profileInfo[profile].projectLink,
-			projectInfo:profileInfo[profile].projectInfo,
-			uid:profileInfo[profile].uid,
+	        id: profile,
+	        about: Profiles[profile].about,
+	        frameworkOne:Profiles[profile].frameworkOne,
+			frameworkTwo:Profiles[profile].frameworkTwo,
+			frameworkThree:Profiles[profile].frameworkThree,
+			projectName:Profiles[profile].projectName,
+			projectLink:Profiles[profile].projectLink,
+			projectInfo:Profiles[profile].projectInfo,
+			uid:Profiles[profile].uid,
 	      });
 	    }
 	    this.setState({
@@ -58,7 +58,7 @@ class viewProfile extends Component {
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
-					{this.state.profileInfo.map((profile) => {
+					{this.state.Profiles.map((profile) => {
 						return(
 					<div key={profile.id}>
 						{profile.uid === this.state.authUser.uid ?
@@ -74,15 +74,14 @@ class viewProfile extends Component {
 							<h4>{profile.projectName}</h4>
 							<p className='job-text'>{profile.projectLink}</p>
 							<p className='job-text'>{profile.projectInfo}</p>
-						
+							<Link className='btn yellow-button' to={`profile/${profile.id}`} >Edit Profile</Link>
 						</div>
 						:
 						null}
-						
 					</div>
 					);
-					})}	
-					
+					})}
+
 				</div>
 
 				:

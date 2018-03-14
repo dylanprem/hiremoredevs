@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import './profile.css';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
 
 class editProfile extends Component {
@@ -10,6 +10,7 @@ class editProfile extends Component {
 		super(props);
 		this.state = {
 			authUser:null,
+			currentProfile: this.props.match.params.editProfile,
 			uid:'',
 			about:'',
 			frameworkOne:'',
@@ -33,7 +34,7 @@ class editProfile extends Component {
 	handleSubmit(e) {
 	  e.preventDefault();
 	  this.props.history.push(routes.VIEW_PROFILE)
-	  const profilesRef = firebase.database().ref('Profiles/' + this.state.authUser.uid + '/ProfileInfo');
+	  const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
@@ -48,7 +49,7 @@ class editProfile extends Component {
 	  }
 
 
-	  profilesRef.push(Profiles);
+	  profilesRef.update(Profiles);
 	  this.setState({
 			about:'',
 			frameworkOne:'',
@@ -102,7 +103,7 @@ class editProfile extends Component {
 						<br />					
 					</div>
 					<div className='col-md-12'>
-						<Link to='profile/{this.state.authUser.uid}' className='btn yellow-button' onClick={this.handleSubmit}>Update profile</Link>
+						<button className='btn yellow-button' onClick={this.handleSubmit}>Update profile</button>
 					</div>
 				</div>
 
