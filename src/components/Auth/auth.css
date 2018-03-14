@@ -7,6 +7,7 @@
 	background-color: #363738;
 	height: 100%;
 	padding-bottom: 10%;
+	padding-top: 10%;
 }
 
 .register, .login, .forgot-pw, .forgot-password-button {
@@ -32,4 +33,8 @@
 .google-btn{
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	font-size: 18px;
+}
+
+.git-btn{
+	margin-left: 10px;
 }

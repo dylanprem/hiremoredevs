@@ -4,8 +4,8 @@
 
 .post-box{
 	padding:2%;
-	color:#fff;
-	background-color: 	#FF8C00;
+	color:#363738;
+	background-color:#D3D3D3;
 }
 
 .job-text{
@@ -14,10 +14,15 @@
 }
 
 .dark-bg-company-info{
-	background-color:  #363738;
+	background-color: #363738;
 }
 
 .table-text{
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	font-size: 18px;	
+}
+
+.job-form{
+	padding-top: 2%;
+	padding-bottom: 2%;
 }

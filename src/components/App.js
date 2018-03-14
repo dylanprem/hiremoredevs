@@ -8,6 +8,8 @@ import DualFeed from './feeds/dualFeed';
 import PostJob from './jobs/PostJob';
 import viewJob from './jobs/viewJob';
 import Landing from './Landing/landing';
+import viewProfile from './profile/viewProfile';
+import editProfile from './profile/editProfile';
 
 
 import * as routes from '../constants/routes';
@@ -26,6 +28,9 @@ const App = () =>
       <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
       <Route exact path={routes.POST_JOB} component={() => <PostJob />} />
       <Route exact path="/job/:viewJob" component={viewJob} />
+      <Route exact path="/profile/:viewProfile" component={viewProfile} />
+      <Route exact path="/edit-profile/:id" component={editProfile} />
+
     </div>
   </Router>
 

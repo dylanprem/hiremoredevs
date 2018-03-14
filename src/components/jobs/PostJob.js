@@ -94,8 +94,10 @@ componentDidMount(){
 	    }
 
 		return(
+			<div className='row job-form'>
 			<div className='col-md-6 col-md-offset-3'>
-				<form onSubmit={this.handleSubmit}>
+				<h1 className='text-center'>Please fill out this form to post this Job</h1>
+				<form className='job-text' onSubmit={this.handleSubmit}>
 					<div className='form-group'>
 						<label>Company</label>
 						<input className='form-control' name='companyName' onChange={this.handleChange} value={this.state.companyName} />
@@ -144,8 +146,9 @@ componentDidMount(){
 						<input placeholder='Bootstrap' className='form-control' name='reqThree' onChange={this.handleChange} value={this.state.reqThree}/>
 					</div>
 
-					<input type='submit' className='btn btn-primary btn-block' value='Post' />
+					<input type='submit' className='btn yellow-button btn-block' value='Post' />
 				</form>
+			</div>
 			</div>
 		);
 	}

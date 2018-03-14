@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import './style.css';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
+import * as routes from '../../constants/routes';
 
 const Header = (props, { authUser }) =>
   <div>
@@ -26,6 +27,7 @@ const NavigationAuth = () =>
 			<div>
 				<Navbar inverse collapseOnSelect>
 				  <Navbar.Header>
+
 				    <Navbar.Brand>
 				      <Link to="/latest" className="navbar-brand">HireMoreDevs</Link>
 				    </Navbar.Brand>
@@ -33,8 +35,11 @@ const NavigationAuth = () =>
 				  </Navbar.Header>
 				  <Navbar.Collapse>
 
-				    <LoggedInAs />
+				    
 				    <Nav pullRight>
+				      <NavItem>
+				      	<Link className='signup-link' to={routes.VIEW_PROFILE}>About Me</Link>
+				      </NavItem>
 				      <NavItem eventKey={1}>
 				        <Link to='/post-job' className='signup-link'> Post Job Ad</Link>
 				      </NavItem>
@@ -42,6 +47,7 @@ const NavigationAuth = () =>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>
 				      </NavItem>
 				    </Nav>
+				    <LoggedInAs />
 				  </Navbar.Collapse>
 				</Navbar>
 			</div>

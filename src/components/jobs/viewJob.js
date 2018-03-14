@@ -42,6 +42,9 @@ class ViewJob extends Component{
 	  }
 
 
+	 
+
+
 	 handleChange(e) {
 	    this.setState({
 	    	[e.target.name]: e.target.value
@@ -50,7 +53,7 @@ class ViewJob extends Component{
 
 	  handleSubmit(e) {
 	  
-	  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers');
+	  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
 	  
 	  
 	  const postsFromUsers = { 
@@ -70,7 +73,7 @@ class ViewJob extends Component{
 	  JobPostsCandidatesRef.push(postsFromUsers);
 	  this.setState({
 	  	pic:'',
-	  	displayName:'',
+	  	name:'',
 	  	email:'',
 	    position: '',
 	    state: '',
@@ -98,6 +101,9 @@ class ViewJob extends Component{
 	        position: snapshot.val().position,
 	        address: snapshot.val().address,
 	        about: snapshot.val().about,
+	        reqOne:snapshot.val().reqOne,
+	        reqTwo: snapshot.val().reqTwo,
+	        reqThree: snapshot.val().reqThree,
 	        applyLink: snapshot.val().applyLink
 	      });
 	    
@@ -106,13 +112,14 @@ class ViewJob extends Component{
 	    });
 	  });
 
-	const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers');
+	const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' );
 	JobPostsCandidatesRef.once('value', (snapshot) => {
 		let postsFromUsers = snapshot.val();
 		let newState = [];
 		for (let post in postsFromUsers) {
 	      newState.push({
 	        id: post,
+	        uid: postsFromUsers[post].uid,
 	        pic:postsFromUsers[post].pic,
 	        name: postsFromUsers[post].name,
 		    email: postsFromUsers[post].email,
@@ -166,6 +173,11 @@ class ViewJob extends Component{
 
 						       <h3>About the Job:</h3>
 						       <p className='job-text'>{post.about}</p>
+
+						       <h3>Requirements</h3>
+						       <p className='job-text'>{post.reqOne}</p>
+						       <p className='job-text'>{post.reqTwo}</p>
+						       <p className='job-text'>{post.reqThree}</p>
 						       <Link target='_new' className='btn yellow-button' to={`${post.applyLink}`}>Apply</Link>
 					        </div>
 
@@ -175,7 +187,7 @@ class ViewJob extends Component{
 				</div>
 				<div className='col-md-12 post-box'>
 					<h3 className='text-center'>Interested in this job? Tell us about yourself.</h3>
-					<form className='col-md-4 col-md-offset-4' onSubmit={this.handleSubmit}>
+					<form className='col-md-4 col-md-offset-4 job-text' onSubmit={this.handleSubmit}>
 						<div className='form-group'>
 							<label>I am a:</label>
 							<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>
@@ -256,23 +268,7 @@ class ViewJob extends Component{
 							</select>
 						</div>
 
-						<div className='form-group'>
-							<label>Tell us your strengths and weaknesses. Be sure to include specific technologies and frameworks.</label>
-							<textarea onChange={this.handleChange} value={this.state.about} className='form-control' rows="5" name='about' placeholder='e.g. I love Javascript, but PHP? ...not so great. I am great with NOSQL datatbases like Firebase and MongoDB, but I am not a fan of MySQL.'></textarea>
-						</div>
-
-						<div className='form-group'>
-						<div class="input-group">
-						    <span class="input-group-addon">GitHub url</span>
-						    <input id="msg" type="text" class="form-control" name="github" onChange={this.handleChange} value={this.state.github} placeholder="e.g. https://github.com/mygithub" />
-						</div>
-
-						<div class="input-group">
-						    <span class="input-group-addon">LinkedIn url</span>
-						    <input id="msg" type="text" class="form-control" name="linkedin" onChange={this.handleChange} value={this.state.linkedin} placeholder="e.g. https://linkedin.com/in/mylinkedin" />
-						</div>
-						</div>
-						<input type='submit' className='btn btn-primary btn-block' value='Post' />
+						<input type='submit' className='btn black-button btn-block' value='Post' />
 					</form>
 
 				</div> 
@@ -286,9 +282,10 @@ class ViewJob extends Component{
 						        <th>Email</th>
 						        <th>Position</th>
 						        <th>Location</th>
-						        <th>Details</th>
-						        <th>GitHub</th>
-						        <th>LinkedIn</th>
+						        <th>Status</th>
+						        <th>Profile</th>
+						        <th></th>
+						        
 						        <th></th>
 						      </tr>
 						    </thead>
@@ -301,12 +298,11 @@ class ViewJob extends Component{
 			                      <td><strong className='text-primary'>{post.email}</strong></td>
 			                      <td>{post.position}</td>
 			                      <td>{post.city}, {post.state}</td>
-			                      <td><button className='btn btn-info btn-sm'>View Details</button></td>
-			                      <td><Link target='_new' className='btn btn-primary btn-sm' to={`${post.github}`}><small>GitHub</small></Link></td>
-							      <td><Link target='_new' className='btn btn-primary btn-sm' to={`${post.linkedin}`}><small>LinkedIn</small></Link></td>
+			                      <td>{post.relocate}</td>
+			                      <td><Link className='btn black-button' to={'/profile/' + `${post.uid}`}>View</Link></td>
 							      <td>{post.email === this.state.authUser.email ?
-               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>X</button> : null}
-               					  </td>  
+               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>DELETE</button> : null}
+               					  </td>
 			                    </tr>
 			                    
 				                    );
