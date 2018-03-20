@@ -29,7 +29,6 @@ class SignInForm extends Component {
   }
 
   loginWithGoogle() {
-
       auth.signInWithPopup(provider) 
         .then((result) => {
           const token = result.credential.accessToken;
@@ -52,12 +51,6 @@ class SignInForm extends Component {
           });
         });
     }
-
-
-
-
-
-
 
 
   render() {

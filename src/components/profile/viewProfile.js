@@ -6,6 +6,7 @@ import * as routes from '../../constants/routes';
 import withAuthorization from '../withAuthorization';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+
 class viewProfile extends Component {
 	constructor(props){
 		super(props);
@@ -16,10 +17,7 @@ class viewProfile extends Component {
 	}
 
 
-	componentDidMount(){
-
-
-		const user = firebase.auth().currentUser;		
+	componentDidMount(){	
 		const profilesRef = firebase.database().ref('Profiles' );
 		profilesRef.once('value', (snapshot) => {
 	    let Profiles = snapshot.val();
@@ -58,6 +56,7 @@ class viewProfile extends Component {
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
+					
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>
@@ -74,7 +73,7 @@ class viewProfile extends Component {
 								<h4>{profile.projectName}</h4>
 								<p className='job-text'>{profile.projectLink}</p>
 								<p className='job-text'>{profile.projectInfo}</p>
-								<Link className='btn yellow-button' to={`profile/${profile.id}`} >Edit Profile</Link>
+								
 							</div>
 							:
 							null}

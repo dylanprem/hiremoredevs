@@ -7,6 +7,7 @@ import './style.css';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
+import ProfileButtonToggle from './ProfileButton';
 
 const Header = (props, { authUser }) =>
   <div>
@@ -43,13 +44,11 @@ const NavigationAuth = () =>
 				      <NavItem eventKey={1}>
 				        <Link to='/post-job' className='signup-link'> Post Job Ad</Link>
 				      </NavItem>
-				      <NavItem eventKey={2} onClick={auth.doSignOut}>
+				      <NavItem eventKey={1} onClick={auth.doSignOut}>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>
 				      </NavItem>
-				      <NavItem eventKey={3}>
-				        <Link to={routes.EDIT_PROFILE} className='signup-link'><span className='glyphicon glyphicon-cog'></span></Link>
-				      </NavItem>
 				    </Nav>
+				    <ProfileButtonToggle />
 				    <LoggedInAs />
 				  </Navbar.Collapse>
 				</Navbar>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import JobFeed from './JobFeed';
 import PropTypes from 'prop-types';
 import withAuthorization from '../withAuthorization';

@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import './profile.css';
-import * as routes from '../../constants/routes';
-import withAuthorization from '../withAuthorization';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import * as routes from '../../constants/routes';
 
-class editProfile extends Component {
+class createProfile extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			authUser:null,
-			Profiles:[],
-			currentProfile: props.match.params.editProfile,
 			uid:'',
 			about:'',
 			frameworkOne:'',
@@ -26,15 +23,18 @@ class editProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+
+
 	handleChange(e) {
 	    this.setState({
 	    	[e.target.name]: e.target.value
 	    });
 	  }
-
 	handleSubmit(e) {
 	  e.preventDefault();
-	  const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
+	  this.props.history.push(routes.CURRENT_FEED);
+	  window.location.reload();
+	  const profilesRef = firebase.database().ref('Profiles');
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
@@ -49,7 +49,7 @@ class editProfile extends Component {
 	  }
 
 
-	  profilesRef.update(Profiles);
+	  profilesRef.push(Profiles);
 	  this.setState({
 			about:'',
 			frameworkOne:'',
@@ -61,17 +61,13 @@ class editProfile extends Component {
 	  });
 	}
 
-
-	componentDidMount(){	
-
-
-	  firebase.auth().onAuthStateChanged((authUser) => {
-	      if (authUser) {
-	        this.setState({ authUser });
-	      } 
-    	});	
+	componentDidMount(){
+		firebase.auth().onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.setState({ authUser });
+      } 
+    });	 
 	}
-	
 
 	render() {
 		return (
@@ -119,4 +115,4 @@ class editProfile extends Component {
 	}
 }
 
-export default editProfile;
+export default createProfile;

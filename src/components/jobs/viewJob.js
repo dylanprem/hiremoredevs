@@ -138,6 +138,21 @@ class ViewJob extends Component{
 		});
 	});
 
+	const user = firebase.auth().currentUser;		
+		const profilesRef = firebase.database().ref('Profiles' );
+		profilesRef.once('value', (snapshot) => {
+	    let Profiles = snapshot.val();
+	    let newState = [];
+	    for (let profile in Profiles){
+	      newState.push({
+	        id: profile
+	       });
+	    }
+	    this.setState({
+	      Profiles: newState
+	    });
+	  });
+
 
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -272,19 +287,20 @@ class ViewJob extends Component{
 					</form>
 
 				</div> 
-				<div className='col-md-12 members-posted'>
+				<div className='row'>
+					<div className='col-md-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>
 					<table className="table table-text">
 						    <thead>
 						      <tr>
-						      	<th></th>
+						      	<th>&nbsp;</th>
 						      	<th>Name</th>
 						        <th>Email</th>
 						        <th>Position</th>
 						        <th>Location</th>
 						        <th>Status</th>
 						        <th>Profile</th>
-						        <th></th>
+						        <th>&nbsp;</th>
 						        
 						        <th></th>
 						      </tr>
@@ -308,8 +324,9 @@ class ViewJob extends Component{
 				                    );
 			          			})}         
 						    </tbody>
-		            </table>		  	
-		    		</div>  	
+		            </table>
+		            </div>		  	
+		    	</div>  	
 				</div>
 				:
 				<div className='text-center'>

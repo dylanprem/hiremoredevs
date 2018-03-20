@@ -6,7 +6,8 @@ export const PASSWORD_CHANGE = '/pw-change';
 export const PASSWORD_FORGET = '/pw-forget';
 export const POST_JOB = '/post-job';
 export const VIEW_JOB = '/latest/:viewJob';
-export const VIEW_PROFILE = '/profile';
-export const EDIT_PROFILE = '/profile/:profile';
+export const VIEW_PROFILE = '/profile/:viewProfile';
+export const EDIT_PROFILE = '/edit/:editProfile';
+export const CREATE_PROFILE = '/create-profile';
 
 
