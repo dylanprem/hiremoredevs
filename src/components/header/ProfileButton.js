@@ -19,6 +19,7 @@ class ProfileButtonToggle extends Component {
 
 	componentDidMount(){
 	  const profilesRef = firebase.database().ref('Profiles');
+	  console.log(this.state.Profiles);
 		profilesRef.once('value', (snapshot) => {
 	    let Profiles = snapshot.val();
 	    let newState = [];
@@ -47,9 +48,9 @@ class ProfileButtonToggle extends Component {
 			{this.state.authUser ?
 				<div>
 					<div>
-						{this.state.Profiles.map((profile) => {
+						{this.state.Profiles.map((profile,index) => {
 							return(
-							<div key={profile.id}>
+							<div key={profile.id} id={index}>
 								<Nav>
 									<NavItem>
 									{profile.uid === this.state.authUser.uid ?
@@ -64,12 +65,12 @@ class ProfileButtonToggle extends Component {
 						})}
 					</div>
 					<div>
-						{this.state.Profiles.map((profile) => {
+						{this.state.Profiles.map((profile,index) => {
 							return(
-							<div>
+							<div key={profile.id} id={index}>
 								<Nav>
 									<NavItem>
-									{profile.uid === null && profile.uid !== this.state.authUser.uid ?
+									{index.length === 0 ?
 										<Link className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
 										: 
 										null
