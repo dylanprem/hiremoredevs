@@ -15,12 +15,12 @@ class editProfile extends Component {
 			currentProfile: props.match.params.editProfile,
 			uid:'',
 			about:'',
+			email:'',
+			displayName:'',
+			profilePicture:'',
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
-			projectName:'',
-			projectLink:'',
-			projectInfo:'',
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,22 +30,21 @@ class editProfile extends Component {
 	    this.setState({
 	    	[e.target.name]: e.target.value
 	    });
-	  }
+	}
 
 	handleSubmit(e) {
 	  e.preventDefault();
+	  this.props.history.push(routes.VIEW_PROFILE);
 	  const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
 	  		name: this.state.authUser.displayName,
+	  		profilePicture: this.state.authUser.photoURL,
 	    	about: this.state.about,
 			frameworkOne: this.state.frameworkOne,
 			frameworkTwo: this.state.frameworkTwo,
 			frameworkThree: this.state.frameworkThree,
-			projectName: this.state.projectName,
-			projectLink: this.state.projectLink,
-			projectInfo: this.state.projectInfo,
 	  }
 
 
@@ -55,16 +54,11 @@ class editProfile extends Component {
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
-			projectName:'',
-			projectLink:'',
-			projectInfo:'',
 	  });
 	}
 
 
 	componentDidMount(){	
-
-
 	  firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
@@ -82,30 +76,20 @@ class editProfile extends Component {
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
 					
-					<div className='form-group col-md-6 col-md-offset-3'>
+					<div className='form-group col-md-6 col-md-offset-3 job-text'>
 						<h3>About Me</h3>
-						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} value={this.state.about} />
+						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} value={this.state.about} placeholder='I am awesome!' required />
 					</div>
 
-					<div className='form-group col-md-6 col-md-offset-3'>
+					<div className='form-group col-md-6 col-md-offset-3 job-text'>
 						<h3>My top three frameworks</h3>
-						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} value={this.state.frameworkOne} />
+						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} value={this.state.frameworkOne} placeholder='React' required />
 						<br />
-						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} value={this.state.frameworkTwo} />
+						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} value={this.state.frameworkTwo} placeholder='Javascript' required />
 						<br />
-						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} />
+						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} placeholder='Firebase' required />
 					</div>
 					
-					<div className='form-group col-md-6 col-md-offset-3'>
-					<h3>My Best Work</h3>
-					<p>Please include a link to your best project.</p>
-						<input type='text' className='form-control' placeholder='Project Name' name='projectName' onChange={this.handleChange} value={this.state.projectName} />
-						<br />
-						<input type='text' className='form-control' placeholder='e.g. http://myapp.com' name='projectLink' onChange={this.handleChange} value={this.state.projectLink} />
-						<br />
-						<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} value={this.state.projectInfo} />
-						<br />					
-					</div>
 					<div className='col-md-12'>
 						<button className='btn yellow-button' onClick={this.handleSubmit}>Update profile</button>
 					</div>

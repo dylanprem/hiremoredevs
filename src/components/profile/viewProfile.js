@@ -5,6 +5,7 @@ import './profile.css';
 import * as routes from '../../constants/routes';
 import withAuthorization from '../withAuthorization';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import AddProject from './AddProject';
 
 
 class viewProfile extends Component {
@@ -13,7 +14,15 @@ class viewProfile extends Component {
 		this.state = {
 			authUser:null,
 			Profiles:[],
+			Projects:[]
 		}
+		this.removeItem = this.removeItem.bind(this);
+	}
+
+	removeItem(projectId) {
+	    const projectsRef = firebase.database().ref(`Projects/${projectId}`);
+	    projectsRef.remove();
+	    window.location.reload();
 	}
 
 
@@ -29,9 +38,6 @@ class viewProfile extends Component {
 	        frameworkOne:Profiles[profile].frameworkOne,
 			frameworkTwo:Profiles[profile].frameworkTwo,
 			frameworkThree:Profiles[profile].frameworkThree,
-			projectName:Profiles[profile].projectName,
-			projectLink:Profiles[profile].projectLink,
-			projectInfo:Profiles[profile].projectInfo,
 			uid:Profiles[profile].uid,
 	      });
 	    }
@@ -39,6 +45,26 @@ class viewProfile extends Component {
 	      Profiles: newState
 	    });
 	  });
+
+		const projectsRef = firebase.database().ref('Projects' );
+		projectsRef.once('value', (snapshot) => {
+	    let Projects = snapshot.val();
+	    let newState = [];
+	    for (let project in Projects){
+	      newState.push({
+	        id: project,
+			projectName:Projects[project].projectName,
+			projectLink:Projects[project].projectLink,
+			projectInfo:Projects[project].projectInfo,
+			uid:Projects[project].uid,
+	      });
+	    }
+	    this.setState({
+	      Projects: newState
+	    });
+	  });
+
+
 
 	  firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
@@ -52,6 +78,7 @@ class viewProfile extends Component {
 		return (
 			<div className='row profile-container'>
 			{this.state.authUser ?
+				
 				<div className='col-md-12 text-center'>
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
@@ -68,11 +95,34 @@ class viewProfile extends Component {
 								<p className='job-text'>{profile.frameworkOne}</p>
 								<p className='job-text'>{profile.frameworkTwo}</p>
 								<p className='job-text'>{profile.frameworkThree}</p>
-								
-								<h3>My Best Work</h3>
-								<h4>{profile.projectName}</h4>
-								<p className='job-text'>{profile.projectLink}</p>
-								<p className='job-text'>{profile.projectInfo}</p>
+								<AddProject />
+								<table className="table text-left job-text">
+								    <thead>
+								      <tr>
+								      	<th>Project Name</th>
+								        <th>View Demo</th>
+								        <th>Description</th>
+								      </tr>
+								    </thead>
+								    
+						       {this.state.Projects.map((project) => {
+		    		  			return(
+		    		  				<tbody key={project.id}>
+				    		  		{project.uid === profile.uid ?
+									    <tr className='active' >
+					                      <td className='text-warning'>{project.projectName}</td>
+					                      <td><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </td>
+					                      <td>{project.projectInfo}</td>
+					                      <td>{project.uid === this.state.authUser.uid ?
+		               						 <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(project.id)}>Delete</button> : null}
+		               					  </td>
+					                    </tr>
+					                :
+					                      null}   
+								    </tbody>
+								       );
+					          			})}
+								</table>
 								
 							</div>
 							:
@@ -80,7 +130,8 @@ class viewProfile extends Component {
 						</div>
 					);
 					})}
-
+				
+				
 				</div>
 
 				:

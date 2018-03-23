@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom';
 import './feeds.css';
 
 class JobFeed extends Component {
-	constructor(){
-	super();
+	constructor(props){
+	super(props);
 	this.state = {
 		JobPosts: [],
+		ADMIN: [],
+		authUser: null
 		}
+	this.removeItem = this.removeItem.bind(this);
+	}
+
+	removeItem(jobId) {
+	    const JobsRef = firebase.database().ref(`JobPosts/${jobId}`);
+	    JobsRef.remove();
+	    window.location.reload();
 	}
 
 	componentDidMount() {
@@ -33,12 +42,35 @@ class JobFeed extends Component {
 	      JobPosts: newState
 	    });
 	  });
+
+
+	  const ADMINref = firebase.database().ref('ADMIN');
+	  ADMINref.on('value', (snapshot) => {
+	  	let ADMIN = snapshot.val();
+	  	console.log(snapshot.val());
+	  	let newState = [];
+	  	for (let admins in ADMIN){
+	      newState.push({
+	      	id: admins,
+			uid: ADMIN[admins].uid,
+	      });
+	    }
+	    this.setState({
+	      ADMIN: newState
+	    });
+	  });
+
+	   firebase.auth().onAuthStateChanged((authUser) => {
+	      if (authUser) {
+	        this.setState({ authUser });
+	      } 
+    	});	
 }
 	render(){
 		return(
 			<div className='row dark-bg-feed'>
 			
-
+			{this.state.authUser?
 			<div className='col-md-12 jobs-container'>
 			<h1 className="text-center">JOB FEED</h1>
 
@@ -60,12 +92,24 @@ class JobFeed extends Component {
 	                      <td>{post.address}</td>
 	                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td>
 	                      
+	                      {this.state.ADMIN.map((admins) => {
+	                      	return(
+	                      		<td>
+		                  		{this.state.authUser.uid === admins.uid ?
+						 			<button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> 
+						 		: null}
+							  	</td> 
+	                      	);
+	                      })}
+	                  	  
 	                    </tr>
 		                    );
 	          			})}         
 				    </tbody>
 				</table>
 			</div>
+			:
+			null}
 			</div>
 		);
 	}

@@ -22,6 +22,7 @@ class SignInForm extends Component {
 
     this.state = {
       authUser:null,
+      uid:''
     }
 
     this.loginWithGoogle = this.loginWithGoogle.bind(this); 
@@ -51,6 +52,16 @@ class SignInForm extends Component {
           });
         });
     }
+
+    componentDidMount(){
+      firebase.auth().onAuthStateChanged((authUser) => {
+        if (authUser) {
+          this.setState({ authUser });
+        } 
+      });  
+    }
+
+
 
 
   render() {

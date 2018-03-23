@@ -16,6 +16,7 @@ class ViewJob extends Component{
 		this.state = {
 			JobPosts: [],
 			postsFromUsers:[],
+			Profiles:[],
 			currentJob: props.match.params.viewJob,
 			uid:'',
 			pic:'',
@@ -54,8 +55,7 @@ class ViewJob extends Component{
 	  handleSubmit(e) {
 	  
 	  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
-	  
-	  
+
 	  const postsFromUsers = { 
 	  	uid: this.state.authUser.uid,
 	  	pic: this.state.authUser.photoURL,
@@ -137,15 +137,15 @@ class ViewJob extends Component{
 			postsFromUsers: newState
 		});
 	});
-
-	const user = firebase.auth().currentUser;		
-		const profilesRef = firebase.database().ref('Profiles' );
-		profilesRef.once('value', (snapshot) => {
+	
+	const profilesRef = firebase.database().ref('Profiles' );
+	profilesRef.once('value', (snapshot) => {
 	    let Profiles = snapshot.val();
 	    let newState = [];
 	    for (let profile in Profiles){
 	      newState.push({
-	        id: profile
+	        id: profile,
+	        uid: Profiles[profile].uid
 	       });
 	    }
 	    this.setState({
@@ -283,6 +283,7 @@ class ViewJob extends Component{
 							</select>
 						</div>
 
+
 						<input type='submit' className='btn black-button btn-block' value='Post' />
 					</form>
 
@@ -315,7 +316,20 @@ class ViewJob extends Component{
 			                      <td>{post.position}</td>
 			                      <td>{post.city}, {post.state}</td>
 			                      <td>{post.relocate}</td>
-			                      <td><Link className='btn black-button' to={'/profile/' + `${post.uid}`}>View</Link></td>
+			                      <td>
+			                      {this.state.Profiles.map((profile) => {
+			                      	return(
+			                      		<div key={profile.id}>
+			                      		{post.uid === profile.uid ?
+			                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}>View</Link>
+			                      		:
+			                      		null
+			                      		
+			                      		}
+			                      		</div>
+			                      	);
+			                      })}
+			                      </td>
 							      <td>{post.email === this.state.authUser.email ?
                						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>DELETE</button> : null}
                					  </td>

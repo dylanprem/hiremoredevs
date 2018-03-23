@@ -11,6 +11,9 @@ class createProfile extends Component {
 		this.state = {
 			authUser:null,
 			uid:'',
+			name:'',
+			email:'',
+			profilePicture:'',
 			about:'',
 			frameworkOne:'',
 			frameworkTwo:'',
@@ -39,6 +42,7 @@ class createProfile extends Component {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
 	  		name: this.state.authUser.displayName,
+	  		profilePicture: this.state.authUser.photoURL,
 	    	about: this.state.about,
 			frameworkOne: this.state.frameworkOne,
 			frameworkTwo: this.state.frameworkTwo,
@@ -92,16 +96,7 @@ class createProfile extends Component {
 						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} />
 					</div>
 					
-					<div className='form-group col-md-6 col-md-offset-3'>
-					<h3>My Best Work</h3>
-					<p>Please include a link to your best project.</p>
-						<input type='text' className='form-control' placeholder='Project Name' name='projectName' onChange={this.handleChange} value={this.state.projectName} />
-						<br />
-						<input type='text' className='form-control' placeholder='e.g. http://myapp.com' name='projectLink' onChange={this.handleChange} value={this.state.projectLink} />
-						<br />
-						<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} value={this.state.projectInfo} />
-						<br />					
-					</div>
+					
 					<div className='col-md-12'>
 						<button className='btn yellow-button' onClick={this.handleSubmit}>Update profile</button>
 					</div>

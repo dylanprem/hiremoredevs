@@ -12,16 +12,19 @@ class ProfileButtonToggle extends Component {
 		super(props);
 		this.state = {
 			authUser:null,
-			Profiles:[]
-
+			Profiles:[],
+			
 		}
 	}
+
+	
 
 	componentDidMount(){
 	  const profilesRef = firebase.database().ref('Profiles');
 	  console.log(this.state.Profiles);
-		profilesRef.once('value', (snapshot) => {
+		profilesRef.once('value', (snapshot) => {		
 	    let Profiles = snapshot.val();
+	    console.log(snapshot.val());
 	    let newState = [];
 	    for (let profile in Profiles){
 	      newState.push({
@@ -32,7 +35,9 @@ class ProfileButtonToggle extends Component {
 	    this.setState({
 	      Profiles: newState
 	    });
-	  });	
+	  });
+
+
 
 	  firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
@@ -43,37 +48,21 @@ class ProfileButtonToggle extends Component {
 	
 
 	render() {
+		
 		return (
 			<div>
 			{this.state.authUser ?
 				<div>
 					<div>
-						{this.state.Profiles.map((profile,index) => {
+						{this.state.Profiles.map((profile) => {
 							return(
-							<div key={profile.id} id={index}>
+							<div key={profile.id}>
 								<Nav>
 									<NavItem>
 									{profile.uid === this.state.authUser.uid ?
-										<Link className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
+										<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
 										: 
-										null
-										}
-									</NavItem>
-								</Nav>
-							</div>
-						);
-						})}
-					</div>
-					<div>
-						{this.state.Profiles.map((profile,index) => {
-							return(
-							<div key={profile.id} id={index}>
-								<Nav>
-									<NavItem>
-									{index.length === 0 ?
-										<Link className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
-										: 
-										null
+										<Link id='create-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
 										}
 									</NavItem>
 								</Nav>

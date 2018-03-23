@@ -7,6 +7,8 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import Phone from 'react-phone-number-input';
 import rrui from 'react-phone-number-input/rrui.css';
 import rpni from 'react-phone-number-input/style.css';
+import * as routes from '../../constants/routes';
+import { BrowserRouter as BrowserHistory, Router, Route, Link } from 'react-router-dom';
 
 const PostJob = (props, { authUser }) =>
 
@@ -43,6 +45,7 @@ class PostJobForm extends Component {
   }
 
   handleSubmit(e) {
+  this.props.history.push(routes.CURRENT_FEED);
   e.preventDefault();
   const JobsRef = firebase.database().ref('JobPosts');
   const JobPosts = {
@@ -77,6 +80,8 @@ class PostJobForm extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error))
+
+  
 
 }
 

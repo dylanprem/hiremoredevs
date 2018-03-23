@@ -11,6 +11,7 @@ import Landing from './Landing/landing';
 import viewProfile from './profile/viewProfile';
 import createProfile from './profile/createProfile';
 import editProfile from './profile/editProfile';
+import publicProfile from './profile/publicProfile';
 
 
 import * as routes from '../constants/routes';
@@ -32,6 +33,7 @@ const App = () =>
       <Route exact path="/profile/:viewProfile" component={viewProfile} />
       <Route exact path={routes.CREATE_PROFILE} component={createProfile} />
       <Route exact path="/edit/:editProfile" component={editProfile} />
+      <Route exact path="/user/:userProfile" component={publicProfile} />
     </div>
   </Router>
 
