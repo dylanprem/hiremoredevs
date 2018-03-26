@@ -6,6 +6,7 @@ import * as routes from '../../constants/routes';
 import withAuthorization from '../withAuthorization';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AddProject from './AddProject';
+import ProfileButtonToggle from '../header/ProfileButton';
 
 
 class viewProfile extends Component {
@@ -80,10 +81,13 @@ class viewProfile extends Component {
 			{this.state.authUser ?
 				
 				<div className='col-md-12 text-center'>
+					
+					
+					
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
-					
+					<ProfileButtonToggle />
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>

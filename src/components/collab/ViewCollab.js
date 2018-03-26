@@ -117,7 +117,7 @@ class ViewCollab extends Component {
 						);
 					})}
 				</div>
-				<div className='col-md-4 col-md-offset-4'>
+				<div className='col-md-4 col-md-offset-4 profile-container'>
 					<label className='job-text'>Leave a comment</label>
 					<textarea className='form-control job-text' name='comment' value={this.state.value} onChange={this.handleChange} rows='5' placeholder='I love this idea! Let&apos;s collab!' />
 					<br />

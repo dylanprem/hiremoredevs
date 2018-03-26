@@ -3,6 +3,8 @@ import { auth } from '../../firebase';
 import * as firebase from 'firebase';
 import withAuthorization from '../withAuthorization';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import * as routes from '../../constants/routes';
+import { Link } from 'react-router-dom';
 
 class LoggedInAs extends Component {
 	constructor(props){
@@ -29,7 +31,7 @@ class LoggedInAs extends Component {
 					<p class='logged-in-as'>Logged in as: {this.state.authUser.displayName}</p>
 				</NavItem>
 				<NavItem>
-					<img style={{with:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+					<Link className='signup-link' to={routes.VIEW_PROFILE}><img style={{with:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} /></Link>
 				</NavItem>
 			</Nav>
 			:

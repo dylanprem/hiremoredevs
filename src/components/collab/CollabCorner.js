@@ -25,7 +25,7 @@ class CollabCorner extends Component {
 			<div>
 			{this.state.authUser ?
 			<div>
-				<div className='row text-center'>
+				<div className='row text-center profile-container'>
 					<h1 className='text-center'>COLLAB CORNER</h1>
 					<Link className='btn yellow-button job-text' to={routes.ADD_COLLAB}><span className='glyphicon glyphicon-plus-sign'></span>&nbsp;&nbsp;Post Here</Link>
 
