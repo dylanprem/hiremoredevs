@@ -22,13 +22,15 @@ class SignInForm extends Component {
 
     this.state = {
       authUser:null,
-      uid:''
+    
     }
 
     this.loginWithGoogle = this.loginWithGoogle.bind(this); 
-    this.loginWithGitHub = this.loginWithGitHub.bind(this);    
+    this.loginWithGitHub = this.loginWithGitHub.bind(this);
+      
   }
 
+ 
   loginWithGoogle() {
       auth.signInWithPopup(provider) 
         .then((result) => {
@@ -51,6 +53,8 @@ class SignInForm extends Component {
             authUser
           });
         });
+
+       
     }
 
     componentDidMount(){

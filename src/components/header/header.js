@@ -44,8 +44,11 @@ const NavigationAuth = () =>
 				      <NavItem eventKey={1}>
 				        <Link to='/post-job' className='signup-link'> Post Job Ad</Link>
 				      </NavItem>
-				      <NavItem eventKey={1} onClick={auth.doSignOut}>
+				      <NavItem eventKey={2} onClick={auth.doSignOut}>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>
+				      </NavItem>
+				      <NavItem>
+				      	<Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link>
 				      </NavItem>
 				    </Nav>
 				    <ProfileButtonToggle />

@@ -12,6 +12,9 @@ import viewProfile from './profile/viewProfile';
 import createProfile from './profile/createProfile';
 import editProfile from './profile/editProfile';
 import publicProfile from './profile/publicProfile';
+import CollabCorner from './collab/CollabCorner';
+import AddCollab from './collab/AddCollab';
+import ViewCollab from './collab/ViewCollab';
 
 
 import * as routes from '../constants/routes';
@@ -34,6 +37,9 @@ const App = () =>
       <Route exact path={routes.CREATE_PROFILE} component={createProfile} />
       <Route exact path="/edit/:editProfile" component={editProfile} />
       <Route exact path="/user/:userProfile" component={publicProfile} />
+      <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
+      <Route exact path={routes.ADD_COLLAB} component={AddCollab} />
+      <Route exact path={routes.VIEW_COLLAB} component={ViewCollab} />
     </div>
   </Router>
 

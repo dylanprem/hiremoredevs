@@ -13,42 +13,46 @@ class ProfileButtonToggle extends Component {
 		this.state = {
 			authUser:null,
 			Profiles:[],
-			
+			hasProfile: false
 		}
 	}
+
 
 	
 
 	componentDidMount(){
-	  const profilesRef = firebase.database().ref('Profiles');
-	  console.log(this.state.Profiles);
-		profilesRef.once('value', (snapshot) => {		
-	    let Profiles = snapshot.val();
-	    console.log(snapshot.val());
-	    let newState = [];
-	    for (let profile in Profiles){
-	      newState.push({
-	        id: profile,
-			uid:Profiles[profile].uid,
-	      });
-	    }
-	    this.setState({
-	      Profiles: newState
-	    });
-	  });
-
-
-
-	  firebase.auth().onAuthStateChanged((authUser) => {
+		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-	      } 
-    	});	
+	        console.log(this.state.authUser.uid);
+	        
+			} 
+    	});
+
+    	const profilesRef = firebase.database().ref('Profiles');
+	        profilesRef.once('value', (snapshot) => {		
+			    let Profiles = snapshot.val();
+			    console.log(snapshot.val());
+			    console.log(this.state.Profiles);
+			    const checkUID = snapshot.val().hasOwnProperty("uid");
+			    console.log(checkUID);
+			    let newState = [];
+			    console.log(newState);
+			    for (let profile in Profiles){
+			      newState.push({
+			        id: profile,
+					uid:Profiles[profile].uid,
+			      });
+			      console.log(this.state.authUser.uid === Profiles[profile].uid);
+			    }
+			    this.setState({
+			      Profiles: newState
+			    });
+			  });	
 	}
 	
 
 	render() {
-		
 		return (
 			<div>
 			{this.state.authUser ?
@@ -61,14 +65,25 @@ class ProfileButtonToggle extends Component {
 									<NavItem>
 									{profile.uid === this.state.authUser.uid ?
 										<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
-										: 
-										<Link id='create-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
-										}
+										:
+										null
+									}
 									</NavItem>
 								</Nav>
 							</div>
 						);
 						})}
+					</div>
+					<div>
+						<Nav>
+							<NavItem>
+							{typeof this.state.Profiles.uid !== String ? 
+								<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
+								:
+								null
+							}
+							</NavItem>
+						</Nav>
 					</div>
 				</div>
 				:
