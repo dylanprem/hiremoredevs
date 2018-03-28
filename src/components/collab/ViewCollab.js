@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import CommentSection from './Comments';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class ViewCollab extends Component {
 	constructor(props){
@@ -11,9 +12,9 @@ class ViewCollab extends Component {
 			currentCollab: this.props.match.params.currentCollab,
 			Collabs:[],
 			Comments:[],
+			Profiles:[],
 			comment:'',
 			time:'',
-			uid:''
 	}
 
 	this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,6 @@ class ViewCollab extends Component {
 
 	handleSubmit(e) {
 	  e.preventDefault();
-	  window.location.reload();
 	  const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments');
 	  const Collabs = {
 	  		uid: this.state.authUser.uid,
@@ -50,9 +50,8 @@ class ViewCollab extends Component {
 	  this.setState({
 			comment:'',
 			time:'',
-			uid:'',
-
 	  });
+	window.location.reload();
 }
 	componentDidMount(){
 		const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab);
@@ -93,6 +92,21 @@ class ViewCollab extends Component {
 			});
 		});
 
+		const profilesRef = firebase.database().ref('Profiles' );
+		profilesRef.once('value', (snapshot) => {
+		    let Profiles = snapshot.val();
+		    let newState = [];
+		    for (let profile in Profiles){
+		      newState.push({
+		        id: profile,
+		        uid: Profiles[profile].uid
+		       });
+		    }
+		    this.setState({
+		      Profiles: newState
+		    });
+		  });
+
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
@@ -119,7 +133,7 @@ class ViewCollab extends Component {
 				</div>
 				<div className='col-md-4 col-md-offset-4 profile-container'>
 					<label className='job-text'>Leave a comment</label>
-					<textarea className='form-control job-text' name='comment' value={this.state.value} onChange={this.handleChange} rows='5' placeholder='I love this idea! Let&apos;s collab!' />
+					<textarea className='form-control job-text' name='comment' value={this.state.comment} onChange={this.handleChange} rows='5' placeholder='I love this idea! Let&apos;s collab!' />
 					<br />
 					<div className='text-center'>
 						<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Submit</button>
@@ -134,7 +148,18 @@ class ViewCollab extends Component {
 										<tr>
 											<td>
 												<div className='col-md-4 job-text'>
-													<img src={comment.photo} className='center-block img-responsive img-circle' style={{with:40, height:40}} />
+													{this.state.Profiles.map((profile) => {
+								                      	return(
+								                      		<div key={profile.id}>
+								                      		{comment.uid === profile.uid ?
+								                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={comment.photo} className='center-block img-responsive img-circle' style={{with:40, height:40}} /></Link>
+								                      		:
+								                      		null
+								                      		
+								                      		}
+								                      		</div>
+								                      	);
+								                      })}
 													<p><small className='text-muted'>From:</small> {comment.name}</p>
 													<p>{comment.time}</p>
 												</div>

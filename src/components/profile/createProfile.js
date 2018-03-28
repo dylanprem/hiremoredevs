@@ -18,9 +18,7 @@ class createProfile extends Component {
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
-			projectName:'',
-			projectLink:'',
-			projectInfo:'',
+			Profiles: []
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,8 +33,6 @@ class createProfile extends Component {
 	  }
 	handleSubmit(e) {
 	  e.preventDefault();
-	  this.props.history.push(routes.CURRENT_FEED);
-	  window.location.reload();
 	  const profilesRef = firebase.database().ref('Profiles');
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
@@ -47,9 +43,6 @@ class createProfile extends Component {
 			frameworkOne: this.state.frameworkOne,
 			frameworkTwo: this.state.frameworkTwo,
 			frameworkThree: this.state.frameworkThree,
-			projectName: this.state.projectName,
-			projectLink: this.state.projectLink,
-			projectInfo: this.state.projectInfo,
 	  }
 
 
@@ -59,10 +52,9 @@ class createProfile extends Component {
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
-			projectName:'',
-			projectLink:'',
-			projectInfo:'',
 	  });
+
+	  this.props.history.push(routes.VIEW_PROFILE);
 	}
 
 	componentDidMount(){
@@ -87,19 +79,21 @@ class createProfile extends Component {
 						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} value={this.state.about} />
 					</div>
 
-					<div className='form-group col-md-6 col-md-offset-3'>
-						<h3>My top three frameworks</h3>
-						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} value={this.state.frameworkOne} />
-						<br />
-						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} value={this.state.frameworkTwo} />
-						<br />
-						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} />
-					</div>
-					
-					
-					<div className='col-md-12'>
-						<button className='btn yellow-button' onClick={this.handleSubmit}>Update profile</button>
-					</div>
+					<form onSubmit={this.handleSubmit}>
+						<div className='form-group col-md-6 col-md-offset-3'>
+							<h3>My top three frameworks</h3>
+							<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} value={this.state.frameworkOne} />
+							<br />
+							<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} value={this.state.frameworkTwo} />
+							<br />
+							<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} />
+						</div>
+						
+						
+						<div className='col-md-12'>
+							<button className='btn yellow-button' type='submit'>Create profile</button>
+						</div>
+					</form>
 				</div>
 
 				:

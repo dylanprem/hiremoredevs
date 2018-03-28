@@ -94,7 +94,7 @@ class JobFeed extends Component {
 	                      
 	                      {this.state.ADMIN.map((admins) => {
 	                      	return(
-	                      		<td>
+	                      		<td key={admins.id}>
 		                  		{this.state.authUser.uid === admins.uid ?
 						 			<button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> 
 						 		: null}

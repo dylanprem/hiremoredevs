@@ -99,6 +99,7 @@ class viewProfile extends Component {
 								<p className='job-text'>{profile.frameworkOne}</p>
 								<p className='job-text'>{profile.frameworkTwo}</p>
 								<p className='job-text'>{profile.frameworkThree}</p>
+								
 								<AddProject />
 								<table className="table text-left job-text">
 								    <thead>

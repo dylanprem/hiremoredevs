@@ -21,13 +21,7 @@ class ProfileButtonToggle extends Component {
 	
 
 	componentDidMount(){
-		firebase.auth().onAuthStateChanged((authUser) => {
-	      if (authUser) {
-	        this.setState({ authUser });
-	        console.log(this.state.authUser.uid);
-	        
-			} 
-    	});
+
 
     	const profilesRef = firebase.database().ref('Profiles');
 	        profilesRef.once('value', (snapshot) => {		
@@ -43,12 +37,20 @@ class ProfileButtonToggle extends Component {
 			        id: profile,
 					uid:Profiles[profile].uid,
 			      });
-			      console.log(this.state.authUser.uid === Profiles[profile].uid);
+
 			    }
 			    this.setState({
 			      Profiles: newState
 			    });
-			  });	
+			  });
+
+		firebase.auth().onAuthStateChanged((authUser) => {
+	      if (authUser) {
+	        this.setState({ authUser });
+
+	        
+			} 
+    	});	
 	}
 	
 
@@ -61,26 +63,30 @@ class ProfileButtonToggle extends Component {
 						{this.state.Profiles.map((profile) => {
 							return(
 							<div key={profile.id}>
-
 									{profile.uid === this.state.authUser.uid ?
 										<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
 										:
 										null
 									}
-								
 							</div>
 						);
 						})}
 					</div>
 					<div>
-						
-							{typeof this.state.Profiles.uid !== String ? 
-								<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
-								:
-								null
-							}
-						
+						{this.state.Profiles.map((profile) => {
+							return(
+							<div key={profile.id}>
+									{profile.uid !== this.state.authUser.uid && typeof profile.uid !== String ? 
+										<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
+										:
+										null
+									}
+							</div>
+						);
+						})}
 					</div>
+					
+					
 				</div>
 				:
 				null
