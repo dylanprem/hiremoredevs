@@ -31,7 +31,6 @@ class AddCollab extends Component {
 	  const collabsRef = firebase.database().ref('Collabs');
 	  const Collabs = {
 	  		uid: this.state.authUser.uid,
-	  		name: this.state.authUser.displayName,
 			title: this.state.title,
 			description: this.state.description,
 			time: new Date().toLocaleString()

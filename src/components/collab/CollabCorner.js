@@ -26,6 +26,7 @@ class CollabCorner extends Component {
 			{this.state.authUser ?
 			<div>
 				<div className='row text-center profile-container'>
+					<img src={"https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/collaboration-128.png"} className='img-responsive center-block' />
 					<h1 className='text-center'>COLLAB CORNER</h1>
 					<Link className='btn yellow-button job-text' to={routes.ADD_COLLAB}><span className='glyphicon glyphicon-plus-sign'></span>&nbsp;&nbsp;Post Here</Link>
 

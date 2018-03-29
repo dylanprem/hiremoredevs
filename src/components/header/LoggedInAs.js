@@ -31,7 +31,7 @@ class LoggedInAs extends Component {
 					<p class='logged-in-as'>Logged in as: {this.state.authUser.displayName}</p>
 				</NavItem>
 				<NavItem>
-					<Link className='signup-link' to={routes.VIEW_PROFILE}><img style={{with:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} /></Link>
+					<Link className='signup-link' to={routes.VIEW_PROFILE}><img style={{width:60, height:60}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} /></Link>
 				</NavItem>
 			</Nav>
 			:

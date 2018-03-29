@@ -84,10 +84,11 @@ class viewProfile extends Component {
 					
 					
 					
-					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+					<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
-					<ProfileButtonToggle />
+					<Link to={routes.EDIT_BASIC_INFO} className='btn yellow-button job-text'>Update Basic Info</Link>
+					
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>
@@ -99,7 +100,7 @@ class viewProfile extends Component {
 								<p className='job-text'>{profile.frameworkOne}</p>
 								<p className='job-text'>{profile.frameworkTwo}</p>
 								<p className='job-text'>{profile.frameworkThree}</p>
-								
+								<ProfileButtonToggle />
 								<AddProject />
 								<table className="table text-left job-text">
 								    <thead>

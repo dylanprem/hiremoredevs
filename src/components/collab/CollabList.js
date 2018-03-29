@@ -8,7 +8,8 @@ class CollabList extends Component {
 		super(props)
 		this.state = {
 			authUser: null,
-			Collabs:[]
+			Collabs:[],
+			Profiles:[]
 		}
 		this.removeItem = this.removeItem.bind(this);
 	}
@@ -29,7 +30,6 @@ class CollabList extends Component {
 					id: collab,
 					title: Collabs[collab].title,
 					description: Collabs[collab].description,
-					name: Collabs[collab].name,
 					time: Collabs[collab].time,
 					uid: Collabs[collab].uid
 				});
@@ -38,6 +38,23 @@ class CollabList extends Component {
 				Collabs: newState
 			});
 		});
+
+		const profilesRef = firebase.database().ref('Profiles' );
+		profilesRef.once('value', (snapshot) => {
+		    let Profiles = snapshot.val();
+		    let newState = [];
+		    for (let profile in Profiles){
+		      newState.push({
+		        id: profile,
+		        uid: Profiles[profile].uid,
+		        name: Profiles[profile].name,
+		        profilePicture: Profiles[profile].profilePicture
+		       });
+		    }
+		    this.setState({
+		      Profiles: newState
+		    });
+		  });
 
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
@@ -57,11 +74,26 @@ class CollabList extends Component {
 						return(
 						<tr key={collab.id}>
 							<td className='text-center'>
-								<h2>{collab.title}</h2>
+								<h2 className='collab-title'>{collab.title}</h2>
+								{this.state.Profiles.map((profile) => {
+		                      	return(
+		                      		<div key={profile.id}>
+		                      		{collab.uid === profile.uid ?
+		                      		<div className='job-text text-center'>
+		                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle' style={{with:80, height:80}} /></Link>
+		                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
+		                      		</div>
+		                      		:
+		                      		null
+		                      		
+		                      		}
+		                      		</div>
+			                      	);
+			                    })}
 								<p><small className='text-muted'>From:</small> {collab.name}</p>
 								<p>{collab.time}</p>
 								<p><Link className='btn yellow-button' to={`/view-collab/${collab.id}`}>View</Link></p>
-								<p><button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}>DELETE</button></p>
+								<p><button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button></p>
 							</td>
 						</tr>
 						);

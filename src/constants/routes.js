@@ -8,6 +8,7 @@ export const POST_JOB = '/post-job';
 export const VIEW_JOB = '/latest/:viewJob';
 export const VIEW_PROFILE = '/profile/:viewProfile';
 export const EDIT_PROFILE = '/edit/:editProfile';
+export const EDIT_BASIC_INFO = '/edit-info';
 export const CREATE_PROFILE = '/create-profile';
 export const VIEW_PUBLIC_PROFILE = '/user/:userProfile';
 export const ADD_PROJECT = '/add-project';

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import CommentSection from './Comments';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import './collab.css';
 
 class ViewCollab extends Component {
 	constructor(props){
@@ -39,8 +40,6 @@ class ViewCollab extends Component {
 	  const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments');
 	  const Collabs = {
 	  		uid: this.state.authUser.uid,
-	  		name: this.state.authUser.displayName,
-	  		photo: this.state.authUser.photoURL,
 			comment: this.state.comment,
 			time: new Date().toLocaleString()
 
@@ -80,8 +79,6 @@ class ViewCollab extends Component {
 			for (let comment in Comments){			
 			newState.push({
 				id: comment,
-				name: Comments[comment].name,
-				photo: Comments[comment].photo,
 				uid: Comments[comment].uid,
 				comment: Comments[comment].comment,
 				time: Comments[comment].time,
@@ -99,7 +96,9 @@ class ViewCollab extends Component {
 		    for (let profile in Profiles){
 		      newState.push({
 		        id: profile,
-		        uid: Profiles[profile].uid
+		        uid: Profiles[profile].uid,
+		        name: Profiles[profile].name,
+		        profilePicture: Profiles[profile].profilePicture
 		       });
 		    }
 		    this.setState({
@@ -123,6 +122,21 @@ class ViewCollab extends Component {
 					{this.state.Collabs.map((collab) => {
 						return(
 						<div key={collab.id}>
+							{this.state.Profiles.map((profile) => {
+		                      	return(
+		                      		<div key={profile.id}>
+		                      		{collab.uid === profile.uid ?
+		                      		<div className='job-text text-center'>
+		                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle' style={{with:80, height:80}} /></Link>
+		                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
+		                      		</div>
+		                      		:
+		                      		null
+		                      		
+		                      		}
+		                      		</div>
+		                      	);
+		                      })}
 							<h1 className='text-center'>Idea:</h1>
 							<h1 className='job-text text-center'>{collab.title}</h1>
 							<h1 className='text-center'>Description:</h1>
@@ -152,7 +166,10 @@ class ViewCollab extends Component {
 								                      	return(
 								                      		<div key={profile.id}>
 								                      		{comment.uid === profile.uid ?
-								                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={comment.photo} className='center-block img-responsive img-circle' style={{with:40, height:40}} /></Link>
+								                      		<div>
+								                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle' style={{with:40, height:40}} /></Link>
+								                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
+								                      		</div>
 								                      		:
 								                      		null
 								                      		
@@ -160,16 +177,16 @@ class ViewCollab extends Component {
 								                      		</div>
 								                      	);
 								                      })}
-													<p><small className='text-muted'>From:</small> {comment.name}</p>
+													
 													<p>{comment.time}</p>
 												</div>
 												<div className='col-md-4 text-center job-text'>
-													<p>{comment.comment}</p>
+													<p className='comment'>{comment.comment}</p>
 													
 												</div>
 												<div className='col-md-4 text-center'>
 												{comment.uid === this.state.authUser.uid ? 
-													<button className='btn btn-danger job-text' onClick={() => this.removeComment(comment.id)}>DELETE</button> 
+													<button className='btn btn-danger job-text' onClick={() => this.removeComment(comment.id)}><span className='glyphicon glyphicon-trash'></span>  DELETE</button> 
 													: 
 													null
 												}
