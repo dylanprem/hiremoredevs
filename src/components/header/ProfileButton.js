@@ -21,8 +21,6 @@ class ProfileButtonToggle extends Component {
 	
 
 	componentDidMount(){
-
-
     	const profilesRef = firebase.database().ref('Profiles');
 	        profilesRef.once('value', (snapshot) => {		
 			    let Profiles = snapshot.val();

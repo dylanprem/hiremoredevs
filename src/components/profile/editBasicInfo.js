@@ -14,9 +14,8 @@ class EditInfo extends Component {
 			updatedDisplayName:'',
 			updatedPhotoURL:'',
 			updatedEmail:'',
-			pic:'',
-			name:'',
-			postsFromUsers:[]
+			Profiles:[],
+			currentProfile: this.props.match.params.editInfo
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,23 +38,22 @@ class EditInfo extends Component {
 		  console.log('Profile did not update');
 		});
 
-		const JobPostsCandidatesRef = firebase.database().ref('postsFromUsers');
-
-	  	const postsFromUsers = { 
-	  		pic: this.state.updatedPhotoURL,
-	  		name: this.state.updatedDisplayName,
-	    }
-
-		  JobPostsCandidatesRef.update(postsFromUsers);
-		  this.setState({
-		  	pic:'',
-		  	name:'',
-		  });
-		  window.location.reload();
+		const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
+		const Profiles = {
+			name: this.state.updatedDisplayName,
+			profilePicture: this.state.updatedPhotoURL
 		}
 
 
-	componentDidMount(){	
+		profilesRef.update(Profiles);
+		this.setState({
+			name: '',
+			profilePicture:''
+		});
+}
+
+
+	componentDidMount(){		
 	  firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });

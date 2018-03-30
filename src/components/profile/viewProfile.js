@@ -87,13 +87,14 @@ class viewProfile extends Component {
 					<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
-					<Link to={routes.EDIT_BASIC_INFO} className='btn yellow-button job-text'>Update Basic Info</Link>
+					
 					
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>
 							{profile.uid === this.state.authUser.uid ?
 							<div>
+								<Link to={`/edit-info/${profile.id}`} className='btn yellow-button job-text'>Update Basic Info</Link>
 								<h3>About Me</h3>
 								<p className='job-text'>{profile.about}</p>
 								<h3>My top three</h3>
@@ -120,7 +121,7 @@ class viewProfile extends Component {
 					                      <td><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </td>
 					                      <td>{project.projectInfo}</td>
 					                      <td>{project.uid === this.state.authUser.uid ?
-		               						 <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(project.id)}>Delete</button> : null}
+		               						 <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
 		               					  </td>
 					                    </tr>
 					                :

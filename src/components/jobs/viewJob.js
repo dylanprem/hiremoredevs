@@ -58,30 +58,18 @@ class ViewJob extends Component{
 
 	  const postsFromUsers = { 
 	  	uid: this.state.authUser.uid,
-	  	pic: this.state.authUser.photoURL,
-	  	name: this.state.authUser.displayName,
-	  	email: this.state.authUser.email,
 	    position: this.state.position,
 	    state: this.state.state,
 	    city: this.state.city,
 	    relocate: this.state.relocate,
-	    about: this.state.about,
-	    github: this.state.github,
-	    linkedin: this.state.linkedin
 	  }
 
 	  JobPostsCandidatesRef.push(postsFromUsers);
 	  this.setState({
-	  	pic:'',
-	  	name:'',
-	  	email:'',
 	    position: '',
 	    state: '',
 	    city: '',
 	    relocate: '',
-	    about: '',
-	    github:'',
-	    linkedin:''
 	  });
 
 	}
@@ -145,7 +133,10 @@ class ViewJob extends Component{
 	    for (let profile in Profiles){
 	      newState.push({
 	        id: profile,
-	        uid: Profiles[profile].uid
+	        uid: Profiles[profile].uid,
+	        name: Profiles[profile].name,
+	        profilePicture: Profiles[profile].profilePicture,
+	        email: Profiles[profile].email
 	       });
 	    }
 	    this.setState({
@@ -291,7 +282,7 @@ class ViewJob extends Component{
 				<div className='row'>
 					<div className='col-md-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>
-					<table className="table table-text">
+					<table className="table-striped table-text col-md-12">
 						    <thead>
 						      <tr>
 						      	<th>&nbsp;</th>
@@ -309,14 +300,47 @@ class ViewJob extends Component{
 						    <tbody>
 						    {this.state.postsFromUsers.map((post) => {
 		    		  			return(
-							    <tr className='active' key={post.id}>
-							      <td><img style={{with:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={post.pic} /></td>
-			                      <td className='text-warning'>{post.name}</td>
-			                      <td><strong className='text-primary'>{post.email}</strong></td>
-			                      <td>{post.position}</td>
-			                      <td>{post.city}, {post.state}</td>
-			                      <td>{post.relocate}</td>
-			                      <td>
+							    <tr className='active' key={post.id}>  
+									<td>
+									{this.state.Profiles.map((profile) => {
+									return(
+										<div key={profile.id}>
+										{post.uid === profile.uid ? 
+										<img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+										:
+										null}
+										</div>
+										);
+									})}
+									</td>
+									<td>
+									{this.state.Profiles.map((profile) => {
+									return(
+										<div key={profile.id}>
+										{post.uid === profile.uid ? 
+										<p>{profile.name}</p>
+										:
+										null}
+										</div>
+										);
+									})}
+									</td>
+									<td>
+									{this.state.Profiles.map((profile) => {
+									return(
+										<div key={profile.id}>
+										{post.uid === profile.uid ? 
+										<strong className='text-primary'>{profile.email}</strong>
+										:
+										null}
+										</div>
+										);
+									})}
+									</td>
+									<td>{post.position}</td>
+									<td>{post.city}, {post.state}</td>
+									<td>{post.relocate}</td>
+									<td>
 			                      {this.state.Profiles.map((profile) => {
 			                      	return(
 			                      		<div key={profile.id}>
@@ -331,7 +355,7 @@ class ViewJob extends Component{
 			                      })}
 			                      </td>
 							      <td>{post.email === this.state.authUser.email ?
-               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>DELETE</button> : null}
+               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>&nbsp;DELETE&nbsp;</button> : null}
                					  </td>
 			                    </tr>
 			                    
