@@ -55,7 +55,7 @@ class AddCollab extends Component {
 
 	render(){
 		return(
-			<div>
+			<div className='profile-container'>
 			{this.state.authUser ?
 			<div className='col-md-4 col-md-offset-4'>
 				<h1 className='text-center'>ADD COLLAB</h1>

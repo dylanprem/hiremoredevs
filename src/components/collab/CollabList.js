@@ -90,10 +90,15 @@ class CollabList extends Component {
 		                      		</div>
 			                      	);
 			                    })}
-								<p><small className='text-muted'>From:</small> {collab.name}</p>
+								
 								<p>{collab.time}</p>
 								<p><Link className='btn yellow-button' to={`/view-collab/${collab.id}`}>View</Link></p>
-								<p><button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button></p>
+								<p>{collab.uid === this.state.authUser.uid ?
+									<button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button>
+									:
+									null
+								}
+								</p>
 							</td>
 						</tr>
 						);

@@ -21,18 +21,25 @@
 
 .employers-img{
 	background: url('./images/city.jpg') no-repeat;
-	background-attachment: fixed;
+    background-position: center; 
+    min-height: 500px;
+    height: 500px;
+
+}
+
+.seeker-img{
+	background: url('./images/jobseeker.jpg') no-repeat;
     background-position: center; 
     min-height: 500px;
     height: 500px;
 }
 
-.seeker-img{
-	background: url('./images/jobseeker.jpg') no-repeat;
-	background-attachment: fixed;
+.collab-img{
+	background: url('./images/jl.jpg') no-repeat;
     background-position: center; 
     min-height: 500px;
     height: 500px;
+
 }
 
 .dark-bg{

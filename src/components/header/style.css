@@ -16,3 +16,11 @@
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	color: #fff;
 }
+
+.container {
+	width: 100% !important;
+}
+
+.logo{
+	font-size: 32px !important;
+}

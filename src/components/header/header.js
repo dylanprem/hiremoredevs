@@ -7,6 +7,7 @@ import './style.css';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
+import ProfileButtonToggle from './ProfileButton';
 
 
 const Header = (props, { authUser }) =>
@@ -30,7 +31,7 @@ const NavigationAuth = () =>
 				  <Navbar.Header>
 
 				    <Navbar.Brand>
-				      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
+				      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
 				    </Navbar.Brand>
 				    <Navbar.Toggle />
 				  </Navbar.Header>
@@ -52,7 +53,7 @@ const NavigationAuth = () =>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>
 				      </NavItem>
 				    </Nav>
-				    
+				    <ProfileButtonToggle />
 				    <LoggedInAs />
 				  </Navbar.Collapse>
 				</Navbar>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Employers from './Employers';
 import Jobseekers from './Jobseekers';
 import About from './About';
+import CollabBlock from './collabBlock';
 
 class Landing extends Component {
 	render(){
@@ -10,6 +11,7 @@ class Landing extends Component {
 				<About />
 				<Employers />
 				<Jobseekers />
+				<CollabBlock />
 			</div>
 		);
 	}

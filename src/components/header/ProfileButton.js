@@ -56,36 +56,20 @@ class ProfileButtonToggle extends Component {
 		return (
 			<div>
 			{this.state.authUser ?
-				<div>
-					<div>
-						{this.state.Profiles.map((profile) => {
-							return(
-							<div key={profile.id}>
-									{profile.uid === this.state.authUser.uid ?
-										<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
-										:
-										null
-									}
-							</div>
-						);
-						})}
-					</div>
-					<div>
-						{this.state.Profiles.map((profile) => {
-							return(
-							<div key={profile.id}>
-									{profile.uid !== this.state.authUser.uid && typeof profile.uid !== String ? 
-										<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
-										:
-										null
-									}
-							</div>
-						);
-						})}
-					</div>
-					
-					
-				</div>
+				<Nav>
+					{this.state.Profiles.map((profile) => {
+						return(
+						<NavItem key={profile.id}>
+								{profile.uid === this.state.authUser.uid ?
+									<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
+									: profile.uid === this.state.authUser.uid && typeof profile.uid != undefined ?
+									<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
+									: null
+								}
+						</NavItem>
+					);
+					})}
+				</Nav>
 				:
 				null
 			}

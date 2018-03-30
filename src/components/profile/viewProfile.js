@@ -81,14 +81,9 @@ class viewProfile extends Component {
 			{this.state.authUser ?
 				
 				<div className='col-md-12 text-center'>
-					
-					
-					
 					<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
-					
-					
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>
@@ -101,7 +96,7 @@ class viewProfile extends Component {
 								<p className='job-text'>{profile.frameworkOne}</p>
 								<p className='job-text'>{profile.frameworkTwo}</p>
 								<p className='job-text'>{profile.frameworkThree}</p>
-								<ProfileButtonToggle />
+								
 								<AddProject />
 								<table className="table text-left job-text">
 								    <thead>
@@ -110,8 +105,7 @@ class viewProfile extends Component {
 								        <th>View Demo</th>
 								        <th>Description</th>
 								      </tr>
-								    </thead>
-								    
+								    </thead> 
 						       {this.state.Projects.map((project) => {
 		    		  			return(
 		    		  				<tbody key={project.id}>
@@ -120,27 +114,25 @@ class viewProfile extends Component {
 					                      <td className='text-warning'>{project.projectName}</td>
 					                      <td><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </td>
 					                      <td>{project.projectInfo}</td>
-					                      <td>{project.uid === this.state.authUser.uid ?
+					                      <td>{project.uid != undefined ?
 		               						 <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
 		               					  </td>
 					                    </tr>
 					                :
-					                      null}   
+					                null}   
 								    </tbody>
 								       );
-					          			})}
+					          		})}
 								</table>
 								
 							</div>
 							:
 							null}
 						</div>
-					);
+						);
 					})}
-				
-				
+					
 				</div>
-
 				:
 				null
 			}
