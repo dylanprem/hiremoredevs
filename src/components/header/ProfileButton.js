@@ -62,7 +62,7 @@ class ProfileButtonToggle extends Component {
 						<NavItem key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 									<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
-									: profile.uid === this.state.authUser.uid && typeof profile.uid != undefined ?
+									: profile.uid === this.state.authUser.uid && typeof(profile.uid) !== String ?
 									<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
 									: null
 								}
