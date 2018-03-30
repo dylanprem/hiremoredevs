@@ -69,7 +69,7 @@ class createProfile extends Component {
 		return (
 			<div className='row profile-container'>
 			{this.state.authUser ?
-				<div className='col-md-12 text-center'>
+				<div className='col-md-12 text-center job-text'>
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
