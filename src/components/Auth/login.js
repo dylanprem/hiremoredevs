@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, history, Link } from 'react-router-dom';
-import { auth, provider, providerAlt } from '../../firebase/firebase.js';
+import { auth, provider } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
 import DualFeed from '../feeds/dualFeed';
 import * as firebase from 'firebase';
@@ -43,8 +43,8 @@ class SignInForm extends Component {
         });
     }
 
-     loginWithGitHub() {
-      auth.signInWithPopup(providerAlt) 
+  loginWithGitHub() {
+      auth.signInWithPopup(provider) 
         .then((result) => {
           const token = result.credential.accessToken;
           const authUser = result.authUser;
@@ -52,9 +52,7 @@ class SignInForm extends Component {
           this.setState({
             authUser
           });
-        });
-
-       
+        });  
     }
 
     componentDidMount(){
