@@ -22,7 +22,7 @@ class SignInForm extends Component {
 
     this.state = {
       authUser:null,
-    
+      Profiles: [],
     }
 
     this.loginWithGoogle = this.loginWithGoogle.bind(this); 
@@ -61,7 +61,7 @@ class SignInForm extends Component {
         if (authUser) {
           this.setState({ authUser });
         } 
-      });  
+      });
     }
 
 

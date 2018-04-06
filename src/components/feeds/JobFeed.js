@@ -9,9 +9,12 @@ class JobFeed extends Component {
 	this.state = {
 		JobPosts: [],
 		ADMIN: [],
-		authUser: null
+		Profiles:[],
+		authUser: null,
+		uid:''
 		}
 	this.removeItem = this.removeItem.bind(this);
+	// this.createProfile = this.createProfile.bind(this);
 	}
 
 	removeItem(jobId) {
@@ -21,8 +24,8 @@ class JobFeed extends Component {
 	}
 
 	componentDidMount() {
+	   // window.addEventListener('load', this.createProfile);
 	   const JobsRef = firebase.database().ref('JobPosts');
-
 	   JobsRef.on('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
 	    let newState = [];
@@ -65,12 +68,17 @@ class JobFeed extends Component {
 	        this.setState({ authUser });
 	      } 
     	});	
-}
+	}
+
+
+	
+
 	render(){
+
 		return(
 			<div className='row dark-bg-feed'>
 			
-			{this.state.authUser?
+			{this.state.authUser ? 
 			<div className='col-md-12 jobs-container'>
 			<h1 className="text-center">JOB FEED</h1>
 

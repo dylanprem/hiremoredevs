@@ -13,7 +13,6 @@ class ProfileButtonToggle extends Component {
 		this.state = {
 			authUser:null,
 			Profiles:[],
-			hasProfile: false
 		}
 	}
 
@@ -24,12 +23,7 @@ class ProfileButtonToggle extends Component {
     	const profilesRef = firebase.database().ref('Profiles');
 	        profilesRef.once('value', (snapshot) => {		
 			    let Profiles = snapshot.val();
-			    console.log(snapshot.val());
-			    console.log(this.state.Profiles);
-			    const checkUID = snapshot.val().hasOwnProperty("uid");
-			    console.log(checkUID);
 			    let newState = [];
-			    console.log(newState);
 			    for (let profile in Profiles){
 			      newState.push({
 			        id: profile,
@@ -50,6 +44,22 @@ class ProfileButtonToggle extends Component {
 			} 
     	});	
 	}
+
+	componentDidUpdate() {
+		firebase.database().ref("Profiles").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userData = snapshot.val();
+		    if (userData){
+		      console.log("exists!");
+		    } else {
+		    	const profilesRef = firebase.database().ref('Profiles');
+				const Profiles  = {
+					uid: this.state.authUser.uid
+				}
+				profilesRef.push(Profiles);
+				window.location.reload();
+			}
+		});
+	}
 	
 
 	render() {
@@ -62,9 +72,8 @@ class ProfileButtonToggle extends Component {
 						<NavItem key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 									<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
-									: profile.uid !== this.state.authUser.uid && profile.uid !== null ?
-									<Link id='edit-button' className='btn yellow-button job-text' to={routes.CREATE_PROFILE}>Create Profile</Link>
-									: null
+									: 
+									null
 								}
 						</NavItem>
 					);

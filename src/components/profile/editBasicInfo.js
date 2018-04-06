@@ -29,6 +29,7 @@ class EditInfo extends Component {
 
 	handleSubmit(e) {
 	    e.preventDefault();
+	    this.props.history.push(routes.VIEW_PROFILE);
 	    firebase.auth().currentUser.updateProfile({
 		  displayName: this.state.updatedDisplayName,
 		  photoURL: this.state.updatedPhotoURL
