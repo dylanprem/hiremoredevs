@@ -51,6 +51,7 @@ class EditInfo extends Component {
 			name: '',
 			profilePicture:''
 		});
+		window.location.reload();
 }
 
 

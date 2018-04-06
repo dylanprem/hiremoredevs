@@ -354,7 +354,7 @@ class ViewJob extends Component{
 			                      	);
 			                      })}
 			                      </td>
-							      <td>{post.email === this.state.authUser.email ?
+							      <td>{post.uid === this.state.authUser.uid ?
                						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>&nbsp;DELETE&nbsp;</button> : null}
                					  </td>
 			                    </tr>
