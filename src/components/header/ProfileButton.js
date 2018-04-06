@@ -53,7 +53,9 @@ class ProfileButtonToggle extends Component {
 		    } else {
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
-					uid: this.state.authUser.uid
+					uid: this.state.authUser.uid,
+					profilePicture: this.state.authUser.photoURL,
+					email: this.state.authUser.email
 				}
 				profilesRef.push(Profiles);
 				window.location.reload();
