@@ -26,7 +26,7 @@ Header.contextTypes = {
 
 
 const NavigationAuth = () =>
-			<div>
+			
 				<Navbar inverse collapseOnSelect>
 				  <Navbar.Header>
 
@@ -57,10 +57,10 @@ const NavigationAuth = () =>
 				    <LoggedInAs />
 				  </Navbar.Collapse>
 				</Navbar>
-			</div>
+			
 
 const NavigationNonAuth = () =>	
-			<div>
+			
 				<Navbar inverse collapseOnSelect>
 				  <Navbar.Header>
 				    <Navbar.Brand>
@@ -76,7 +76,7 @@ const NavigationNonAuth = () =>
 				    </Nav>
 				  </Navbar.Collapse>
 				</Navbar> 
-			</div>
+			
 
 
 

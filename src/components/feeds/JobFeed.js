@@ -12,12 +12,13 @@ class JobFeed extends Component {
 		Profiles:[],
 		authUser: null,
 		uid:'',
-		searcedState:'',
-		searcedZip:''
+		searchedState:'',
+		searchedZip:''
 		}
 	this.removeItem = this.removeItem.bind(this);
 	this.handleChange = this.handleChange.bind(this);
 	this.orderByState = this.orderByState.bind(this);
+	this.orderByZip = this.orderByZip.bind(this);
 
 	}
 	handleChange(e) {
@@ -33,25 +34,51 @@ class JobFeed extends Component {
 	}
 
 	orderByState(){
-		const stateRef = firebase.database().ref("JobPosts").orderByChild("state").equalTo(this.state.searcedState);
-		stateRef.on("value", function(snapshot) {
-		  snapshot.forEach(function(childSnapshot) {
-		    var key = childSnapshot.key;
-		    console.log(childSnapshot.key);
-		    var childData = childSnapshot.val();
-		    console.log(childSnapshot.val());
-		    newState.push({
-		        id: childSnapshot.key,
-		        companyName: childSnapshot.val().companyName,
-		      });
-		    }
-		    this.setState({
-		      JobPosts: newState
-		    });
-		  });
-		}, function(error) {
-		  console.error(error);
-		});
+		const stateRef = firebase.database().ref("JobPosts").orderByChild("state").equalTo(this.state.searchedState);
+		stateRef.on('value', (snapshot) => {
+	    let JobPosts = snapshot.val();
+	    let newState = [];
+	    for (let post in JobPosts) {
+	      newState.push({
+	        id: post,
+	        companyName: JobPosts[post].companyName,
+		    email: JobPosts[post].email,
+		    phone: JobPosts[post].phone,
+		    position: JobPosts[post].position,
+		    state: JobPosts[post].state,
+		    zip: JobPosts[post].zip,
+		    about: JobPosts[post].about,
+		    applyLink: JobPosts[post].applyLink
+	      });
+	    }
+	    this.setState({
+	      JobPosts: newState
+	    });
+	  });
+	}
+
+	orderByZip(){
+		const stateRef = firebase.database().ref("JobPosts").orderByChild("zip").equalTo(this.state.searchedZip);
+		stateRef.on('value', (snapshot) => {
+	    let JobPosts = snapshot.val();
+	    let newState = [];
+	    for (let post in JobPosts) {
+	      newState.push({
+	        id: post,
+	        companyName: JobPosts[post].companyName,
+		    email: JobPosts[post].email,
+		    phone: JobPosts[post].phone,
+		    position: JobPosts[post].position,
+		    state: JobPosts[post].state,
+		    zip: JobPosts[post].zip,
+		    about: JobPosts[post].about,
+		    applyLink: JobPosts[post].applyLink
+	      });
+	    }
+	    this.setState({
+	      JobPosts: newState
+	    });
+	  });
 	}
 
 
@@ -117,7 +144,7 @@ class JobFeed extends Component {
 				<div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
 					<div className='form-group'>
 							<label>Search By State</label>
-							<select className='form-control' name='searcedState' onChange={this.handleChange} value={this.state.searcedState} >
+							<select className='form-control' name='searchedState' onChange={this.handleChange} value={this.state.searchedState} >
 								<option value="" disabled selected>Select an option</option>
 								<option value="Alabama">Alabama</option>
 								<option value="Alaska">Alaska</option>
@@ -174,6 +201,17 @@ class JobFeed extends Component {
 					</div>
 					<div className='text-center'>
 						<button className='btn yellow-button' onClick={this.orderByState}>Submit</button>
+					</div>
+				</div>
+			</div>
+			<div className='row job-text'>
+				<div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
+					<div className='form-group'>
+						<label>Search by Zip Code</label>
+						<input type='text' className='form-control' name='searchedZip' value={this.state.searchedZip} onChange={this.handleChange} />
+					</div>
+					<div className='text-center'>
+						<button onClick={this.orderByZip} className='btn yellow-button'>Submit</button>
 					</div>
 				</div>
 			</div>

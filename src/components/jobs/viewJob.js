@@ -54,26 +54,23 @@ class ViewJob extends Component{
 	  }
 
 	  handleSubmit(e) {
-	  
-	  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
+		  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
+		  const postsFromUsers = { 
+		  	uid: this.state.authUser.uid,
+		    position: this.state.position,
+		    state: this.state.state,
+		    city: this.state.city,
+		    relocate: this.state.relocate,
+		  }
 
-	  const postsFromUsers = { 
-	  	uid: this.state.authUser.uid,
-	    position: this.state.position,
-	    state: this.state.state,
-	    city: this.state.city,
-	    relocate: this.state.relocate,
-	  }
-
-	  JobPostsCandidatesRef.push(postsFromUsers);
-	  this.setState({
-	    position: '',
-	    state: '',
-	    city: '',
-	    relocate: '',
-	  });
-
-	}
+		  JobPostsCandidatesRef.push(postsFromUsers);
+		  this.setState({
+		    position: '',
+		    state: '',
+		    city: '',
+		    relocate: '',
+		  });
+		}
 
 	componentDidMount() {
 
@@ -154,12 +151,13 @@ class ViewJob extends Component{
 	}
 
 
+
 	render(){
 		return(
 			<div className='row'>
 				{this.state.authUser ?
 				<div>
-				<div className='col-md-12 dark-bg-company-info company-info'>
+				<div className='col-md-12 col-sm-12 col-xs-12 dark-bg-company-info company-info'>
 					{this.state.JobPosts.map((post) => {
 				    		return(
 		                    <div className="success text-center" key={post.id}>
@@ -192,9 +190,9 @@ class ViewJob extends Component{
 		        		})}
 		        	       
 				</div>
-				<div className='col-md-12 post-box'>
+				<div className='col-md-12 col-sm-12 col-xs-12 post-box'>
 					<h3 className='text-center'>Interested in this job? Tell us about yourself.</h3>
-					<form className='col-md-4 col-md-offset-4 job-text' onSubmit={this.handleSubmit}>
+					<form className='col-md-4 col-md-offset-4 col-xs-12 col-sm-12 job-text' onSubmit={this.handleSubmit}>
 						<div className='form-group'>
 							<label>I am a:</label>
 							<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>
@@ -274,96 +272,97 @@ class ViewJob extends Component{
 								<option value="Not Willing to relocate">Does not want to relocate.</option>
 							</select>
 						</div>
-
-
 						<input type='submit' className='btn black-button btn-block' value='Post' />
 					</form>
-
 				</div> 
 				<div className='row'>
-					<div className='col-md-12'>
+					<div className='col-md-12 col-sm-12 col-xs-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>
-					<table className="table-striped table-text col-md-12">
-						    <thead>
-						      <tr>
-						      	<th>&nbsp;</th>
-						      	<th>Name</th>
-						        <th>Email</th>
-						        <th>Position</th>
-						        <th>Location</th>
-						        <th>Status</th>
-						        <th>Profile</th>
-						        <th>&nbsp;</th>
-						        
-						        <th></th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						    {this.state.postsFromUsers.map((post) => {
-		    		  			return(
-							    <tr className='active' key={post.id}>  
-									<td>
-									{this.state.Profiles.map((profile) => {
-									return(
-										<div key={profile.id}>
-										{post.uid === profile.uid ? 
-										<img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
-										:
-										null}
-										</div>
-										);
-									})}
-									</td>
-									<td>
-									{this.state.Profiles.map((profile) => {
-									return(
-										<div key={profile.id}>
-										{post.uid === profile.uid ? 
-										<p>{profile.name}</p>
-										:
-										null}
-										</div>
-										);
-									})}
-									</td>
-									<td>
-									{this.state.Profiles.map((profile) => {
-									return(
-										<div key={profile.id}>
-										{post.uid === profile.uid ? 
-										<strong className='text-primary'>{profile.email}</strong>
-										:
-										null}
-										</div>
-										);
-									})}
-									</td>
-									<td>{post.position}</td>
-									<td>{post.city}, {post.state}</td>
-									<td>{post.relocate}</td>
-									<td>
-			                      {this.state.Profiles.map((profile) => {
-			                      	return(
-			                      		<div key={profile.id}>
-			                      		{post.uid === profile.uid ?
-			                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}>View</Link>
-			                      		:
-			                      		null
-			                      		
-			                      		}
-			                      		</div>
-			                      	);
-			                      })}
-			                      </td>
-							      <td>{post.uid === this.state.authUser.uid ?
-               						 <button type='submit' className="btn btn-danger btn-sm" onClick={() => this.removeItem(post.id)}>&nbsp;DELETE&nbsp;</button> : null}
-               					  </td>
-			                    </tr>
-			                    
-				                    );
-			          			})}         
-						    </tbody>
-		            </table>
+						<div className='table-responsive'>
+							<table className="table table-text col-md-12 col-sm-12 col-xs-12">
+								    <thead>
+								      <tr>
+										<th></th>
+								      	<th>Name</th>
+								        <th>Email</th>
+								        <th className='hidden-xs'>Position</th>
+								        <th className='hidden-xs'>Location</th>
+								        <th className='hidden-xs'>Status</th>
+								        <th>Profile</th>
+								        
+								        
+								        <th></th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								    {this.state.postsFromUsers.map((post) => {
+				    		  			return(
+									    <tr className='active' key={post.id}>  
+											<td>
+											{this.state.Profiles.map((profile) => {
+											return(
+												<div key={profile.id} className='hidden-xs'>
+												{post.uid === profile.uid ? 
+												<img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+												:
+												null}
+												</div>
+												);
+											})}
+											</td>
+											<td>
+											{this.state.Profiles.map((profile) => {
+											return(
+												<div key={profile.id}>
+												{post.uid === profile.uid ? 
+												<p>{profile.name}</p>
+												:
+												null}
+												</div>
+												);
+											})}
+											</td>
+											<td>
+											{this.state.Profiles.map((profile) => {
+											return(
+												<div key={profile.id}>
+												{post.uid === profile.uid ? 
+												<strong className='text-primary'>{profile.email}</strong>
+												:
+												null}
+												</div>
+												);
+											})}
+											</td>
+											<td className='hidden-xs'>{post.position}</td>
+											<td className='hidden-xs'>{post.city}, {post.state}</td>
+											<td className='hidden-xs'>{post.relocate}</td>
+											<td>
+					                      {this.state.Profiles.map((profile) => {
+					                      	return(
+					                      		<div key={profile.id}>
+					                      		{post.uid === profile.uid ?
+					                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}>View</Link>
+					                      		:
+					                      		null
+					                      		
+					                      		}
+					                      		</div>
+					                      	);
+					                      })}
+					                      </td>
+									      <td>{post.uid === this.state.authUser.uid ?
+		               						 <button type='submit' className="btn btn-danger btn-sm hidden-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span> DELETE&nbsp;</button> : null}
+		               						 {post.uid === this.state.authUser.uid ?
+		               						 <button type='submit' className="btn btn-danger btn-sm visible-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span></button> : null}
+		               					  </td>
+					                    </tr>
+					                    
+						                    );
+					          			})}         
+								    </tbody>
+				            </table>
+				        </div>
 		            </div>		  	
 		    	</div>  	
 				</div>

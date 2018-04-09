@@ -173,7 +173,7 @@ componentDidMount(){
 
 					<div className='form-group'>
 						<label>Zip Code</label>
-						<input required type='text' className='form-control' name='zip' onChange={this.handleChange} value={this.state.zip} />
+						<input required type='text' className='form-control' name='zip' onChange={this.handleChange} value={this.state.zip} maxlength="5" />
 					</div>
 
 					<div className='form-group'>

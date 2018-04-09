@@ -115,7 +115,7 @@ class viewProfile extends Component {
 					                      <td><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </td>
 					                      <td>{project.projectInfo}</td>
 					                      <td>{project.uid != undefined ?
-		               						 <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
+		               						 <button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
 		               					  </td>
 					                    </tr>
 					                :
