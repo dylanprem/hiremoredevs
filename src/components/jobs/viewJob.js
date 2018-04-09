@@ -24,6 +24,7 @@ class ViewJob extends Component{
 	    	email:'',
 		    position: '',
 		    state: '',
+		    zip:'',
 		    city: '',
 		    relocate: '',
 		    about: '',
@@ -87,7 +88,8 @@ class ViewJob extends Component{
 	        email: snapshot.val().email,
 	        phone: snapshot.val().phone,
 	        position: snapshot.val().position,
-	        address: snapshot.val().address,
+	        state: snapshot.val().state,
+	        zip: snapshot.val().zip,
 	        about: snapshot.val().about,
 	        reqOne:snapshot.val().reqOne,
 	        reqTwo: snapshot.val().reqTwo,
@@ -118,7 +120,6 @@ class ViewJob extends Component{
 		    about: postsFromUsers[post].about,
 		    github: postsFromUsers[post].github,
 		    linkedin: postsFromUsers[post].linkedin,
-		    authUser: postsFromUsers[post].authUser
 	      });
 	    }
 		this.setState({
@@ -175,7 +176,7 @@ class ViewJob extends Component{
 						       <p className='job-text'>{post.position}</p>
 
 						       <h3>Job Location</h3>
-						       <p className='job-text'>{post.address}</p>
+						       <p className='job-text'>{post.state}, {post.zip}</p>
 
 						       <h3>About the Job:</h3>
 						       <p className='job-text'>{post.about}</p>

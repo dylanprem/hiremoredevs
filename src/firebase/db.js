@@ -2,8 +2,8 @@ import { db } from './firebase';
 
 // User API
 
-export const doCreateProfile = (uid) =>
-  db.ref('Profiles').set({
+export const createProfile = (uid) =>
+  db.ref('Profiles').push({
     uid
   });
 
