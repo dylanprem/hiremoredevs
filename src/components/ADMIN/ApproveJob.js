@@ -106,8 +106,8 @@ class ApproveJob extends Component {
 		                      <td>{post.zip}</td>
 		                      <td><Link className='btn black-button btn-sm' to={`admin-view-job/${post.id}`}>View Details</Link></td>
 		                      <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td>
-		                      <td><button type='submit' className="btn btn-info" onClick={() => this.handleSubmit(post.id)}>Approve</button></td>
-		                      					          
+		                      
+		                      			          
 		                    </tr>
 		                    );
 		                 })}       

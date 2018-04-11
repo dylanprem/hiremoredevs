@@ -9,7 +9,8 @@ class AdminButton extends Component {
 	super(props);
 	this.state = {
 		authUser: null,
-		ADMIN: []
+		ADMIN: [],
+		JobPostRequests:[]
 		}
 	}
 
