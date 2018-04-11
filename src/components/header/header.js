@@ -8,6 +8,7 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
 import ProfileButtonToggle from './ProfileButton';
+import AdminButton from '../ADMIN/AdminButton';
 
 
 const Header = (props, { authUser }) =>
@@ -37,7 +38,7 @@ const NavigationAuth = () =>
 				  </Navbar.Header>
 				  <Navbar.Collapse>
 
-				    
+				    <AdminButton />
 				    <Nav pullRight>
 				      <NavItem>
 				      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>

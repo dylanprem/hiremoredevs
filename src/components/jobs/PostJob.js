@@ -42,8 +42,8 @@ class PostJobForm extends Component {
 
   handleSubmit(e) {
   e.preventDefault();
-  const JobsRef = firebase.database().ref('JobPosts');
-  const JobPosts = {
+  const JobsRef = firebase.database().ref('JobPostRequests');
+  const JobPostRequests = {
     companyName: this.state.companyName,
     email: this.state.email,
     position: this.state.position,
@@ -55,10 +55,11 @@ class PostJobForm extends Component {
     reqOne:this.state.reqOne,
 	reqTwo:this.state.reqTwo,
 	reqThree:this.state.reqThree,
+	uid: this.state.authUser.uid
   }
 
 
-  JobsRef.push(JobPosts);
+  JobsRef.push(JobPostRequests);
   this.setState({
     companyName: '',
     email: '',
@@ -73,7 +74,7 @@ class PostJobForm extends Component {
 	reqThree:'',
   });
 
-this.props.history.push(routes.CURRENT_FEED);  
+this.props.history.push(routes.THANK_YOU);  
 }
 
 componentDidMount(){

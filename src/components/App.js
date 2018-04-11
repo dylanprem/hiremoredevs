@@ -16,6 +16,9 @@ import CollabCorner from './collab/CollabCorner';
 import AddCollab from './collab/AddCollab';
 import ViewCollab from './collab/ViewCollab';
 import EditInfo from './profile/editBasicInfo';
+import ThankYou from './jobs/ThankYou';
+import ApproveJob from './ADMIN/ApproveJob';
+import ViewJobADMIN from './ADMIN/ViewJobADMIN';
 
 
 import * as routes from '../constants/routes';
@@ -42,6 +45,9 @@ const App = () =>
       <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />
       <Route exact path={routes.VIEW_COLLAB} component={ViewCollab} />
+      <Route exact path={routes.THANK_YOU} component={ThankYou} />
+      <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
+      <Route exact path="/admin-view-job/:viewJobADMIN" component={ViewJobADMIN} />
     </div>
   </Router>
 
