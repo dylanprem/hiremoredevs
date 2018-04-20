@@ -8,7 +8,6 @@ class ViewSignupRequest extends Component {
 	constructor(props){
 	super(props);
 	this.state = {
-		authUser: null,
 		ADMIN: [],
 		Profiles:[],
 		RECRUITERSignupRequests:[],
@@ -17,42 +16,31 @@ class ViewSignupRequest extends Component {
 		uid:'',
 		companyName:'',
 		linkedin:'',
+		authUser: null,
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.removeItem = this.removeItem.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(e) {
-	    this.setState({
-	    	[e.target.name]: e.target.value
-	    });
-	}
 
-	removeItem(id) {
-	    const reqToDeleteref = firebase.database().ref('RECRUITERSignupRequests' + '/' + this.state.currentReq);
-	    reqToDeleteref.remove();
-	}
 
 	handleSubmit(e) {
 	  e.preventDefault();
-	  const approvereqref = firebase.database().ref('RECRUITERSignupRequests' + '/' + this.state.currentReq);
+	  const deleteRef = firebase.database().ref('RECRUITERSignupRequests/' + this.state.currentReq );
 	  const recruitersRef = firebase.database().ref('RECRUITER');
 	  const RECRUITER = {
 	    companyName: this.state.companyName,
 	    linkedin: this.state.linkedin,
 		uid: this.state.uid
 	  }
-
-
 	  recruitersRef.push(RECRUITER);
 	  this.setState({
 	    companyName: '',
 	    linkedin:'',
 	    uid:'',
 	  });
-	  
-	  approvereqref.remove();
+	  deleteRef.remove();
 	  this.props.history.push(routes.RECRUITER_SIGNUP_REQUESTS);
 	}
 
@@ -101,6 +89,17 @@ class ViewSignupRequest extends Component {
 	}
 
 
+
+	handleChange(e) {
+	    this.setState({
+	    	[e.target.name]: e.target.value
+	    });
+	}
+
+	removeItem(id) {
+	    const reqToDeleteref = firebase.database().ref('RECRUITERSignupRequests' + '/' + this.state.currentReq);
+	    reqToDeleteref.remove();
+	}
 	
 
 	render(){

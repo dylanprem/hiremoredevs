@@ -12,7 +12,7 @@ class RecruiterSignupRequests extends Component {
 		ADMIN: [],
 		Profiles:[],
 		RECRUITERSignupRequests:[],
-	
+
 		}
 	}
 
@@ -92,7 +92,7 @@ class RecruiterSignupRequests extends Component {
 				<div key={admins.id}>
 					{admins.uid === this.state.authUser.uid ? 
 						<div className='table-responsive'>
-							<table class='table job-text'>
+							<table class='table table-striped job-text'>
 								<thead>
 									<tr>
 										<th></th>
