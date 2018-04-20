@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
 
@@ -52,7 +52,10 @@ class AdminButton extends Component {
 			return(
 				<NavItem key={admins.id}>
 				{this.state.authUser.uid === admins.uid ?
-				<Link to={routes.ADMIN_APPROVE_JOB} className="btn btn-info job-text">ADMIN</Link>
+				<DropdownButton bsStyle={'info'} title={'ADMIN'} className='job-text'>
+				    <MenuItem><Link to={routes.ADMIN_APPROVE_JOB} class='job-text'>JOB POST REQUESTS</Link></MenuItem>
+				    <MenuItem><Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text'>RECRUITER SIGNUP REQUESTS</Link></MenuItem>
+				</DropdownButton> 
 				: null }
 				</NavItem>
 					);

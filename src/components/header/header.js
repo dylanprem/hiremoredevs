@@ -9,6 +9,8 @@ import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
 import ProfileButtonToggle from './ProfileButton';
 import AdminButton from '../ADMIN/AdminButton';
+import RECRUITERButton from '../RECRUITER/RECRUITERButton';
+import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
 
 
 const Header = (props, { authUser }) =>
@@ -43,12 +45,14 @@ const NavigationAuth = () =>
 				      <NavItem>
 				      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>
 				      </NavItem>
-				      <NavItem eventKey={1}>
-				        <Link to='/post-job' className='signup-link job-text'> Post Job Ad</Link>
-				      </NavItem>
-				      
 				      <NavItem>
 				      	<Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link>
+				      </NavItem>
+				      <NavItem>
+				      	<RECRUITERButton />
+				      </NavItem>
+				      <NavItem>
+				      	<RECRUITERSignup />
 				      </NavItem>
 				      <NavItem eventKey={2} onClick={auth.doSignOut}>
 				        <button className='btn yellow-button logged-in-as'>Logout</button>

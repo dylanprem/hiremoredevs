@@ -19,6 +19,9 @@ import EditInfo from './profile/editBasicInfo';
 import ThankYou from './jobs/ThankYou';
 import ApproveJob from './ADMIN/ApproveJob';
 import ViewJobADMIN from './ADMIN/ViewJobADMIN';
+import RECRUITERSignupForm from './RECRUITER/RECRUITERSignupForm';
+import RecruiterSignupRequests from './ADMIN/RecruiterSignupRequests';
+import ViewSignupRequest from './ADMIN/ViewSignupRequest';
 
 
 import * as routes from '../constants/routes';
@@ -48,6 +51,9 @@ const App = () =>
       <Route exact path={routes.THANK_YOU} component={ThankYou} />
       <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
       <Route exact path="/admin-view-job/:viewJobADMIN" component={ViewJobADMIN} />
+      <Route exact path={routes.RECRUITER_SIGNUP_FORM} component={RECRUITERSignupForm} />
+      <Route exact path={routes.RECRUITER_SIGNUP_REQUESTS} component={RecruiterSignupRequests} />
+      <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
     </div>
   </Router>
 

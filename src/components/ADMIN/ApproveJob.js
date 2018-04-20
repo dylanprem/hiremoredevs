@@ -85,7 +85,7 @@ class ApproveJob extends Component {
 				<div key={admins.id}>
 				{this.state.authUser.uid === admins.uid ?
 				<div>
-					<h1 className="text-center">JOB POST REQUESTS</h1>
+					<h1 className="text-center job-text">JOB POST REQUESTS</h1>
 					<table className="table jobs-table">
 					    <thead>
 					      <tr>

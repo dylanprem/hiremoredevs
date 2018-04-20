@@ -18,6 +18,9 @@ export const VIEW_COLLAB = '/view-collab/:currentCollab';
 export const THANK_YOU = '/thank-you';
 export const ADMIN_APPROVE_JOB = '/admin-job-approval-queue';
 export const ADMIN_VIEW_JOB = '/admin-view-job/:viewJobADMIN';
+export const RECRUITER_SIGNUP_FORM = '/recruiter-registration';
+export const RECRUITER_SIGNUP_REQUESTS = '/admin-signup-requests';
+export const VIEW_RECRUITER_REQUEST = 'admin-view-recruiter-request/:viewReq';
 
 
 
