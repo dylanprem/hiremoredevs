@@ -41,23 +41,23 @@ class ViewSignupRequest extends Component {
 	    uid:'',
 	  });
 	  deleteRef.remove();
+	  window.location.reload();
 	  this.props.history.push(routes.RECRUITER_SIGNUP_REQUESTS);
 	}
 
 
 	componentDidMount() {
 	  const reqref = firebase.database().ref('RECRUITERSignupRequests' + '/' + this.state.currentReq);
-	  reqref.on('value', (snapshot) => {
+	  reqref.once('value', (snapshot) => {
 	  	let RECRUITERSignupRequests = snapshot.val();
 	  	let newState = [];
-
-	      newState.push({
+	  	newState.push({
 	      	id: this.state.currentReq,
 			companyName: snapshot.val().companyName,
 			linkedin: snapshot.val().linkedin,
 			uid: snapshot.val().uid,
 	      });
-
+	    
 	    this.setState({
 	      RECRUITERSignupRequests: newState
 	    });

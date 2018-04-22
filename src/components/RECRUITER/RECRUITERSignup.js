@@ -49,16 +49,9 @@ class RECRUITERSignup extends Component {
 		firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
 		    const userData = snapshot.val();
 		    if (userData){
-		      	function renderButton() {
-				    var buttonToHide = document.getElementById('recSignupButton');
-				    buttonToHide.style.display === "none";
-				}
+				    document.getElementById("recSignupButton").style.display = "none";
 		    } else {
-		    	function hideButton() {
-				    var buttonToHide = document.getElementById('recSignupButton');
-				    buttonToHide.style.display === "block";
-				}
-				
+				    document.getElementById('recSignupButton').style.display = "block";
 			}
 		});
 	}

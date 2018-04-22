@@ -89,7 +89,6 @@ class viewProfile extends Component {
 						<div key={profile.id}>
 							{profile.uid === this.state.authUser.uid ?
 							<div>
-								<Link to={`/edit-info/${profile.id}`} className='btn yellow-button job-text'>Update Basic Info</Link>
 								<h3>About Me</h3>
 								<p className='job-text'>{profile.about}</p>
 								<h3>My top three</h3>

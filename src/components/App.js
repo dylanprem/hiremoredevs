@@ -15,7 +15,6 @@ import publicProfile from './profile/publicProfile';
 import CollabCorner from './collab/CollabCorner';
 import AddCollab from './collab/AddCollab';
 import ViewCollab from './collab/ViewCollab';
-import EditInfo from './profile/editBasicInfo';
 import ThankYou from './jobs/ThankYou';
 import ApproveJob from './ADMIN/ApproveJob';
 import ViewJobADMIN from './ADMIN/ViewJobADMIN';
@@ -43,7 +42,6 @@ const App = () =>
       <Route exact path="/profile/:viewProfile" component={viewProfile} />
       <Route exact path={routes.CREATE_PROFILE} component={createProfile} />
       <Route exact path="/edit/:editProfile" component={editProfile} />
-      <Route exact path={routes.EDIT_BASIC_INFO} component={EditInfo} />
       <Route exact path="/user/:userProfile" component={publicProfile} />
       <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />

@@ -35,13 +35,21 @@ class editProfile extends Component {
 	handleSubmit(e) {
 	  e.preventDefault();
 	  this.props.history.push(routes.VIEW_PROFILE);
+	   firebase.auth().currentUser.updateProfile({
+		  displayName: this.name.value,
+		  photoURL: this.profilePicture.value
+		}).then(function() {
+		  console.log('Profile updated');
+		}).catch(function(error) {
+		  console.log('Profile did not update');
+		});
 	  const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
 	  		name: this.state.authUser.displayName,
 	  		profilePicture: this.state.authUser.photoURL,
-	    	about: this.state.about,
+	    	about: this.about.value,
 			frameworkOne: this.state.frameworkOne,
 			frameworkTwo: this.state.frameworkTwo,
 			frameworkThree: this.state.frameworkThree,
@@ -54,11 +62,34 @@ class editProfile extends Component {
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
+			name: '',
+			profilePicture:''
 	  });
 	}
 
 
 	componentDidMount(){	
+	  const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
+		profilesRef.once('value', (snapshot) => {
+	    let Profiles = snapshot.val();
+	    let newState = [];
+	      newState.push({
+	        id: this.state.currentProfile,
+	        about: snapshot.val().about,
+	        frameworkOne:snapshot.val().frameworkOne,
+			frameworkTwo:snapshot.val().frameworkTwo,
+			frameworkThree:snapshot.val().frameworkThree,
+			uid:snapshot.val().uid,
+			name: snapshot.val().name,
+			profilePicture: snapshot.val().profilePicture,
+	      });
+	    
+	    this.setState({
+	      Profiles: newState
+	    });
+	  });
+
+
 	  firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
@@ -72,27 +103,41 @@ class editProfile extends Component {
 			<div className='row profile-container'>
 			{this.state.authUser ?
 				<div className='col-md-12 text-center'>
+					{this.state.Profiles.map((profile) => {return(
+					<div>
 					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
+
+					<div className='form-group col-md-6 col-md-offset-3 job-text'>
+						<label>Full Name</label>
+						<input type='text' name='name' defaultValue={profile.name} ref={(name) => this.name = name} onChange={this.handleChange} className='form-control' placeholder='Your Name' />
+					</div>
+
+					<div className='form-group col-md-6 col-md-offset-3 job-text'>
+						<label>Photo URL</label>
+						<input type='text' name='profilePicture' defaultValue={profile.profilePicture} ref={(profilePicture) => this.profilePicture = profilePicture} onChange={this.handleChange} className='form-control' placeholder='https://pathToPhoto.com' />
+					</div>
 					
 					<div className='form-group col-md-6 col-md-offset-3 job-text'>
 						<h3>About Me</h3>
-						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} value={this.state.about} placeholder='I am awesome!' required />
+						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} ref={(about) => this.about = about}  defaultValue={profile.about} placeholder='I am awesome!' required />
 					</div>
 
 					<div className='form-group col-md-6 col-md-offset-3 job-text'>
 						<h3>My top three frameworks</h3>
-						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} value={this.state.frameworkOne} placeholder='React' required />
+						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} defaultValue={profile.frameworkOne} ref={(frameworkOne) => this.frameworkOne = frameworkOne} placeholder='React' required />
 						<br />
-						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} value={this.state.frameworkTwo} placeholder='Javascript' required />
+						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} defaultValue={profile.frameworkTwo} ref={(frameworkTwo) => this.frameworkTwo = frameworkTwo} placeholder='Javascript' required />
 						<br />
-						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} value={this.state.frameworkThree} placeholder='Firebase' required />
+						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} defaultValue={profile.frameworkThree} ref={(frameworkThree) => this.frameworkThree = frameworkThree} placeholder='Firebase' required />
 					</div>
 					
 					<div className='col-md-12'>
-						<button className='btn yellow-button' onClick={this.handleSubmit}>Update profile</button>
+						<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
 					</div>
+					</div>
+					);})}
 				</div>
 
 				:
