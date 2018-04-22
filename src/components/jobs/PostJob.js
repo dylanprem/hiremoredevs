@@ -78,6 +78,22 @@ this.props.history.push(routes.THANK_YOU);
 }
 
 componentDidMount(){
+    const recruiterRef = firebase.database().ref('RECRUITER');
+        recruiterRef.once('value', (snapshot) => {		
+		    let RECRUITER = snapshot.val();
+		    let newState = [];
+		    for (let r in RECRUITER){
+		      newState.push({
+		        id: r,
+				uid:RECRUITER[r].uid,
+		      });
+
+		    }
+		    this.setState({
+		      RECRUITER: newState
+		    });
+		  });
+
       firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
@@ -89,7 +105,10 @@ componentDidMount(){
 			<div>
 			{this.state.authUser ?
 			<div className='row job-form'>
+			{this.state.RECRUITER.map((r) => {return(
 			<div className='col-md-6 col-md-offset-3'>
+				{r.uid === this.state.authUser.uid ?
+				<div>
 				<h1 className='text-center'>Please fill out this form to post this Job</h1>
 				<form className='job-text' onSubmit={this.handleSubmit}>
 					<div className='form-group'>
@@ -200,7 +219,11 @@ componentDidMount(){
 
 					<button className='btn yellow-button btn-block' type='submit'>Post</button>
 				</form>
+				</div>
+				:
+				null}
 			</div>
+			);})}
 			</div>
 			:
 			<p>Please Login</p>
