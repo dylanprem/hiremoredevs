@@ -146,8 +146,20 @@ class ViewJob extends Component{
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
-      } 
-    });	 
+      }
+      firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userData = snapshot.val();
+		    if (userData){
+				    document.getElementById("post-box").style.display = "none";
+				    document.getElementById("thanks-box").style.display = "block";
+		    } else {
+				    document.getElementById('post-box').style.display = "block";
+				    document.getElementById("thanks-box").style.display = "none";
+			}
+		});
+    });
+
+
 	}
 
 
@@ -190,7 +202,7 @@ class ViewJob extends Component{
 		        		})}
 		        	       
 				</div>
-				<div className='col-md-12 col-sm-12 col-xs-12 post-box'>
+				<div className='col-md-12 col-sm-12 col-xs-12 post-box' id="post-box">
 					<h3 className='text-center'>Interested in this job? Tell us about yourself.</h3>
 					<form className='col-md-4 col-md-offset-4 col-xs-12 col-sm-12 job-text' onSubmit={this.handleSubmit}>
 						<div className='form-group'>
@@ -274,7 +286,10 @@ class ViewJob extends Component{
 						</div>
 						<input type='submit' className='btn black-button btn-block' value='Post' />
 					</form>
-				</div> 
+				</div>
+				<div className='col-md-12 col-sm-12 col-xs-12 post-box' id="thanks-box">
+					<h3 className='text-center'>You've already expressed interest in this job.</h3> 
+				</div>
 				<div className='row'>
 					<div className='col-md-12 col-sm-12 col-xs-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>
