@@ -21,6 +21,7 @@ import ViewJobADMIN from './ADMIN/ViewJobADMIN';
 import RECRUITERSignupForm from './RECRUITER/RECRUITERSignupForm';
 import RecruiterSignupRequests from './ADMIN/RecruiterSignupRequests';
 import ViewSignupRequest from './ADMIN/ViewSignupRequest';
+import EditComment from './collab/EditComment';
 
 
 import * as routes from '../constants/routes';
@@ -45,7 +46,8 @@ const App = () =>
       <Route exact path="/user/:userProfile" component={publicProfile} />
       <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />
-      <Route exact path={routes.VIEW_COLLAB} component={ViewCollab} />
+      <Route exact path="/view-collab/:currentCollab" component={ViewCollab} />
+      <Route exact path="/edit-comment/:currentCollab?/:currentComment?" component={EditComment} />
       <Route exact path={routes.THANK_YOU} component={ThankYou} />
       <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
       <Route exact path="/admin-view-job/:viewJobADMIN" component={ViewJobADMIN} />

@@ -14,7 +14,16 @@ class RecruiterSignupRequests extends Component {
 		RECRUITERSignupRequests:[],
 
 		}
+		this.removeItem = this.removeItem.bind(this);
 	}
+
+	removeItem(id) {
+	    const reqToDeleteref = firebase.database().ref(`RECRUITERSignupRequests/${id}`);
+	    reqToDeleteref.remove();
+	    window.location.reload();
+	}
+
+
 
 	componentDidMount() {
 
@@ -101,22 +110,46 @@ class RecruiterSignupRequests extends Component {
 										<th>LinkedIn</th>
 									</tr>
 								</thead>
-								{this.state.RECRUITERSignupRequests.map((req) => {
-								return(
-								<tbody key={req.id}>
-									{this.state.Profiles.map((profile) => {
+								
+								<tbody>
+									{this.state.RECRUITERSignupRequests.map((req) => {
 									return(
-									<tr key={profile.id}>
-										<td>{profile.uid === req.uid ? <img src={profile.profilePicture} className='img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}</td>
-										<td>{profile.uid === req.uid ? profile.name : null }</td>
-										<td>{profile.uid === req.uid ? <Link to={`/admin-view-recruiter-request/${req.id}`} className='btn yellow-button btn-sm'>View</Link> : null }</td>
-										<td>{profile.uid === req.uid ? <Link to={req.linkedin} className='btn btn-primary btn-sm'>LinkedIn</Link> : null }</td>
+									<tr key={req.id}>
+										<td>
+										{this.state.Profiles.map((profile) => { return(
+											<div key={profile.id}>
+											{profile.uid === req.uid ? <img src={profile.profilePicture} className='img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
+											</div>
+										);})}
+										</td>
+
+										<td>
+										{this.state.Profiles.map((profile) => { return(
+											<div key={profile.id}>
+											{profile.uid === req.uid ? profile.name : null }
+											</div>
+										);})}
+										</td>
+										<td>
+										{this.state.Profiles.map((profile) => { return(
+											<div key={profile.id}>
+											{profile.uid === req.uid ? <Link to={`/admin-view-recruiter-request/${req.id}`} className='btn yellow-button btn-sm'>View</Link> : null }
+											</div>
+										);})}
+										</td>
+										<td>
+										{this.state.Profiles.map((profile) => { return(
+											<div key={profile.id}>
+											{profile.uid === req.uid ? <Link to={req.linkedin} className='btn btn-primary btn-sm'>LinkedIn</Link> : null }
+											</div>
+										);})}
+										</td>
+										<td><button className='btn btn-danger job-text btn-block' onClick={() => this.removeItem(req.id)}>Deny</button></td>
 									</tr>
-									);
+										);
 									})}
 								</tbody>
-								);
-								})}
+								
 							</table>
 						</div> 
 					: null }

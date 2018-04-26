@@ -26,7 +26,8 @@ class PostJobForm extends Component {
 	    reqOne:'',
 	    reqTwo:'',
 	    reqThree:'',
-	    authUser:null
+	    authUser:null,
+	    RECRUITER:[]
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -127,9 +128,9 @@ componentDidMount(){
 						<label>We are looking for a:</label>
 						<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>
 							<option disabled selected>Select an option</option>
-							<option>Front End Developer</option>
-							<option>Back End Developer</option>
-							<option>Full Stack Developer</option>
+							<option value="Front End Developer">Front End Developer</option>
+							<option value="Back End Developer">Back End Developer</option>
+							<option value="Full Stack Developer">Full Stack Developer</option>
 						</select>
 					</div>
 					

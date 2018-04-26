@@ -34,7 +34,7 @@ class JobFeed extends Component {
 	}
 
 	orderByState(){
-		const stateRef = firebase.database().ref("JobPosts").orderByChild("state").equalTo(this.state.searchedState);
+		const stateRef = firebase.database().ref("JobPosts").orderByChild("State").equalTo(this.state.searchedState);
 		stateRef.on('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
 	    let newState = [];
@@ -45,7 +45,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    State: JobPosts[post].State,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -69,7 +69,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    State: JobPosts[post].State,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -95,7 +95,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    State: JobPosts[post].State,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -234,7 +234,7 @@ class JobFeed extends Component {
 					    <tr className='active' key={post.id}>
 	                      <td className='text-warning'>{post.companyName}</td>
 	                      <td>{post.position}</td>
-	                      <td>{post.state}</td>
+	                      <td>{post.State}</td>
 	                      <td>{post.zip}</td>
 	                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td>
 	                      

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import withAuthorization from '../withAuthorization';
 import * as firebase from 'firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import * as routes  from '../../constants/routes';
+import { Modal } from 'react-bootstrap';
+
 
 class ViewSignupRequest extends Component {
 	constructor(props){
@@ -19,7 +22,6 @@ class ViewSignupRequest extends Component {
 		authUser: null,
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.removeItem = this.removeItem.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
@@ -30,9 +32,9 @@ class ViewSignupRequest extends Component {
 	  const deleteRef = firebase.database().ref('RECRUITERSignupRequests/' + this.state.currentReq );
 	  const recruitersRef = firebase.database().ref('RECRUITER');
 	  const RECRUITER = {
-	    companyName: this.state.companyName,
-	    linkedin: this.state.linkedin,
-		uid: this.state.uid
+	    companyName: this.companyName.value,
+	    linkedin: this.linkedin.value,
+		uid: this.uid.value
 	  }
 	  recruitersRef.push(RECRUITER);
 	  this.setState({
@@ -41,8 +43,8 @@ class ViewSignupRequest extends Component {
 	    uid:'',
 	  });
 	  deleteRef.remove();
-	  window.location.reload();
 	  this.props.history.push(routes.RECRUITER_SIGNUP_REQUESTS);
+	  window.location.reload();
 	}
 
 
@@ -96,10 +98,7 @@ class ViewSignupRequest extends Component {
 	    });
 	}
 
-	removeItem(id) {
-	    const reqToDeleteref = firebase.database().ref('RECRUITERSignupRequests' + '/' + this.state.currentReq);
-	    reqToDeleteref.remove();
-	}
+
 	
 
 	render(){
@@ -118,16 +117,23 @@ class ViewSignupRequest extends Component {
 								<div key={req.id} className='job-text'>
 
 									<div className='col-md-4 col-md-offset-4'>
-										<input type='text' onChange={this.handleChange} name='companyName' value={this.state.companyName = req.companyName} className='form-control' />
-										<input type='text' onChange={this.handleChange} name='linkedin' value={this.state.linkedin = req.linkedin} className='form-control' />
-										<input type='text' onChange={this.handleChange} name='uid' className='form-control' value={this.state.uid = req.uid} />
+										<div className='form-group'>
+											<label>Company Name</label>
+											<input type='text' onChange={this.handleChange} defaultValue={req.companyName} name='companyName' ref={(companyName) => this.companyName = companyName} className='form-control' />
+										</div>
+										<div className='form-group'>
+											<label>LinkedIn</label>
+											<input type='text' onChange={this.handleChange} name='linkedin' defaultValue={req.linkedin} ref={(linkedin) => this.linkedin = linkedin} className='form-control' />
+										</div>
+										<div className='form-group'>
+											<label>UID</label>
+											<input type='text' onChange={this.handleChange} name='uid' className='form-control' defaultValue={req.uid} ref={(uid) => this.uid = uid} />
+										</div>
 									</div>
 									<div className='text-center col-md-4 col-md-offset-4'>
 										<button className='btn yellow-button job-text btn-block' onClick={this.handleSubmit}>Approve</button>
 									</div>
-									<div className='text-center col-md-4 col-md-offset-4'>
-										<button className='btn btn-danger job-text btn-block' onClick={() => this.removeItem(req.id)}>Deny</button>
-									</div>
+
 								</div>
 								);
 								})}

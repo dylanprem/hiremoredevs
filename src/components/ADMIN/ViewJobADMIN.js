@@ -46,17 +46,17 @@ class ViewJobADMIN extends Component{
 	  const JobPostToDelete = firebase.database().ref('JobPostRequests' + '/' + this.state.currentJobADMIN);
 	  const JobsRef = firebase.database().ref('JobPosts');
 	  const JobPosts = {
-	    companyName: this.state.companyName,
-	    email: this.state.email,
-	    position: this.state.position,
-	    about: this.state.about,
-	    state: this.state.state,
-	    zip: this.state.zip,
-	    phone: this.state.phone,
-	    applyLink: this.state.applyLink,
-	    reqOne:this.state.reqOne,
-		reqTwo:this.state.reqTwo,
-		reqThree:this.state.reqThree,
+	    companyName: this.companyName.value,
+	    email: this.email.value,
+	    position: this.position.value,
+	    about: this.about.value,
+	    State: this.State.value,
+	    zip: this.zip.value,
+	    phone: this.phone.value,
+	    applyLink: this.applyLink.value,
+	    reqOne:this.reqOne.value,
+		reqTwo:this.reqTwo.value,
+		reqThree:this.reqThree.value,
 		uid: this.state.uid
 	  }
 
@@ -152,44 +152,44 @@ class ViewJobADMIN extends Component{
 					    		return(
 			                    <div className="success text-center" key={post.id}>
 							       <h3>Company: </h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='companyName' value={this.state.companyName = post.companyName} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='companyName' ref={(companyName) => this.companyName = companyName} defaultValue={post.companyName} />
 							       
 							       <h3>Email:</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='email' value={this.state.email = post.email} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='email' ref={(email) => this.email = email} defaultValue={post.email} />
 
 							       <h3>Phone:</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='phone' value={this.state.phone = post.phone} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='phone' ref={(phone) => this.phone = phone} defaultValue={post.phone} />
 
 							       <h3>Position</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='position' value={this.state.position = post.position} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='position' ref={(position) => this.position = position} defaultValue={post.position} />
 
 							       <h3>Job Location</h3>
 
 							       <h4 className='text-left'>State</h4>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='state' value={this.state.state = post.state} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='State' ref={(State) => this.State = State} defaultValue={post.state} />
 
 							       <h4 className='text-left'>Zip</h4>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='zip' value={this.state.zip = post.zip} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='zip' ref={(zip) => this.zip = zip} defaultValue={post.zip} />
 
 							       <h3>About the Job:</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='about' value={this.state.about = post.about} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' ref={(about) => this.about = about} defaultValue={post.about} />
 
 							       <h3>Requirements</h3>
 
 							       <h4 className='text-left'>Req One</h4>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqOne' value={this.state.reqOne = post.reqOne} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqOne' ref={(reqOne) => this.reqOne = reqOne} defaultValue={post.reqOne} />
 
 							       <h4 className='text-left'>Req Two</h4>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqTwo' value={this.state.reqTwo = post.reqTwo} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqTwo' ref={(reqTwo) => this.reqTwo = reqTwo} defaultValue={post.reqTwo} />
 
 							       <h4 className='text-left'>Req Three</h4>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqThree' value={this.state.reqThree = post.reqThree} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='reqThree' ref={(reqThree) => this.reqThree = reqThree} defaultValue={post.reqThree} />
 
 							       <h3>Application Link</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='applyLink' value={this.state.applyLink = post.applyLink} />
+							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='applyLink' ref={(applyLink) => this.applyLink = applyLink} defaultValue={post.applyLink} />
 
 							       <h3>UID</h3>
-							       <input type='text' onChange={this.handleChange} className='job-text form-control' name='uid' value={this.state.uid = post.uid} />
+							       <input type='text' className='job-text form-control' name='uid' value={this.state.uid = post.uid} />
 							       <button onClick={this.handleSubmit} className='btn btn-info'>Approve</button>
 						        </div>
 						         );
