@@ -193,15 +193,15 @@ class ViewCollab extends Component {
 											<div className='col-md-4 text-center job-text'>
 												<p className='comment'>{comment.commentBody}</p>
 											</div>
-											<div className='col-md-4 text-center'>
-												<div className='col-md-2'>
+											<div className='col-md-2 col-md-offset-2 text-center'>
+												<div className='col-md-12'>
 												{comment.uid === this.state.authUser.uid ? 
 													<button className='btn btn-danger job-text btn-block' onClick={() => this.removeComment(comment.id)}><span className='glyphicon glyphicon-trash'></span>  DELETE</button> 
 													: 
 													null
 												}
 												</div>
-												<div className='col-md-2'>
+												<div className='col-md-12'>
 												{comment.uid === this.state.authUser.uid ? 
 													<Link to={"/edit-comment/" + this.state.currentCollab + '/' + `${comment.id}`} className='btn btn-warning job-text btn-block'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
 													: 

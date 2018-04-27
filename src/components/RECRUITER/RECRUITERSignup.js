@@ -12,6 +12,7 @@ class RECRUITERSignup extends Component {
 		this.state = {
 			authUser:null,
 			RECRUITER:[],
+			RECRUITERSignupRequests:[]
 		}
 	}
 
@@ -35,6 +36,22 @@ class RECRUITERSignup extends Component {
 			    });
 			  });
 
+		const signupRef = firebase.database().ref('RECRUITERSignupRequests');
+	        signupRef.once('value', (snapshot) => {		
+			    let RECRUITERSignupRequests = snapshot.val();
+			    let newState = [];
+			    for (let s in RECRUITERSignupRequests){
+			      newState.push({
+			        id: s,
+					uid:RECRUITERSignupRequests[s].uid,
+			      });
+
+			    }
+			    this.setState({
+			      RECRUITERSignupRequests: newState
+			    });
+			  });
+
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
@@ -48,6 +65,15 @@ class RECRUITERSignup extends Component {
 		firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
 		    const userData = snapshot.val();
 		    if (userData){
+				    document.getElementById("recSignupButton").style.display = "none";
+		    } else {
+				    document.getElementById('recSignupButton').style.display = "block";
+			}
+		});
+
+		firebase.database().ref("RECRUITERSignupRequests").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userDataAlt = snapshot.val();
+		    if (userDataAlt){
 				    document.getElementById("recSignupButton").style.display = "none";
 		    } else {
 				    document.getElementById('recSignupButton').style.display = "block";

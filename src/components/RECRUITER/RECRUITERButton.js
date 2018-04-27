@@ -13,6 +13,7 @@ class RECRUITERButton extends Component {
 		this.state = {
 			authUser:null,
 			RECRUITER:[],
+			
 		}
 	}
 
@@ -45,7 +46,7 @@ class RECRUITERButton extends Component {
     	});	
 	}
 
-	componentDidUpdate() {}
+
 	
 
 	render() {

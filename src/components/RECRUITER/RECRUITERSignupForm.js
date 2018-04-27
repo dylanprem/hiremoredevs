@@ -42,7 +42,7 @@ class RECRUITERSignupForm extends Component {
     companyName: '',
     linkedin:'',
   });
-
+this.props.history.push(routes.THANK_YOU_REC);  
 }
 
 componentDidMount(){

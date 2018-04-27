@@ -17,6 +17,8 @@ export const ADD_COLLAB = '/add-collab';
 export const VIEW_COLLAB = '/view-collab/:currentCollab';
 
 export const THANK_YOU = '/thank-you';
+export const THANK_YOU_REC = '/thank-you-reg';
+
 export const ADMIN_APPROVE_JOB = '/admin-job-approval-queue';
 export const ADMIN_VIEW_JOB = '/admin-view-job/:viewJobADMIN';
 export const RECRUITER_SIGNUP_FORM = '/recruiter-registration';

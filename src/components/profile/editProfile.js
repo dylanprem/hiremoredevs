@@ -50,9 +50,9 @@ class editProfile extends Component {
 	  		name: this.state.authUser.displayName,
 	  		profilePicture: this.state.authUser.photoURL,
 	    	about: this.about.value,
-			frameworkOne: this.state.frameworkOne,
-			frameworkTwo: this.state.frameworkTwo,
-			frameworkThree: this.state.frameworkThree,
+			frameworkOne: this.frameworkOne.value,
+			frameworkTwo: this.frameworkTwo.value,
+			frameworkThree: this.frameworkThree.value,
 	  }
 
 

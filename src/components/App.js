@@ -16,6 +16,7 @@ import CollabCorner from './collab/CollabCorner';
 import AddCollab from './collab/AddCollab';
 import ViewCollab from './collab/ViewCollab';
 import ThankYou from './jobs/ThankYou';
+import ThankYouRec from './RECRUITER/ThankYouRec';
 import ApproveJob from './ADMIN/ApproveJob';
 import ViewJobADMIN from './ADMIN/ViewJobADMIN';
 import RECRUITERSignupForm from './RECRUITER/RECRUITERSignupForm';
@@ -49,6 +50,7 @@ const App = () =>
       <Route exact path="/view-collab/:currentCollab" component={ViewCollab} />
       <Route exact path="/edit-comment/:currentCollab?/:currentComment?" component={EditComment} />
       <Route exact path={routes.THANK_YOU} component={ThankYou} />
+      <Route exact path={routes.THANK_YOU_REC} component={ThankYouRec} />
       <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
       <Route exact path="/admin-view-job/:viewJobADMIN" component={ViewJobADMIN} />
       <Route exact path={routes.RECRUITER_SIGNUP_FORM} component={RECRUITERSignupForm} />
