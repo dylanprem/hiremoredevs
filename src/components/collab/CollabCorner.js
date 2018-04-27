@@ -4,6 +4,7 @@ import { auth } from '../../firebase';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
 import CollabList from './CollabList';
+import SignInForm from '../Auth/login';
 
 class CollabCorner extends Component {
 	constructor(props){
@@ -36,7 +37,7 @@ class CollabCorner extends Component {
 				</div>
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

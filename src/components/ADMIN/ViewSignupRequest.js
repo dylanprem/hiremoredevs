@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withAuthorization from '../withAuthorization';
 import * as firebase from 'firebase';
 import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
+import SignInForm from '../Auth/login';
 
 
 class ViewSignupRequest extends Component {
@@ -143,7 +143,7 @@ class ViewSignupRequest extends Component {
 					);
 		        })}
 			</div>
-			: null }
+			: <SignInForm /> }
 			</div>
 		);
 	}

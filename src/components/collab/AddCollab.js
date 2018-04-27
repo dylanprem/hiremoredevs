@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 class AddCollab extends Component {
 	constructor(props){
@@ -75,7 +76,7 @@ class AddCollab extends Component {
 				</form>
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

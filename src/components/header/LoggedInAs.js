@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from '../../firebase';
 import * as firebase from 'firebase';
-import withAuthorization from '../withAuthorization';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import * as routes from '../../constants/routes';
 import { Link } from 'react-router-dom';

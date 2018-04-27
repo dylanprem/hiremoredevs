@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import { withRouter, history, Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
-import DualFeed from '../feeds/dualFeed';
 import * as firebase from 'firebase';
 import './auth.css';
 import gmail from './auth-images/gmail.png';
 import facebook from './auth-images/facebook.png';
-
-
-const SignInPage = ({ history }) =>
-  <div>
-    <SignInForm history={history} />
-  </div>
 
 
 
@@ -71,6 +64,9 @@ class SignInForm extends Component {
 
     return (
     <div className='row dark-bg-login'>
+      {this.state.authUser ? 
+      null 
+      :
       <div className='col-md-6 col-md-offset-3 login'>
         <div className='panel-group'>
           <div className='panel'>
@@ -83,13 +79,10 @@ class SignInForm extends Component {
           </div>
       </div>
     </div>
+    }
   </div>
     );
   }
 }
 
-export default withRouter(SignInPage);
-
-export {
-  SignInForm,
-};
+export default SignInForm;

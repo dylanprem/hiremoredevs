@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
-import withAuthorization from '../withAuthorization';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 
 class RECRUITERButton extends Component {
@@ -65,7 +65,7 @@ class RECRUITERButton extends Component {
 					})}
 				</div>
 				:
-				null
+				<SignInForm />
 			}
 			</div>
 

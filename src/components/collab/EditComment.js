@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './collab.css';
+import SignInForm from '../Auth/login';
 
 class EditComment extends Component {
 	constructor(props){
@@ -133,7 +134,7 @@ class EditComment extends Component {
 				</div>
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

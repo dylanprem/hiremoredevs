@@ -3,10 +3,10 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import './profile.css';
 import * as routes from '../../constants/routes';
-import withAuthorization from '../withAuthorization';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AddProject from './AddProject';
 import ProfileButtonToggle from '../header/ProfileButton';
+import SignInForm from '../Auth/login';
 
 
 class viewProfile extends Component {
@@ -133,7 +133,7 @@ class viewProfile extends Component {
 					
 				</div>
 				:
-				null
+				<SignInForm />
 			}
 			</div>
 		);

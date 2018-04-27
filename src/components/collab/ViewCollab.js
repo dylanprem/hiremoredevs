@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './collab.css';
+import SignInForm from '../Auth/login';
 
 class ViewCollab extends Component {
 	constructor(props){
@@ -218,7 +219,7 @@ class ViewCollab extends Component {
 				</div>
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

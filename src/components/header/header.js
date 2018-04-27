@@ -11,78 +11,84 @@ import ProfileButtonToggle from './ProfileButton';
 import AdminButton from '../ADMIN/AdminButton';
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
 import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
+import LogoutButton from '../Auth/Logout';
 
 
-const Header = (props, { authUser }) =>
-  <div>
-    { authUser
-        ? <NavigationAuth />
-        : <NavigationNonAuth />
-    }
-   
-  </div>
+class Header extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			authUser:null
+		}
+	}
 
-Header.contextTypes = {
-  authUser: PropTypes.object,
-};
+	componentDidMount(){
+		firebase.auth().onAuthStateChanged((authUser) => {
+	      if (authUser) {
+	        this.setState({ authUser });
+	      } 
+    	});	
+	}
 
+	render(){
+		return(
+			<div>
+			{this.state.authUser ? 
+			<Navbar inverse collapseOnSelect>
+			  <Navbar.Header>
 
+			    <Navbar.Brand>
+			      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
+			    </Navbar.Brand>
+			    <Navbar.Toggle />
+			  </Navbar.Header>
+			  <Navbar.Collapse>
 
-const NavigationAuth = () =>
-			
-				<Navbar inverse collapseOnSelect>
-				  <Navbar.Header>
+			    <AdminButton />
+			    <Nav pullRight>
+			      <NavItem>
+			      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>
+			      </NavItem>
+			      <NavItem>
+			      	<Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link>
+			      </NavItem>
+			      <NavItem>
+			      	<RECRUITERButton />
+			      </NavItem>
+			      <NavItem>
+			      	<RECRUITERSignup />
+			      </NavItem>
+			      <LogoutButton />
+			    </Nav>
+			    <ProfileButtonToggle />
+			    <LoggedInAs />
+			  </Navbar.Collapse>
+			</Navbar>
 
-				    <Navbar.Brand>
-				      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
-				    </Navbar.Brand>
-				    <Navbar.Toggle />
-				  </Navbar.Header>
-				  <Navbar.Collapse>
+			:
 
-				    <AdminButton />
-				    <Nav pullRight>
-				      <NavItem>
-				      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>
-				      </NavItem>
-				      <NavItem>
-				      	<Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link>
-				      </NavItem>
-				      <NavItem>
-				      	<RECRUITERButton />
-				      </NavItem>
-				      <NavItem>
-				      	<RECRUITERSignup />
-				      </NavItem>
-				      <NavItem eventKey={2} onClick={auth.doSignOut}>
-				        <button className='btn yellow-button logged-in-as'>Logout</button>
-				      </NavItem>
-				    </Nav>
-				    <ProfileButtonToggle />
-				    <LoggedInAs />
-				  </Navbar.Collapse>
-				</Navbar>
-			
+			<Navbar inverse collapseOnSelect>
+			  <Navbar.Header>
+			    <Navbar.Brand>
+			      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
+			    </Navbar.Brand>
+			    <Navbar.Toggle />
+			  </Navbar.Header>
+			  <Navbar.Collapse>
+			    <Nav pullRight>
+			      <NavItem eventKey={2} to='/login'>
+			        <Link to='/login' className='login-link job-text'> Login</Link>
+			      </NavItem>
+			    </Nav>
+			  </Navbar.Collapse>
+			</Navbar> 
 
-const NavigationNonAuth = () =>	
-			
-				<Navbar inverse collapseOnSelect>
-				  <Navbar.Header>
-				    <Navbar.Brand>
-				      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
-				    </Navbar.Brand>
-				    <Navbar.Toggle />
-				  </Navbar.Header>
-				  <Navbar.Collapse>
-				    <Nav pullRight>
-				      <NavItem eventKey={2} to='/login'>
-				        <Link to='/login' className='login-link job-text'> Login</Link>
-				      </NavItem>
-				    </Nav>
-				  </Navbar.Collapse>
-				</Navbar> 
-			
+			}
+			</div>
+		);
+	}			
 
+}
 
 
 

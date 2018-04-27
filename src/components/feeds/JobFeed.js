@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import './feeds.css';
+import SignInForm from '../Auth/login';
 
 class JobFeed extends Component {
 	constructor(props){
@@ -255,7 +256,7 @@ class JobFeed extends Component {
 				</table>
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

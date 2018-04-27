@@ -4,6 +4,7 @@ import { auth } from '../../firebase';
 import './profile.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 class createProfile extends Component {
 	constructor(props){
@@ -97,7 +98,7 @@ class createProfile extends Component {
 				</div>
 
 				:
-				null
+				<SignInForm />
 			}
 			</div>
 		);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 
 class ApproveJob extends Component {
@@ -119,7 +120,7 @@ class ApproveJob extends Component {
 					);
 		        })}
 			</div>
-			: null }
+			: <SignInForm /> }
 			</div>
 		);
 	}

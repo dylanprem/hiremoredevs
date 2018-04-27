@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import SignInForm from '../Auth/login';
 
 class CollabList extends Component {
 	constructor(props){
@@ -108,7 +109,7 @@ class CollabList extends Component {
 				
 			</div>
 			:
-			null}
+			<SignInForm />}
 			</div>
 		);
 	}

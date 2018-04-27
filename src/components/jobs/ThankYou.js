@@ -4,7 +4,7 @@ import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './style.css';
 import * as firebase from 'firebase';
-
+import SignInForm from '../Auth/login';
 
 
 class ThankYou extends Component{
@@ -35,9 +35,7 @@ class ThankYou extends Component{
 		    	</div>  	
 
 				:
-				<div className='text-center'>
-					<h1>Please Login</h1>
-				</div>
+				<SignInForm />
 				}
 			</div>
 		);

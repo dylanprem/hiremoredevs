@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, } from 'react-router-dom';
 
 //USERS
 import Header from './header/header';
-import SignInPage from './Auth/login';
-import DualFeed from './feeds/dualFeed';
+import SignInForm from './Auth/login';
+import JobFeed from './feeds/JobFeed';
 import PostJobForm from './jobs/PostJob';
 import viewJob from './jobs/viewJob';
 import Landing from './Landing/landing';
@@ -25,7 +25,7 @@ import EditComment from './collab/EditComment';
 
 
 import * as routes from '../constants/routes';
-import withAuthentication from './withAuthentication';
+
 
 import './App.css'
 
@@ -35,9 +35,9 @@ const App = () =>
   <Router>
     <div className='dark-bg'>
       <Header />
-      <Route exact path={routes.LANDING} component={() => <Landing />} />
-      <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-      <Route exact path={routes.CURRENT_FEED} component={() => <DualFeed />} />
+      <Route exact path={routes.LANDING} component={Landing} />
+      <Route exact path={routes.SIGN_IN} component={SignInForm} />
+      <Route exact path={routes.CURRENT_FEED} component={JobFeed} />
       <Route exact path={routes.POST_JOB} component={PostJobForm} />
       <Route exact path="/job/:viewJob" component={viewJob} />
       <Route exact path="/profile/:viewProfile" component={viewProfile} />
@@ -57,4 +57,4 @@ const App = () =>
     </div>
   </Router>
 
-export default withAuthentication(App);
+export default App;

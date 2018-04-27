@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import withAuthorization from '../withAuthorization';
 import * as firebase from 'firebase';
 import { auth,db } from '../../firebase';
 import Phone from 'react-phone-number-input';
@@ -8,6 +7,7 @@ import rrui from 'react-phone-number-input/rrui.css';
 import rpni from 'react-phone-number-input/style.css';
 import * as routes from '../../constants/routes';
 import { BrowserRouter as BrowserHistory, Router, Route, Link } from 'react-router-dom';
+import SignInForm from '../Auth/login';
 
 
 class PostJobForm extends Component {
@@ -227,7 +227,7 @@ componentDidMount(){
 			);})}
 			</div>
 			:
-			<p>Please Login</p>
+			<SignInForm />
 			}
 			</div>
 		);

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { Nav, Navbar, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 class AdminButton extends Component {
 	constructor(props){
@@ -61,7 +62,7 @@ class AdminButton extends Component {
 					);
 		        })}
 			</Nav>
-			: null }
+			: <SignInForm /> }
 			</div>
 		);
 	}

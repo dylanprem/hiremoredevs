@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
+import SignInForm from '../Auth/login';
 
 class RecruiterSignupRequests extends Component {
 	constructor(props){
@@ -157,7 +158,7 @@ class RecruiterSignupRequests extends Component {
 					);
 		        })}
 			</div>
-			: null }
+			: <SignInForm /> }
 			</div>
 		);
 	}
