@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
 import SignInForm from '../Auth/login';
 
@@ -99,9 +99,10 @@ class RecruiterSignupRequests extends Component {
 			<div>
 			{this.state.ADMIN.map((admins) => {
 			return(
-				<div key={admins.id}>
+				<div className="col-md-12 jobs-container" key={admins.id}>
 					{admins.uid === this.state.authUser.uid ? 
 						<div className='table-responsive'>
+							<h1 className="text-center job-text">RECRUITER REGISTRATION REQUESTS</h1>
 							<table class='table table-striped job-text'>
 								<thead>
 									<tr>

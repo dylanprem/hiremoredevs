@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Link } from 'react-router-dom';
 import * as routes from '../../constants/routes';
 import SignInForm from '../Auth/login';
-
+import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
 
 class ApproveJob extends Component {
 	constructor(props){

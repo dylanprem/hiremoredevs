@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, BrowserHistory, history} from 'react-router-dom';
 
 //USERS
 import Header from './header/header';

@@ -222,7 +222,7 @@ componentDidMount(){
 				</form>
 				</div>
 				:
-				null}
+				<h1 className='text-center job-text'>ONLY REGISTERED RECRUITERS CAN POST JOBS. PLEASE CLICK ON THE RECRUITER REGISTRATION BUTTON TO REGISTER YOUR ACCOUNT AS A RECRUITER</h1>}
 			</div>
 			);})}
 			</div>
