@@ -119,7 +119,7 @@ class ApproveJob extends Component {
 					);
 		        })}
 			</div>
-			: <SignInForm /> }
+			: null }
 			</div>
 		);
 	}

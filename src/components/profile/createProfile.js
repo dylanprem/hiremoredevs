@@ -33,7 +33,7 @@ class createProfile extends Component {
 	    });
 	  }
 	handleSubmit(e) {
-	  e.preventDefault();
+	  
 	  const profilesRef = firebase.database().ref('Profiles');
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
@@ -98,7 +98,7 @@ class createProfile extends Component {
 				</div>
 
 				:
-				<SignInForm />
+				null
 			}
 			</div>
 		);

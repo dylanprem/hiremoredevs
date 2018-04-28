@@ -26,7 +26,6 @@ class EditComment extends Component {
 
 
 	saveComment(e){
-	  e.preventDefault();
 	  const updateRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments/' + this.state.currentComment);
 	  const Collabs = {
   		commentBody: this.commentBody.value,
@@ -134,7 +133,7 @@ class EditComment extends Component {
 				</div>
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

@@ -30,7 +30,6 @@ class AddProject extends Component{
 
 
 	handleSubmit(e) {
-	  e.preventDefault();
 	  const projectsRef = firebase.database().ref('Projects');
 	  const Projects = {
 	  		uid: this.state.authUser.uid,
@@ -46,7 +45,7 @@ class AddProject extends Component{
 			projectLink:'',
 			projectInfo:'',
 	  });
-	  window.location.reload();
+	  
 	}
 
 	componentDidMount(){	
@@ -77,7 +76,7 @@ class AddProject extends Component{
 					</div>
 				</div>
 				:
-				<SignInForm />
+				null
 				}
 			</div>
 		);

@@ -256,7 +256,7 @@ class JobFeed extends Component {
 				</table>
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

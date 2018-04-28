@@ -33,7 +33,7 @@ class editProfile extends Component {
 	}
 
 	handleSubmit(e) {
-	  e.preventDefault();
+	  
 	  this.props.history.push(routes.VIEW_PROFILE);
 	   firebase.auth().currentUser.updateProfile({
 		  displayName: this.name.value,
@@ -141,7 +141,7 @@ class editProfile extends Component {
 				</div>
 
 				:
-				<SignInForm />
+				null
 			}
 			</div>
 		);

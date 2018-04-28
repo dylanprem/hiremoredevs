@@ -42,7 +42,6 @@ class PostJobForm extends Component {
   }
 
   handleSubmit(e) {
-  e.preventDefault();
   const JobsRef = firebase.database().ref('JobPostRequests');
   const JobPostRequests = {
     companyName: this.state.companyName,
@@ -227,7 +226,7 @@ componentDidMount(){
 			);})}
 			</div>
 			:
-			<SignInForm />
+			null
 			}
 			</div>
 		);

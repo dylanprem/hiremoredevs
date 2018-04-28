@@ -28,7 +28,7 @@ class ViewSignupRequest extends Component {
 
 
 	handleSubmit(e) {
-	  e.preventDefault();
+	  
 	  const deleteRef = firebase.database().ref('RECRUITERSignupRequests/' + this.state.currentReq );
 	  const recruitersRef = firebase.database().ref('RECRUITER');
 	  const RECRUITER = {
@@ -143,7 +143,7 @@ class ViewSignupRequest extends Component {
 					);
 		        })}
 			</div>
-			: <SignInForm /> }
+			: null }
 			</div>
 		);
 	}

@@ -10,6 +10,7 @@ import * as routes from '../../constants/routes';
 import ProfileButtonToggle from './ProfileButton';
 import AdminButton from '../ADMIN/AdminButton';
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
+import RECRUITERManageJobsButton from '../RECRUITER/RECRUITERManageJobsButton';
 import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
 import LogoutButton from '../Auth/Logout';
 
@@ -54,6 +55,9 @@ class Header extends Component {
 			      </NavItem>
 			      <NavItem>
 			      	<RECRUITERButton />
+			      </NavItem>
+			      <NavItem>
+			      	<RECRUITERManageJobsButton />
 			      </NavItem>
 			      <NavItem>
 			      	<RECRUITERSignup />

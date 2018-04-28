@@ -37,7 +37,7 @@ class CollabCorner extends Component {
 				</div>
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

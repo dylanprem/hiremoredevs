@@ -154,12 +154,12 @@ class RecruiterSignupRequests extends Component {
 								
 							</table>
 						</div> 
-					: null }
+					: <h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
 				</div>
 					);
 		        })}
 			</div>
-			: <SignInForm /> }
+			: null }
 			</div>
 		);
 	}

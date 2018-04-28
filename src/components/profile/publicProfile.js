@@ -129,7 +129,7 @@ class publicProfile extends Component {
 
 				</div>
 				:
-				<SignInForm />
+				null
 			}
 			</div>
 		);

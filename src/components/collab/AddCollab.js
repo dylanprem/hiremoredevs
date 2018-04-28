@@ -27,7 +27,6 @@ class AddCollab extends Component {
 
 
 	handleSubmit(e) {
-	  e.preventDefault();
 	  this.props.history.push(routes.COLLAB_CORNER);
 	  const collabsRef = firebase.database().ref('Collabs');
 	  const Collabs = {
@@ -76,7 +75,7 @@ class AddCollab extends Component {
 				</form>
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

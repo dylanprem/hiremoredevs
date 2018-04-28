@@ -133,7 +133,7 @@ class viewProfile extends Component {
 					
 				</div>
 				:
-				<SignInForm />
+				null
 			}
 			</div>
 		);

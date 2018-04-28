@@ -42,7 +42,6 @@ class ViewCollab extends Component {
 	}
 
 	handleSubmit(e) {
-	  e.preventDefault();
 	  const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments');
 	  const Collabs = {
 	  		uid: this.state.authUser.uid,
@@ -219,7 +218,7 @@ class ViewCollab extends Component {
 				</div>
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

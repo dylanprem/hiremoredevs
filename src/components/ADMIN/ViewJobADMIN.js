@@ -201,7 +201,7 @@ class ViewJobADMIN extends Component{
 		        })}   	
 				</div>
 				:
-				<SignInForm />
+				null
 				}
 			</div>
 		);

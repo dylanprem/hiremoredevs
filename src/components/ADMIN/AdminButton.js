@@ -62,7 +62,7 @@ class AdminButton extends Component {
 					);
 		        })}
 			</Nav>
-			: <SignInForm /> }
+			: null }
 			</div>
 		);
 	}

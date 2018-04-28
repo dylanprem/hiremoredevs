@@ -109,7 +109,7 @@ class CollabList extends Component {
 				
 			</div>
 			:
-			<SignInForm />}
+			null}
 			</div>
 		);
 	}

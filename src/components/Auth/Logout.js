@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as BrowserHistory, Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as BrowserHistory, Router, Route, Link, withRouter } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
 import * as firebase from 'firebase';
@@ -22,9 +22,8 @@ class LogoutButton extends Component {
 
  
   logout(e) {
-    e.preventDefault();
     firebase.auth().signOut();
-    window.location.reload();
+    this.props.history.push(routes.LANDING);
   }
 
 
@@ -40,4 +39,4 @@ class LogoutButton extends Component {
   }
 }
 
-export default LogoutButton;
+export default withRouter(LogoutButton);

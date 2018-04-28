@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
 import SignInForm from '../Auth/login';
 
-class RECRUITERSignup extends Component {
+
+class RECRUITERManageJobsButton extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			authUser:null,
 			RECRUITER:[],
-			RECRUITERSignupRequests:[]
+			
 		}
 	}
 
@@ -36,22 +37,6 @@ class RECRUITERSignup extends Component {
 			    });
 			  });
 
-		const signupRef = firebase.database().ref('RECRUITERSignupRequests');
-	        signupRef.once('value', (snapshot) => {		
-			    let RECRUITERSignupRequests = snapshot.val();
-			    let newState = [];
-			    for (let s in RECRUITERSignupRequests){
-			      newState.push({
-			        id: s,
-					uid:RECRUITERSignupRequests[s].uid,
-			      });
-
-			    }
-			    this.setState({
-			      RECRUITERSignupRequests: newState
-			    });
-			  });
-
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
@@ -61,24 +46,24 @@ class RECRUITERSignup extends Component {
     	});	
 	}
 
-	componentDidUpdate() {
-		firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).on("child_added",snapshot => {
-		    const userData = snapshot.val();
-		    if (userData){
-				    document.getElementById("recSignupButton").style.display = "none";
-		    } else {
-				    document.getElementById('recSignupButton').style.display = "block";
-			}
-		});
-	}
+
 	
 
 	render() {
 		return (
 			<div>
 			{this.state.authUser ?
-				<div id="recSignupButton">
-					<Link to={routes.RECRUITER_SIGNUP_FORM} className='btn yellow-button job-text'>Recruiter Registration</Link>
+				<div>
+					{this.state.RECRUITER.map((r) => {
+						return(
+					      <div eventKey={1} key={r.id}>
+					      	{r.uid === this.state.authUser.uid ?
+					        <Link to='/view-posted-jobs' className='btn yellow-button job-text'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
+					        :
+					        null }
+					      </div>
+						);
+					})}
 				</div>
 				:
 				null
@@ -89,5 +74,7 @@ class RECRUITERSignup extends Component {
 	}
 }
 
-export default RECRUITERSignup;
+export default RECRUITERManageJobsButton;
 
+
+					        

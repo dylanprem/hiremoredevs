@@ -8,6 +8,7 @@ import rpni from 'react-phone-number-input/style.css';
 import * as routes from '../../constants/routes';
 import { BrowserRouter as BrowserHistory, Router, Route, Link } from 'react-router-dom';
 import SignInForm from '../Auth/login';
+import ThankYouRec from './ThankYouRec';
 
 
 class RECRUITERSignupForm extends Component {
@@ -30,7 +31,6 @@ class RECRUITERSignupForm extends Component {
   }
 
   handleSubmit(e) {
-  e.preventDefault();
   const recruitersRef = firebase.database().ref('RECRUITERSignupRequests');
   const RECRUITERSignupRequests = {
     companyName: this.state.companyName,
@@ -41,23 +41,37 @@ class RECRUITERSignupForm extends Component {
   this.setState({
     companyName: '',
     linkedin:'',
-  });
-this.props.history.push(routes.THANK_YOU_REC);  
+  });  
 }
 
 componentDidMount(){
+
       firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
       } 
     });
 }
+
+componentDidUpdate(){
+	firebase.database().ref("RECRUITERSignupRequests").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+	    const userDataAlt = snapshot.val();
+	    if (userDataAlt){
+			document.getElementById("signupForm").style.display = "none";
+			document.getElementById("thankYouMsg").style.display = "block";
+	    } else {
+	    	document.getElementById("thankYouMsg").style.display = "none";
+			document.getElementById("signupForm").style.display = "block";
+	    }
+	});
+}
+
 	render(){
 		return(
 			<div>
 			{this.state.authUser ?
 			<div className='row job-form'>
-			<div className='col-md-6 col-md-offset-3'>
+			<div className='col-md-6 col-md-offset-3' id="signupForm">
 				<h1 className='text-center'>Please fill out this form sign up as a recruiter</h1>
 				<form className='job-text' onSubmit={this.handleSubmit}>
 					<div className='form-group'>
@@ -76,9 +90,12 @@ componentDidMount(){
 					<button className='btn yellow-button btn-block' type='submit'>Post</button>
 				</form>
 			</div>
+			<div id="thankYouMsg">
+				<ThankYouRec />
+			</div>
 			</div>
 			:
-			<SignInForm />
+			null
 			}
 			</div>
 		);

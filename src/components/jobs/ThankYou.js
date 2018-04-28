@@ -35,7 +35,7 @@ class ThankYou extends Component{
 		    	</div>  	
 
 				:
-				<SignInForm />
+				null
 				}
 			</div>
 		);
