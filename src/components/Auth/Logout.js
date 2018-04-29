@@ -24,6 +24,7 @@ class LogoutButton extends Component {
   logout(e) {
     firebase.auth().signOut();
     this.props.history.push(routes.LANDING);
+    window.location.reload();
   }
 
 

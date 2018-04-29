@@ -33,8 +33,6 @@ class editProfile extends Component {
 	}
 
 	handleSubmit(e) {
-	  
-	  this.props.history.push(routes.VIEW_PROFILE);
 	   firebase.auth().currentUser.updateProfile({
 		  displayName: this.name.value,
 		  photoURL: this.profilePicture.value
@@ -65,6 +63,7 @@ class editProfile extends Component {
 			name: '',
 			profilePicture:''
 	  });
+	  this.props.history.push(routes.VIEW_PROFILE);
 	}
 
 

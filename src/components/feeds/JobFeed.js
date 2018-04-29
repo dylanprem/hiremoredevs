@@ -14,7 +14,8 @@ class JobFeed extends Component {
 		authUser: null,
 		uid:'',
 		searchedState:'',
-		searchedZip:''
+		searchedZip:'',
+		noResults: false
 		}
 	this.removeItem = this.removeItem.bind(this);
 	this.handleChange = this.handleChange.bind(this);
@@ -55,6 +56,11 @@ class JobFeed extends Component {
 	    this.setState({
 	      JobPosts: newState
 	    });
+	    if (JobPosts){
+	    	this.setState({ noResults:false });
+	    } else {
+	    	this.setState({ noResults:true });
+	    }
 	  });
 	}
 
@@ -79,12 +85,17 @@ class JobFeed extends Component {
 	    this.setState({
 	      JobPosts: newState
 	    });
+
+	    if (JobPosts){
+	    	this.setState({ noResults:false });
+	    } else {
+	    	this.setState({ noResults:true });
+	    }
 	  });
 	}
 
 
-	componentDidMount() {
-	   // window.addEventListener('load', this.createProfile);
+	componentDidMount() {	
 	   const JobsRef = firebase.database().ref('JobPosts');
 	   JobsRef.on('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
@@ -253,7 +264,11 @@ class JobFeed extends Component {
 		                    );
 	          			})}         
 				    </tbody>
-				</table>
+			</table>
+			{this.state.noResults ?
+			<h1 id="error-message" className='job-text text-center'>The Search returned with no results.</h1>
+			:
+			null}
 			</div>
 			:
 			null}
