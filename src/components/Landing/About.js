@@ -26,7 +26,7 @@ class About extends Component {
 					<div className='col-md-4 text-center job-seeker'>
 						<img src={"https://media.giphy.com/media/3o7TKTiQWuZ0cOmAkE/giphy.gif"} className='center-block img-responsive img-circle' />
 						<p className='about-text'>
-						Job seekres can spruce up their profiles, and showcase their best projects as well. Think of it as your own virtual resume.
+						Job seekers can spruce up their profiles, and showcase their best projects as well. Think of it as your own virtual resume.
 						</p>
 					</div>
 					<div className='col-md-4 text-center collabs'>
