@@ -45,8 +45,8 @@ class editProfile extends Component {
 	  const Profiles = {
 	  		uid: this.state.authUser.uid,
 	  		email: this.state.authUser.email,
-	  		name: this.state.authUser.displayName,
-	  		profilePicture: this.state.authUser.photoURL,
+	  		name: this.name.value,
+	  		profilePicture: this.profilePicture.value,
 	    	about: this.about.value,
 			frameworkOne: this.frameworkOne.value,
 			frameworkTwo: this.frameworkTwo.value,

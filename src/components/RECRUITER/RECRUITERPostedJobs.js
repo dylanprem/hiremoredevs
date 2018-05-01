@@ -84,32 +84,37 @@ class RECRUITERPostedJobs extends Component {
 			<div className='col-md-12'>
 			{this.state.RECRUITER.map((r) => {return(
 				<div key={r.id}>
-					<h1 className="text-center job-text">JOBS POSTED BY YOU</h1>
-					<table className="table jobs-table">
-						    <thead>
-						      <tr>
-						      	<th>Company</th>
-						        <th>Position</th>
-						        <th>State</th>
-						        <th>Zip</th>
-						        <th>View Details</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						    {this.state.JobPosts.map((post) => {
-		    		  			return(
-							    <tr className='active' key={post.id}>
-			                      {r.uid === post.uid ? <td className='text-warning'>{post.companyName}</td> : null}
-			                      {r.uid === post.uid ? <td>{post.position}</td> : null }
-			                      {r.uid === post.uid ? <td>{post.State}</td> : null }
-			                      {r.uid === post.uid ? <td>{post.zip}</td> : null }
-			                      {r.uid === post.uid ? <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td> : null }
-		                      	  {r.uid === post.uid ? <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td> : null }
-			                    </tr>
-				                    );
-			          			})}         
-						    </tbody>
-					</table>
+					{r.uid === this.state.authUser.uid ?
+					<div>
+						<h1 className="text-center job-text">JOBS POSTED BY YOU</h1>
+						<table className="table jobs-table">
+							    <thead>
+							      <tr>
+							      	<th>Company</th>
+							        <th>Position</th>
+							        <th>State</th>
+							        <th>Zip</th>
+							        <th>View Details</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							    {this.state.JobPosts.map((post) => {
+			    		  			return(
+								    <tr className='active' key={post.id}>
+				                      {r.uid === post.uid ? <td className='text-warning'>{post.companyName}</td> : null}
+				                      {r.uid === post.uid ? <td>{post.position}</td> : null }
+				                      {r.uid === post.uid ? <td>{post.State}</td> : null }
+				                      {r.uid === post.uid ? <td>{post.zip}</td> : null }
+				                      {r.uid === post.uid ? <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td> : null }
+			                      	  {r.uid === post.uid ? <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td> : null }
+				                    </tr>
+					                    );
+				          			})}         
+							    </tbody>
+						</table>
+					</div>
+					:
+					null }
 				</div>
 			);})}	
 			</div>

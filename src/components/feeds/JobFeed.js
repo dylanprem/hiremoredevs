@@ -228,7 +228,7 @@ class JobFeed extends Component {
 				</div>
 			</div>
 
-			<h1 className="text-center">JOB FEED</h1>
+			<h1 className="text-center job-text">JOB FEED</h1>
 
 			<table className="table jobs-table">
 				    <thead>
@@ -266,7 +266,7 @@ class JobFeed extends Component {
 				    </tbody>
 			</table>
 			{this.state.noResults ?
-			<h1 id="error-message" className='job-text text-center'>The Search returned with no results.</h1>
+			<h1 id="error-message" className='job-text text-center'>The search returned with no results.</h1>
 			:
 			null}
 			</div>

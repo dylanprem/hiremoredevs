@@ -27,7 +27,8 @@ class PostJobForm extends Component {
 	    reqTwo:'',
 	    reqThree:'',
 	    authUser:null,
-	    RECRUITER:[]
+	    RECRUITER:[],
+	    isRecruiter: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,6 +93,11 @@ componentDidMount(){
 		    this.setState({
 		      RECRUITER: newState
 		    });
+		    if(RECRUITER){
+		    	this.setState({isRecruiter:true});
+		    } else {
+		    	this.setState({isRecruiter:false});
+		    }
 		  });
 
       firebase.auth().onAuthStateChanged((authUser) => {
@@ -221,7 +227,8 @@ componentDidMount(){
 				</form>
 				</div>
 				:
-				<h1 className='text-center job-text'>ONLY REGISTERED RECRUITERS CAN POST JOBS. PLEASE CLICK ON THE RECRUITER REGISTRATION BUTTON TO REGISTER YOUR ACCOUNT AS A RECRUITER</h1>}
+				null }
+				{this.state.isRecruiter ? null : <h1 className='text-center job-text'>ONLY REGISTERED RECRUITERS CAN POST JOBS. PLEASE CLICK ON THE RECRUITER REGISTRATION BUTTON TO REGISTER YOUR ACCOUNT AS A RECRUITER</h1> }
 			</div>
 			);})}
 			</div>

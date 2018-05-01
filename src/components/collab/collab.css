@@ -7,3 +7,9 @@
 	font-weight:900;
 	color: #fff;
 }
+
+.collab img {
+	height:200px;
+	width:200px;
+	object-fit: cover;
+}

@@ -4,3 +4,7 @@ IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
 
 ERROR MESSGAE IF JOB SEARCH IS EMPTY
 
+
+create I want to collab button 
+
+create a flag user option
