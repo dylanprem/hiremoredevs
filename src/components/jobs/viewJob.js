@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
+import { auth } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import JobFeed from '../feeds/JobFeed';
 import { Modal } from 'react-bootstrap';
 import './style.css';
@@ -75,6 +76,7 @@ class ViewJob extends Component{
 
 	componentDidMount() {
 
+
 	  const JobPostsRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob);
 	  JobPostsRef.once('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
@@ -124,6 +126,7 @@ class ViewJob extends Component{
 			postsFromUsers: newState
 		});
 	});
+
 	
 	const profilesRef = firebase.database().ref('Profiles' );
 	profilesRef.once('value', (snapshot) => {
@@ -156,6 +159,15 @@ class ViewJob extends Component{
 
 
 	render(){
+		firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userData = snapshot.val();
+		    if (userData){
+		      console.log("exists!");
+		      this.setState({isInterested:true});
+		    } else {
+		    	this.setState({isInterested:false});
+			}
+		});
 		return(
 			<div className='row'>
 				{this.state.authUser ?
@@ -195,8 +207,7 @@ class ViewJob extends Component{
 				</div>
 				{this.state.postsFromUsers.map((post) =>{return(
 					<div key={post.id}>
-						{post.uid === this.state.authUser.uid ? () => this.setState({ isInterested:true }) : this.setState({ isInterested:false }) }
-						{this.state.isInterested = true ?
+						{this.state.isInterested ?
 						<div className='col-md-12 col-sm-12 col-xs-12 post-box' id="thanks-box">
 							<h3 className='text-center'>You've already expressed interest in this job.</h3> 
 						</div>
@@ -286,6 +297,7 @@ class ViewJob extends Component{
 								<input type='submit' className='btn black-button btn-block' value='Post' />
 							</form>
 						</div>
+
 						 }
 					</div>
 				);})}
@@ -389,6 +401,6 @@ class ViewJob extends Component{
 }
 
 
-export default ViewJob;
+export default withRouter(ViewJob);
 
 
