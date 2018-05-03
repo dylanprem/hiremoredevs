@@ -32,7 +32,7 @@ class ViewJob extends Component{
 		    github:'',
 	    	linkedin:'',
 	    	isInterested: false,
-	    	authUser:null,
+	    	authUser: null,
 
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -150,6 +150,14 @@ class ViewJob extends Component{
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
+        firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+		    const userData = snapshot.val();
+		    if (userData){
+		      this.setState({ isInterested:true });
+		    } else {
+		    	this.setState({ isInterested:false });
+			}
+		});
 	    }
 	});
 
@@ -159,15 +167,7 @@ class ViewJob extends Component{
 
 
 	render(){
-		firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
-		    const userData = snapshot.val();
-		    if (userData){
-		      console.log("exists!");
-		      this.setState({isInterested:true});
-		    } else {
-		    	this.setState({isInterested:false});
-			}
-		});
+
 		return(
 			<div className='row'>
 				{this.state.authUser ?
