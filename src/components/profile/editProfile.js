@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import './profile.css';
 import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import SignInForm from '../Auth/login';
 
 class editProfile extends Component {
@@ -21,9 +21,25 @@ class editProfile extends Component {
 			frameworkOne:'',
 			frameworkTwo:'',
 			frameworkThree:'',
+			error: null,
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.deleteProfile = this.deleteProfile.bind(this);
+	}
+
+	deleteProfile(){
+		firebase.auth().signOut();
+		const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
+		profileToDelete.remove()
+		.then(function(){
+			var user = firebase.auth().currentUser;
+			user.delete();
+			
+		});
+		window.location.reload();
+		this.props.history.push(routes.LANDING);
+		
 	}
 
 	handleChange(e) {
@@ -135,6 +151,9 @@ class editProfile extends Component {
 					<div className='col-md-12'>
 						<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
 					</div>
+					<div className='col-md-12'>
+						<button className='btn btn-danger job-text' onClick={this.deleteProfile}>Delete profile</button>
+					</div>
 					</div>
 					);})}
 				</div>
@@ -147,4 +166,4 @@ class editProfile extends Component {
 	}
 }
 
-export default editProfile;
+export default withRouter(editProfile);

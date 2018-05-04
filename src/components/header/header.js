@@ -64,7 +64,12 @@ class Header extends Component {
 			      </NavItem>
 			      <LogoutButton />
 			    </Nav>
-			    <ProfileButtonToggle />
+			    <Nav>
+			    	<NavItem>
+			    		<ProfileButtonToggle />
+			    	</NavItem>
+			    </Nav>
+			    
 			    <LoggedInAs />
 			  </Navbar.Collapse>
 			</Navbar>

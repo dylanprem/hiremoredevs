@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import * as routes  from '../../constants/routes';
 
 
@@ -54,10 +54,11 @@ class ProfileButtonToggle extends Component {
 				const Profiles  = {
 					uid: this.state.authUser.uid,
 					name: this.state.authUser.displayName,
-					profilePicture: this.state.authUser.photoURL,
+					profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
 					email: this.state.authUser.email
 				}
 				profilesRef.push(Profiles);
+				this.props.history.push(routes.CURRENT_FEED);
 				window.location.reload();
 			}
 		});
@@ -68,19 +69,19 @@ class ProfileButtonToggle extends Component {
 		return (
 			<div>
 			{this.state.authUser ?
-				<Nav>
+				<div>
 					{this.state.Profiles.map((profile) => {
 						return(
-						<NavItem key={profile.id}>
+						<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 									<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
 									: 
 									null
 								}
-						</NavItem>
+						</div>
 					);
 					})}
-				</Nav>
+				</div>
 				:
 				null
 			}
@@ -90,4 +91,4 @@ class ProfileButtonToggle extends Component {
 	}
 }
 
-export default ProfileButtonToggle;
+export default withRouter(ProfileButtonToggle);
