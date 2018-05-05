@@ -29,7 +29,7 @@ class editProfile extends Component {
 	}
 
 	deleteProfile(){
-		firebase.auth().signOut();
+		
 		const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
 		profileToDelete.remove()
 		.then(function(){
@@ -37,6 +37,7 @@ class editProfile extends Component {
 			user.delete();
 			
 		});
+		firebase.auth().signOut();
 		window.location.reload();
 		this.props.history.push(routes.LANDING);
 		
