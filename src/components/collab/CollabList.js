@@ -80,7 +80,7 @@ class CollabList extends Component {
 		                      	return(
 		                      		<div key={profile.id}>
 		                      		{collab.uid === profile.uid ?
-		                      		<div className='job-text text-center'>
+		                      		<div className='job-text text-center collab'>
 		                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle profile-pic' style={{width:80, height:80}} /></Link>
 		                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
 		                      		</div>
