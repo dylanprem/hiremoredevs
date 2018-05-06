@@ -9,6 +9,10 @@ import facebook from './auth-images/facebook.png';
 import profilePicture from './auth-images/profile.png';
 
 
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
 
 class SignInForm extends Component {
   constructor(props) {
@@ -21,7 +25,6 @@ class SignInForm extends Component {
       userPassword:'',
       regEmail:'',
       regPassword:'',
-      name:'',
       profilePicture:'',
       error: null
     }
@@ -32,7 +35,7 @@ class SignInForm extends Component {
   }
 
 
-    handleChange(e) {
+  handleChange(e) {
       this.setState({
         [e.target.name]: e.target.value
       });
@@ -46,13 +49,9 @@ class SignInForm extends Component {
         const token = result.credential.accessToken;
         const authUser = result.authUser;
         this.setState({ authUser });
-        
     })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
+    .catch(error => {
+        this.setState(byPropKey('error', error));
     });
     this.props.history.push(routes.CURRENT_FEED);
   }
@@ -79,25 +78,8 @@ class SignInForm extends Component {
           const authUser = result.authUser;
           this.setState({ authUser });
       })  
-      .then(function(){  
-          const profilesRef = firebase.database().ref('Profiles');
-          const Profiles = {
-              uid: this.state.authUser.uid,
-              email: this.state.authUser.email,
-              name: this.state.name,
-              profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
-          }
-          profilesRef.push(Profiles);
-          this.setState({
-            name: '',
-            profilePicture:''
-          });
-          this.props.history.push(routes.CURRENT_FEED);
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+      .catch(error => {
+        this.setState(byPropKey('error', error));
       });
     }
 
@@ -120,6 +102,9 @@ class SignInForm extends Component {
       null 
       :
       <div>
+        <div className='col-md-12 text-center'>
+          { this.state.error && <p className='text-danger job-text'>{this.state.error.message}</p> }
+        </div>
         <div className='col-md-4 col-md-offset-1 login'>
           <div className='panel-group'>
             <div className='panel'>
@@ -139,9 +124,10 @@ class SignInForm extends Component {
                   <div className='text-center'>
                     <button className="btn btn-danger google-btn" onClick={this.loginWithGoogle}><span><img src={gmail} /></span> Login With Gmail</button>
                   </div>
+                  
               </div>
             </div>
-            { this.state.error ? <small className='text-danger'>{this.state.errorMessage}</small> : null }
+            
           </div>
         </div>
         <div className='col-md-4 col-md-offset-2 login'>
@@ -150,10 +136,6 @@ class SignInForm extends Component {
               <div className='panel-heading'><h3 className='text-center job-text'>Register</h3></div>
               <div className='panel-body text-center'>
                   <div className='form-group'>
-                    <label className='job-text'>Name</label>
-                    <input type="text" className='form-control job-text' name='name' value={this.state.name} placeholder="your name" onChange={this.handleChange}/>
-                  </div>
-                  <div className='form-group'>
                     <label className='job-text'>Email</label>
                     <input type="email" className='form-control job-text' name='regEmail' value={this.state.regEmail} placeholder="youremail@gmail.com" onChange={this.handleChange}/>
                   </div>
@@ -161,7 +143,10 @@ class SignInForm extends Component {
                     <label className='job-text'>Password</label>
                     <input type="password" className='form-control job-text' name='regPassword' value={this.state.regPassword} onChange={this.handleChange} />
                   </div>
-                  <button className="btn black-button job-text" onClick={this.createUser}> Register </button>
+                  <div className='form-group'>
+                    <button className="btn black-button job-text" onClick={this.createUser}> Register </button>
+                  </div>
+                  
               </div>
             </div>
           </div>
