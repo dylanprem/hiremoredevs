@@ -44,16 +44,18 @@ class SignInForm extends Component {
   loginWithEmailAndPassword(){
     const userEmail = this.state.userEmail;
     const userPassword = this.state.userPassword;
-    firebase.auth().signInWithEmailAndPassword(userEmail, userPassword)
-    .then(function(result) {
+    auth.signInWithEmailAndPassword(userEmail, userPassword)
+    .then((result) => {
         const token = result.credential.accessToken;
         const authUser = result.authUser;
         this.setState({ authUser });
     })
     .catch(error => {
         this.setState(byPropKey('error', error));
+    })
+    .then(() => {
+        this.props.history.push(routes.CURRENT_FEED);
     });
-    this.props.history.push(routes.CURRENT_FEED);
   }
 
   loginWithGoogle() {
@@ -62,10 +64,13 @@ class SignInForm extends Component {
         .then((result) => {
           const token = result.credential.accessToken;
           const authUser = result.authUser;
-          this.setState({
-            authUser
-          });
-          this.props.history.push(routes.CURRENT_FEED);
+          this.setState({ authUser });
+        })
+        .catch(error => {
+            this.setState(byPropKey('error', error));
+        })
+        .then(() => {
+            this.props.history.push(routes.CURRENT_FEED);
         });
     }
 
@@ -79,7 +84,10 @@ class SignInForm extends Component {
           this.setState({ authUser });
       })  
       .catch(error => {
-        this.setState(byPropKey('error', error));
+          this.setState(byPropKey('error', error));
+      })
+      .then(() => {
+          this.props.history.push(routes.CURRENT_FEED);
       });
     }
 

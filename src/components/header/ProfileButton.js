@@ -58,6 +58,7 @@ class ProfileButtonToggle extends Component {
 					email: this.state.authUser.email
 				}
 				profilesRef.push(Profiles);
+				this.props.history.push(routes.CURRENT_FEED);
 				window.location.reload();
 			}
 		});
