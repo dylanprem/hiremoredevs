@@ -29,18 +29,19 @@ class editProfile extends Component {
 	}
 
 	deleteProfile(){
-		
 		const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
 		profileToDelete.remove()
-		.then(function(){
-			var user = firebase.auth().currentUser;
+		.then(() => {
+			const user = firebase.auth().currentUser;
 			user.delete();
-			
-		});
-		firebase.auth().signOut();
-		window.location.reload();
-		this.props.history.push(routes.LANDING);
-		
+		})
+		.then(() => {
+			firebase.auth().signOut();
+			this.props.history.push(routes.LANDING);
+		})
+		.then(() => {
+			window.location.reload();
+		})
 	}
 
 	handleChange(e) {

@@ -37,14 +37,13 @@ class AddProject extends Component{
 			projectLink: this.state.projectLink,
 			projectInfo: this.state.projectInfo,
 	  }
-
-
 	  projectsRef.push(Projects);
 	  this.setState({
 			projectName:'',
 			projectLink:'',
 			projectInfo:'',
 	  });
+	  window.location.reload();
 	  
 	}
 

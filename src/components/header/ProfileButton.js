@@ -50,6 +50,10 @@ class ProfileButtonToggle extends Component {
 		    if (userData){
 		      console.log("exists!");
 		    } else {
+				firebase.auth().currentUser.updateProfile({
+				  displayName: "New User",
+				  photoURL: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
+				});
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
 					uid: this.state.authUser.uid,

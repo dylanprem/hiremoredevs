@@ -17,7 +17,11 @@ class RECRUITERSignupForm extends Component {
     this.state = {
 	    companyName: '',
 	    linkedin: '',
-	    authUser:null
+	    authUser:null,
+	    RECRUITERSignupRequests: [],
+	    RECRUITER:[],
+	    isRecruiter: false,
+	    isPending: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,54 +49,66 @@ class RECRUITERSignupForm extends Component {
 }
 
 componentDidMount(){
-
       firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
+    	firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userData = snapshot.val();
+		    if (userData){
+		    	this.setState({isRecruiter:true});
+		    } else {
+		    	this.setState({isRecruiter:false});
+		    }
+		});
+
+		firebase.database().ref("RECRUITERSignupRequests").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
+		    const userDataAlt = snapshot.val();
+		    if (userDataAlt){
+				this.setState({isPending:true});
+		    } else {
+		    	this.setState({isPending:false});
+		    }
+		});
       } 
     });
 }
 
-componentDidUpdate(){
-	firebase.database().ref("RECRUITERSignupRequests").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
-	    const userDataAlt = snapshot.val();
-	    if (userDataAlt){
-			document.getElementById("signupForm").style.display = "none";
-			document.getElementById("thankYouMsg").style.display = "block";
-	    } else {
-	    	document.getElementById("thankYouMsg").style.display = "none";
-			document.getElementById("signupForm").style.display = "block";
-	    }
-	});
-}
+
 
 	render(){
 		return(
 			<div>
 			{this.state.authUser ?
 			<div className='row job-form'>
-			<div className='col-md-6 col-md-offset-3' id="signupForm">
-				<h1 className='text-center'>Please fill out this form sign up as a recruiter</h1>
-				<form className='job-text' onSubmit={this.handleSubmit}>
-					<div className='form-group'>
-						<label>What Company do you work for?</label>
-						<input className='form-control' name='companyName' onChange={this.handleChange} value={this.state.companyName} />
-					</div>
-					<div className='form-group'>
-						<label>LinkedIn URL</label>
-						<div class="input-group">
-						    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-						    <input required type='text' className='form-control' name='linkedin' value={this.state.linkedin} onChange={this.handleChange} placeholder='Add the direct link to your LinkedIn' />
-							
+			{this.state.isRecruiter ? <h1 className='job-text text-center text-danger'>You're already registered as a Recruiter.</h1> :
+			<div>
+				{this.state.isPending ?
+				<div id="thankYouMsg">
+					<ThankYouRec />
+				</div>
+				:
+				<div className='col-md-6 col-md-offset-3' id="signupForm">
+					<h1 className='text-center'>Please fill out this form sign up as a recruiter</h1>
+					<form className='job-text' onSubmit={this.handleSubmit}>
+						<div className='form-group'>
+							<label>What Company do you work for?</label>
+							<input className='form-control' name='companyName' onChange={this.handleChange} value={this.state.companyName} />
 						</div>
-						<small className='text-danger'>* URL must include https://</small>	
-					</div>
-					<button className='btn yellow-button btn-block' type='submit'>Post</button>
-				</form>
+						<div className='form-group'>
+							<label>LinkedIn URL</label>
+							<div class="input-group">
+							    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+							    <input required type='text' className='form-control' name='linkedin' value={this.state.linkedin} onChange={this.handleChange} placeholder='Add the direct link to your LinkedIn' />
+								
+							</div>
+							<small className='text-danger'>* URL must include https://</small>	
+						</div>
+						<button className='btn yellow-button btn-block' type='submit'>Post</button>
+					</form>
+				</div>
+				}
 			</div>
-			<div id="thankYouMsg">
-				<ThankYouRec />
-			</div>
+			}
 			</div>
 			:
 			null
