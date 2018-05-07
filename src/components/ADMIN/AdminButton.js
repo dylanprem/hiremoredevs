@@ -11,7 +11,8 @@ class AdminButton extends Component {
 	this.state = {
 		authUser: null,
 		ADMIN: [],
-		JobPostRequests:[]
+		JobPostRequests:[],
+		isAdmin: false
 		}
 	}
 
@@ -34,11 +35,21 @@ class AdminButton extends Component {
 	  });
 
 	   firebase.auth().onAuthStateChanged((authUser) => {
-	      if (authUser) {
-	        this.setState({ authUser });
-	      } 
-    	});	
-	}
+		      if (authUser) {
+		        this.setState({ authUser });
+		        firebase.database().ref("ADMIN").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isAdmin:true});
+				    } else {
+				    	this.setState({isAdmin:false});
+				    }
+				});
+
+
+		    	}
+    		});	
+		}
 
 
 	
@@ -48,20 +59,18 @@ class AdminButton extends Component {
 		return(
 			<div>			
 			{this.state.authUser ? 
-			<Nav>
-			{this.state.ADMIN.map((admins) => {
-			return(
-				<NavItem key={admins.id}>
-				{this.state.authUser.uid === admins.uid ?
-				<DropdownButton bsStyle={'info'} title={'ADMIN'} className='job-text'>
-				    <MenuItem><Link to={routes.ADMIN_APPROVE_JOB} class='job-text'>JOB POST REQUESTS</Link></MenuItem>
-				    <MenuItem><Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text'>RECRUITER SIGNUP REQUESTS</Link></MenuItem>
-				</DropdownButton> 
-				: null }
+			<div>
+			{this.state.isAdmin ?
+				<Nav>
+				<NavItem>
+					<Link to={routes.ADMIN_APPROVE_JOB} class='job-text btn btn-info'>JOB POST REQUESTS</Link>
 				</NavItem>
-					);
-		        })}
-			</Nav>
+				<NavItem>
+					<Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text btn btn-info'>RECRUITER SIGNUP REQUESTS</Link>
+				</NavItem>
+				</Nav>
+			: null }			
+			</div>
 			: null }
 			</div>
 		);

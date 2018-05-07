@@ -1,6 +1,4 @@
-.comment{
-	margin-top:13%;
-}
+
 
 .collab-title{
 	font-size: 64px;
@@ -13,3 +11,8 @@
 	width:200px;
 	object-fit: cover;
 }
+
+.panel-group .panel{
+	background: #C0C0C0 !important;
+}
+

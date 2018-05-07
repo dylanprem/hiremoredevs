@@ -6,3 +6,11 @@
 .profile-pic{
 	object-fit: cover;
 }
+
+.projects {
+	padding-top: 2%;
+}
+
+.text-black{
+	color: #363738;
+}

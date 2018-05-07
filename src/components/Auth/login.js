@@ -110,27 +110,28 @@ class SignInForm extends Component {
       null 
       :
       <div>
-        <div className='col-md-12 text-center'>
+        <div className='col-md-12 text-center text-black'>
           { this.state.error && <p className='text-danger job-text'>{this.state.error.message}</p> }
         </div>
         <div className='col-md-4 col-md-offset-1 login'>
           <div className='panel-group'>
             <div className='panel'>
-              <div className='panel-heading'><h3 className='text-center job-text'>Sign In</h3></div>
+              <div className='panel-heading'><h3 className='text-center job-text text-black'>Sign In</h3></div>
               <div className='panel-body text-center'>
                   <div className='form-group'>
-                    <label className='job-text'>Email</label>
+                    <label className='job-text text-black'>Email</label>
                     <input type="email" className='form-control job-text' name='userEmail' value={this.state.userEmail} placeholder="youremail@gmail.com" onChange={this.handleChange}/>
                   </div>
                   <div className='form-group'>
-                    <label className='job-text'>Password</label>
+                    <label className='job-text text-black'>Password</label>
                     <input type="password" className='form-control job-text' name='userPassword' value={this.state.userPassword} onChange={this.handleChange} />
                   </div>
                   <div className='text-center'>
-                    <button className="btn black-button job-text" onClick={this.loginWithEmailAndPassword}>Login</button>
+                    <button className="btn black-button job-text margins" onClick={this.loginWithEmailAndPassword}>Login</button>
                   </div>
+
                   <div className='text-center'>
-                    <button className="btn btn-danger google-btn" onClick={this.loginWithGoogle}><span><img src={gmail} /></span> Login With Gmail</button>
+                    <button className="btn btn-danger google-btn margins" onClick={this.loginWithGoogle}><span><img src={gmail} /></span> Login With Gmail</button>
                   </div>
                   
               </div>
@@ -141,14 +142,14 @@ class SignInForm extends Component {
         <div className='col-md-4 col-md-offset-2 login'>
           <div className='panel-group'>
             <div className='panel'>
-              <div className='panel-heading'><h3 className='text-center job-text'>Register</h3></div>
+              <div className='panel-heading'><h3 className='text-center job-text text-black'>Register</h3></div>
               <div className='panel-body text-center'>
                   <div className='form-group'>
-                    <label className='job-text'>Email</label>
+                    <label className='job-text text-black'>Email</label>
                     <input type="email" className='form-control job-text' name='regEmail' value={this.state.regEmail} placeholder="youremail@gmail.com" onChange={this.handleChange}/>
                   </div>
                   <div className='form-group'>
-                    <label className='job-text'>Password</label>
+                    <label className='job-text text-black'>Password</label>
                     <input type="password" className='form-control job-text' name='regPassword' value={this.state.regPassword} onChange={this.handleChange} />
                   </div>
                   <div className='form-group'>

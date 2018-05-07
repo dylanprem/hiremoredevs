@@ -117,11 +117,9 @@ class EditComment extends Component {
 												);})}
 											</div>
 											<div className='text-center row'>
-												<div className='col-md-6 text-center'>
-													<button className='btn btn-success job-text btn-block' onClick={this.saveComment}><span className='glyphicon glyphicon-pencil'></span>  SAVE</button>
-												</div>
-												<div className='col-md-6 text-center'>
-													<Link to={"/view-collab/" + this.state.currentCollab} className='btn btn-danger job-text btn-block'><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
+												<div className='btn-group'>
+													<button className='btn btn-success job-text ' onClick={this.saveComment}><span className='glyphicon glyphicon-pencil'></span>  SAVE</button>
+													<Link to={"/view-collab/" + this.state.currentCollab} className='btn btn-danger job-text '><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
 												</div>
 											</div>
 										</div>

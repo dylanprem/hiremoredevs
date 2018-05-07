@@ -189,23 +189,26 @@ class ViewCollab extends Component {
 												
 												<p>{comment.time}</p>
 											</div>
-											<div className='col-md-4 text-center job-text'>
-												<p className='comment'>{comment.commentBody}</p>
-											</div>
-											<div className='col-md-2 col-md-offset-2 text-center'>
-												<div className='col-md-12'>
-												{comment.uid === this.state.authUser.uid ? 
-													<button className='btn btn-danger job-text btn-block' onClick={() => this.removeComment(comment.id)}><span className='glyphicon glyphicon-trash'></span>  DELETE</button> 
-													: 
-													null
-												}
-												</div>
-												<div className='col-md-12'>
-												{comment.uid === this.state.authUser.uid ? 
-													<Link to={"/edit-comment/" + this.state.currentCollab + '/' + `${comment.id}`} className='btn btn-warning job-text btn-block'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
-													: 
-													null
-												}
+											<div className='panel-group col-md-4'>
+												<div className='panel panel-default col-md-12'>
+													<div className='panel-body job-text col-md-12 comment text-black'>
+														<div className='row'>{comment.commentBody}</div>
+														<div className='btn-group row'>
+															
+															{comment.uid === this.state.authUser.uid ? 
+																<button className='btn btn-danger job-text' onClick={() => this.removeComment(comment.id)}><span className='glyphicon glyphicon-trash'></span>  DELETE</button> 
+																: 
+																null
+															}
+															
+															{comment.uid === this.state.authUser.uid ? 
+																<Link to={"/edit-comment/" + this.state.currentCollab + '/' + `${comment.id}`} className='btn btn-warning job-text text-black'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
+																: 
+																null
+															}
+															
+														</div>
+													</div>
 												</div>
 											</div>
 										</td>

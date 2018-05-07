@@ -51,14 +51,14 @@ class ProfileButtonToggle extends Component {
 		      console.log("exists!");
 		    } else {
 				firebase.auth().currentUser.updateProfile({
-				  displayName: "New User",
-				  photoURL: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
+				  displayName: this.state.authUser.displayName || "New User",
+				  photoURL: this.state.authUser.photoURL || "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
 				});
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
 					uid: this.state.authUser.uid,
 					name: this.state.authUser.displayName,
-					profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
+					profilePicture: this.state.authUser.photoURL, 
 					email: this.state.authUser.email
 				}
 				profilesRef.push(Profiles);
