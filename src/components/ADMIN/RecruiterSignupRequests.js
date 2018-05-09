@@ -13,6 +13,7 @@ class RecruiterSignupRequests extends Component {
 		ADMIN: [],
 		Profiles:[],
 		RECRUITERSignupRequests:[],
+		isAdmin: false
 
 		}
 		this.removeItem = this.removeItem.bind(this);
@@ -28,21 +29,6 @@ class RecruiterSignupRequests extends Component {
 
 	componentDidMount() {
 
-	  const ADMINref = firebase.database().ref('ADMIN');
-	  ADMINref.on('value', (snapshot) => {
-	  	let ADMIN = snapshot.val();
-	  	console.log(snapshot.val());
-	  	let newState = [];
-	  	for (let admins in ADMIN){
-	      newState.push({
-	      	id: admins,
-			uid: ADMIN[admins].uid,
-	      });
-	    }
-	    this.setState({
-	      ADMIN: newState
-	    });
-	  });
 
 	  const reqref = firebase.database().ref('RECRUITERSignupRequests');
 	  reqref.on('value', (snapshot) => {
@@ -84,6 +70,14 @@ class RecruiterSignupRequests extends Component {
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
+	        firebase.database().ref("ADMIN").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isAdmin:true});
+				    } else {
+				    	this.setState({isAdmin:false});
+				    }
+				});
 	      } 
     	});	
 	}
@@ -97,13 +91,11 @@ class RecruiterSignupRequests extends Component {
 			<div>			
 			{this.state.authUser ? 
 			<div>
-			{this.state.ADMIN.map((admins) => {
-			return(
-				<div className="col-md-12 jobs-container" key={admins.id}>
-					{admins.uid === this.state.authUser.uid ? 
-						<div className='table-responsive'>
+				<div className="col-md-12 jobs-container" >
+					{this.state.isAdmin ? 
+						<div>
 							<h1 className="text-center job-text">RECRUITER REGISTRATION REQUESTS</h1>
-							<table class='table table-striped job-text'>
+							<table class='table  job-text'>
 								<thead>
 									<tr>
 										<th></th>
@@ -117,35 +109,35 @@ class RecruiterSignupRequests extends Component {
 									{this.state.RECRUITERSignupRequests.map((req) => {
 									return(
 									<tr key={req.id}>
-										<td>
+										
 										{this.state.Profiles.map((profile) => { return(
-											<div key={profile.id}>
+											<td key={profile.id}>
 											{profile.uid === req.uid ? <img src={profile.profilePicture} className='img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
-											</div>
+											</td>
 										);})}
-										</td>
+										
 
-										<td>
+										
 										{this.state.Profiles.map((profile) => { return(
-											<div key={profile.id}>
+											<td key={profile.id}>
 											{profile.uid === req.uid ? profile.name : null }
-											</div>
+											</td>
 										);})}
-										</td>
-										<td>
+										
+										
 										{this.state.Profiles.map((profile) => { return(
-											<div key={profile.id}>
+											<td key={profile.id}>
 											{profile.uid === req.uid ? <Link to={`/admin-view-recruiter-request/${req.id}`} className='btn yellow-button btn-sm'>View</Link> : null }
-											</div>
+											</td>
 										);})}
-										</td>
-										<td>
+										
+										
 										{this.state.Profiles.map((profile) => { return(
-											<div key={profile.id}>
+											<td key={profile.id}>
 											{profile.uid === req.uid ? <Link to={req.linkedin} className='btn btn-primary btn-sm'>LinkedIn</Link> : null }
-											</div>
+											</td>
 										);})}
-										</td>
+										
 										<td><button className='btn btn-danger job-text btn-block' onClick={() => this.removeItem(req.id)}>Deny</button></td>
 									</tr>
 										);
@@ -156,8 +148,6 @@ class RecruiterSignupRequests extends Component {
 						</div> 
 					: <h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
 				</div>
-					);
-		        })}
 			</div>
 			: null }
 			</div>

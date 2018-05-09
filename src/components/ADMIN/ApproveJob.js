@@ -12,6 +12,7 @@ class ApproveJob extends Component {
 		ADMIN: [],
 		Profiles:[],
 		authUser: null,
+		isAdmin:false
 		}
 	this.removeItem = this.removeItem.bind(this);
 	}
@@ -48,25 +49,18 @@ class ApproveJob extends Component {
 	  });
 
 
-	  const ADMINref = firebase.database().ref('ADMIN');
-	  ADMINref.on('value', (snapshot) => {
-	  	let ADMIN = snapshot.val();
-	  	console.log(snapshot.val());
-	  	let newState = [];
-	  	for (let admins in ADMIN){
-	      newState.push({
-	      	id: admins,
-			uid: ADMIN[admins].uid,
-	      });
-	    }
-	    this.setState({
-	      ADMIN: newState
-	    });
-	  });
 
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
+	        firebase.database().ref("ADMIN").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isAdmin:true});
+				    } else {
+				    	this.setState({isAdmin:false});
+				    }
+				});
 	      } 
     	});	
 	}
@@ -80,10 +74,7 @@ class ApproveJob extends Component {
 			<div className='row dark-bg-feed'>			
 			{this.state.authUser ? 
 			<div className='col-md-12 jobs-container'>
-			{this.state.ADMIN.map((admins) => {
-			return(
-				<div key={admins.id}>
-				{this.state.authUser.uid === admins.uid ?
+				{this.state.isAdmin ?
 				<div>
 					<h1 className="text-center job-text">JOB POST REQUESTS</h1>
 					<table className="table jobs-table">
@@ -114,10 +105,8 @@ class ApproveJob extends Component {
 					    </tbody>
 					</table>
 				</div>
-				: <h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
-				</div>
-					);
-		        })}
+				: 
+				<h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
 			</div>
 			: null }
 			</div>

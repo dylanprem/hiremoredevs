@@ -58,7 +58,10 @@ class RECRUITERManageJobsButton extends Component {
 						return(
 					      <div eventKey={1} key={r.id}>
 					      	{r.uid === this.state.authUser.uid ?
-					        <Link to='/view-posted-jobs' className='btn yellow-button job-text'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
+					      	<div>
+					        <Link to='/view-posted-jobs' className='btn yellow-button job-text hidden-sm hidden-xs'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
+					        <Link to='/view-posted-jobs' className='signup-link job-text visible-sm visible-xs'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
+					        </div>
 					        :
 					        null }
 					      </div>

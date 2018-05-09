@@ -39,7 +39,8 @@ class Header extends Component {
 			  <Navbar.Header>
 
 			    <Navbar.Brand>
-			      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
+			      <Link to="/" className="navbar-brand logo hidden-sm hidden-xs">HireMoreDevs</Link>
+			      <Link to="/" className="navbar-brand logo visible-xs visible-sm job-text">HireMoreDevs</Link>
 			    </Navbar.Brand>
 			    <Navbar.Toggle />
 			  </Navbar.Header>

@@ -4,10 +4,9 @@
 }
 
 .signup-link:hover, .login-link:hover {
-	color: 	#c4941d;
+	color: 	#fff !important;
 	opacity: 5;
 	text-decoration: none;
-	letter-spacing: 2px;
 	transition: all .5s ease; 
 }
 
@@ -15,7 +14,6 @@
 	color: 	#c4941d;
 	opacity: 5;
 	text-decoration: none !important;
-	letter-spacing: 2px;
 	transition: all .5s ease; 
 }
 

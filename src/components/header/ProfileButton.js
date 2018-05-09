@@ -78,7 +78,10 @@ class ProfileButtonToggle extends Component {
 						return(
 						<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
-									<Link id='edit-button' className='btn yellow-button job-text' to={`/edit/${profile.id}`}>Edit Profile</Link>
+									<div>
+										<Link id='edit-button' className='btn yellow-button job-text hidden-sm hidden-xs' to={`/edit/${profile.id}`}>Edit Profile</Link>
+										<Link id='edit-button' className='signup-link job-text visible-xs visible-sm' to={`/edit/${profile.id}`}>Edit Profile</Link>
+									</div>
 									: 
 									null
 								}

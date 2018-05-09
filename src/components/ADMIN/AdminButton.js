@@ -63,10 +63,12 @@ class AdminButton extends Component {
 			{this.state.isAdmin ?
 				<Nav>
 				<NavItem>
-					<Link to={routes.ADMIN_APPROVE_JOB} class='job-text btn btn-info'>JOB POST REQUESTS</Link>
+					<Link to={routes.ADMIN_APPROVE_JOB} class='job-text btn btn-info hidden-xs hidden-sm'>JOB POST REQUESTS</Link>
+					<Link to={routes.ADMIN_APPROVE_JOB} class='text-info job-text visible-xs visible-sm'>JOB POST REQUESTS</Link>
 				</NavItem>
 				<NavItem>
-					<Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text btn btn-info'>RECRUITER SIGNUP REQUESTS</Link>
+					<Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text btn btn-info hidden-xs hidden-sm'>RECRUITER SIGNUP REQUESTS</Link>
+					<Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text text-info visible-xs visible-sm'>RECRUITER SIGNUP REQUESTS</Link>
 				</NavItem>
 				</Nav>
 			: null }			

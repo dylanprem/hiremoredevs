@@ -35,6 +35,7 @@ class LogoutButton extends Component {
     return (
             <NavItem>
                   <button className='btn yellow-button job-text' onClick={this.logout}>Logout</button>
+                  
             </NavItem>
     );
   }
