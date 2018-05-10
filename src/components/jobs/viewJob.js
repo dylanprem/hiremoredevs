@@ -56,6 +56,7 @@ class ViewJob extends Component{
 	  }
 
 	  handleSubmit(e) {
+	  	  const jobsAppliedRef = firebase.database().ref('AppliedJobs');
 		  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
 		  const postsFromUsers = { 
 		  	uid: this.state.authUser.uid,
@@ -72,6 +73,13 @@ class ViewJob extends Component{
 		    city: '',
 		    relocate: '',
 		  });
+
+		  const AppliedJobs = {
+		  	uid:this.state.authUser.uid,
+		  	jobID: this.state.currentJob
+		  }
+
+		  jobsAppliedRef.push(AppliedJobs);
 		}
 
 	componentDidMount() {
