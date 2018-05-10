@@ -25,7 +25,7 @@ class ViewJobsOfInterest extends Component{
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
-        var postRef = firebase.database().ref('JobPosts').orderByChild('postsFromUsers/uid').equalTo(this.state.authUser.uid);
+        var postRef = firebase.database().ref('AppliedJobs').orderByChild('uid').equalTo(this.state.authUser.uid);
         postRef.on("child_added", snapshot => {
         	console.log(snapshot.val());
         });
