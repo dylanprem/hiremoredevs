@@ -20,6 +20,7 @@ class ViewSignupRequest extends Component {
 		companyName:'',
 		linkedin:'',
 		authUser: null,
+		isAdmin: false
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -65,29 +66,23 @@ class ViewSignupRequest extends Component {
 	    });
 	  });
 
-	  const ADMINref = firebase.database().ref('ADMIN');
-	  ADMINref.on('value', (snapshot) => {
-	  	let ADMIN = snapshot.val();
-	  	console.log(snapshot.val());
-	  	let newState = [];
-	  	for (let admins in ADMIN){
-	      newState.push({
-	      	id: admins,
-			uid: ADMIN[admins].uid,
-	      });
-	    }
-	    this.setState({
-	      ADMIN: newState
-	    });
-	  });
+
 
 
 
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
+	        firebase.database().ref("ADMIN").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isAdmin:true});
+				    } else {
+				    	this.setState({isAdmin:false});
+				    }
+				});
 	      } 
-    	});	
+	    });	
 	}
 
 
@@ -107,41 +102,36 @@ class ViewSignupRequest extends Component {
 			<div>			
 			{this.state.authUser ? 
 			<div>
-			{this.state.ADMIN.map((admins) => {
-			return(
-				<div key={admins.id}>
-					{admins.uid === this.state.authUser.uid ? 
-							<div>
-								{this.state.RECRUITERSignupRequests.map((req) => {
-								return(
-								<div key={req.id} className='job-text'>
-
-									<div className='col-md-4 col-md-offset-4'>
-										<div className='form-group'>
-											<label>Company Name</label>
-											<input type='text' onChange={this.handleChange} defaultValue={req.companyName} name='companyName' ref={(companyName) => this.companyName = companyName} className='form-control' />
-										</div>
-										<div className='form-group'>
-											<label>LinkedIn</label>
-											<input type='text' onChange={this.handleChange} name='linkedin' defaultValue={req.linkedin} ref={(linkedin) => this.linkedin = linkedin} className='form-control' />
-										</div>
-										<div className='form-group'>
-											<label>UID</label>
-											<input type='text' onChange={this.handleChange} name='uid' className='form-control' defaultValue={req.uid} ref={(uid) => this.uid = uid} />
-										</div>
-									</div>
-									<div className='text-center col-md-4 col-md-offset-4'>
-										<button className='btn yellow-button job-text btn-block' onClick={this.handleSubmit}>Approve</button>
-									</div>
-
+			{this.state.isAdmin ?
+				<div>
+					<div>
+						{this.state.RECRUITERSignupRequests.map((req) => {
+						return(
+						<div key={req.id} className='job-text'>
+							<div className='col-md-4 col-md-offset-4'>
+								<div className='form-group'>
+									<label>Company Name</label>
+									<input type='text' onChange={this.handleChange} defaultValue={req.companyName} name='companyName' ref={(companyName) => this.companyName = companyName} className='form-control' />
 								</div>
-								);
-								})}
-							</div> 
-					: null }
+								<div className='form-group'>
+									<label>LinkedIn</label>
+									<input type='text' onChange={this.handleChange} name='linkedin' defaultValue={req.linkedin} ref={(linkedin) => this.linkedin = linkedin} className='form-control' />
+								</div>
+								<div className='form-group'>
+									<label>UID</label>
+									<input type='text' onChange={this.handleChange} name='uid' className='form-control' defaultValue={req.uid} ref={(uid) => this.uid = uid} />
+								</div>
+							</div>
+							<div className='text-center col-md-4 col-md-offset-4'>
+								<button className='btn yellow-button job-text btn-block' onClick={this.handleSubmit}>Approve</button>
+							</div>
+
+						</div>
+						);
+						})}
+					</div> 
 				</div>
-					);
-		        })}
+			: <h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }
 			</div>
 			: null }
 			</div>

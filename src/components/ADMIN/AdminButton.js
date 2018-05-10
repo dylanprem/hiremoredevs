@@ -18,22 +18,6 @@ class AdminButton extends Component {
 
 	componentDidMount() {
 
-	  const ADMINref = firebase.database().ref('ADMIN');
-	  ADMINref.on('value', (snapshot) => {
-	  	let ADMIN = snapshot.val();
-	  	console.log(snapshot.val());
-	  	let newState = [];
-	  	for (let admins in ADMIN){
-	      newState.push({
-	      	id: admins,
-			uid: ADMIN[admins].uid,
-	      });
-	    }
-	    this.setState({
-	      ADMIN: newState
-	    });
-	  });
-
 	   firebase.auth().onAuthStateChanged((authUser) => {
 		      if (authUser) {
 		        this.setState({ authUser });

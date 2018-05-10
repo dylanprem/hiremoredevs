@@ -34,7 +34,7 @@ class ThankYouRec extends Component{
 		    	</div>  	
 
 				:
-				<SignInForm />
+				null
 				}
 			</div>
 		);

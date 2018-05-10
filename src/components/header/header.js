@@ -67,6 +67,9 @@ class Header extends Component {
 			    </Nav>
 			    <Nav>
 			    	<NavItem>
+			    		<Link to='/' className='btn job-text yellow-button'><span className='glyphicon glyphicon-cog'></span> &nbsp;&nbsp; Account</Link>
+			    	</NavItem>
+			    	<NavItem>
 			    		<ProfileButtonToggle />
 			    	</NavItem>
 			    </Nav>

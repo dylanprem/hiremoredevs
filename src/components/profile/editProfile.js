@@ -82,6 +82,7 @@ class editProfile extends Component {
 			profilePicture:''
 	  });
 	  this.props.history.push(routes.VIEW_PROFILE);
+	  window.location.reload();
 	}
 
 
@@ -122,7 +123,7 @@ class editProfile extends Component {
 				<div className='col-md-12 text-center'>
 					{this.state.Profiles.map((profile) => {return(
 					<div>
-					<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+					<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 					<p className='job-text'>{this.state.authUser.displayName}</p>
 					<p className='job-text'>{this.state.authUser.email}</p>
 

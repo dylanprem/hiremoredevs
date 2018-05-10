@@ -12,7 +12,9 @@ class RECRUITERSignup extends Component {
 		this.state = {
 			authUser:null,
 			RECRUITER:[],
-			RECRUITERSignupRequests:[]
+			RECRUITERSignupRequests:[],
+			isPending: false,
+			isRecruiter: false,
 		}
 	}
 
@@ -20,69 +22,45 @@ class RECRUITERSignup extends Component {
 	
 
 	componentDidMount(){
-    	const recruiterRef = firebase.database().ref('RECRUITER');
-	        recruiterRef.once('value', (snapshot) => {		
-			    let RECRUITER = snapshot.val();
-			    let newState = [];
-			    for (let r in RECRUITER){
-			      newState.push({
-			        id: r,
-					uid:RECRUITER[r].uid,
-			      });
-
-			    }
-			    this.setState({
-			      RECRUITER: newState
-			    });
-			  });
-
-		const signupRef = firebase.database().ref('RECRUITERSignupRequests');
-	        signupRef.once('value', (snapshot) => {		
-			    let RECRUITERSignupRequests = snapshot.val();
-			    let newState = [];
-			    for (let s in RECRUITERSignupRequests){
-			      newState.push({
-			        id: s,
-					uid:RECRUITERSignupRequests[s].uid,
-			      });
-
-			    }
-			    this.setState({
-			      RECRUITERSignupRequests: newState
-			    });
-			  });
-
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-
+	        firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isRecruiter:true});
+				    } else {
+				    	this.setState({isRecruiter:false});
+				    }
+				});
+	        firebase.database().ref("RECRUITERSignupRequests").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isPending:true});
+				    } else {
+				    	this.setState({isPending:false});
+				    }
+				});
 	        
 			} 
-    	});	
+    	});
 	}
 
-	componentDidUpdate() {
-		firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).on("child_added",snapshot => {
-		    const userData = snapshot.val();
-		    if (userData){
-				    document.getElementById("recSignupButton").style.display = "none";
-		    } else {
-				    document.getElementById('recSignupButton').style.display = "block";
-			}
-		});
-	}
-	
 
 	render() {
 		return (
 			<div>
 			{this.state.authUser ?
-				<div id="recSignupButton">
-					<Link to={routes.RECRUITER_SIGNUP_FORM} className='btn yellow-button job-text'>Recruiter Registration</Link>
+				<div>
+				{this.state.isRecruiter ? null :
+					<div>
+						{this.state.isPending ? null :
+						<Link to={routes.RECRUITER_SIGNUP_FORM} className='btn yellow-button job-text'>Recruiter Registration</Link>
+						}
+					</div>
+				}
 				</div>
-				:
-				null
-			}
+			: null }
 			</div>
 
 		);

@@ -11,6 +11,7 @@ class RECRUITERPostedJobs extends Component {
 		RECRUITER: [],
 		Profiles:[],
 		authUser: null,
+		isRecruiter: false
 		}
 	this.removeItem = this.removeItem.bind(this);
 
@@ -49,27 +50,21 @@ class RECRUITERPostedJobs extends Component {
 	  });
 
 
-      	const recruiterRef = firebase.database().ref('RECRUITER');
-        recruiterRef.once('value', (snapshot) => {		
-		    let RECRUITER = snapshot.val();
-		    let newState = [];
-		    for (let r in RECRUITER){
-		      newState.push({
-		        id: r,
-				uid:RECRUITER[r].uid,
-		      });
-
-		    }
-		    this.setState({
-		      RECRUITER: newState
-		    });
-		  });
 
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-	      } 
-    	});	
+	        firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isRecruiter:true});
+				    } else {
+				    	this.setState({isRecruiter:false});
+				    }
+				});
+	        
+			} 
+    	});
 	}
 
 
@@ -82,9 +77,8 @@ class RECRUITERPostedJobs extends Component {
 			
 			{this.state.authUser ? 
 			<div className='col-md-12'>
-			{this.state.RECRUITER.map((r) => {return(
-				<div key={r.id}>
-					{r.uid === this.state.authUser.uid ?
+				{this.state.isRecruiter ?
+				<div>
 					<div>
 						<h1 className="text-center job-text">JOBS POSTED BY YOU</h1>
 						<table className="table jobs-table">
@@ -101,22 +95,20 @@ class RECRUITERPostedJobs extends Component {
 							    {this.state.JobPosts.map((post) => {
 			    		  			return(
 								    <tr className='active' key={post.id}>
-				                      {r.uid === post.uid ? <td className='text-warning'>{post.companyName}</td> : null}
-				                      {r.uid === post.uid ? <td>{post.position}</td> : null }
-				                      {r.uid === post.uid ? <td>{post.State}</td> : null }
-				                      {r.uid === post.uid ? <td>{post.zip}</td> : null }
-				                      {r.uid === post.uid ? <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td> : null }
-			                      	  {r.uid === post.uid ? <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td> : null }
+				                      <td className='text-warning'>{post.companyName}</td>
+				                      <td>{post.position}</td>
+				                      <td>{post.State}</td>
+				                      <td>{post.zip}</td> 
+				                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td> 
+			                      	  <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td> 
 				                    </tr>
 					                    );
 				          			})}         
 							    </tbody>
 						</table>
 					</div>
-					:
-					null }
 				</div>
-			);})}	
+				: <h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }	
 			</div>
 			:
 			null}

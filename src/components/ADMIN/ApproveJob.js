@@ -106,7 +106,7 @@ class ApproveJob extends Component {
 					</table>
 				</div>
 				: 
-				<h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
+				<h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }
 			</div>
 			: null }
 			</div>

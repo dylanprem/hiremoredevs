@@ -51,8 +51,8 @@ class ProfileButtonToggle extends Component {
 		      console.log("exists!");
 		    } else {
 				firebase.auth().currentUser.updateProfile({
-				  displayName: this.state.authUser.displayName || "New User",
-				  photoURL: this.state.authUser.photoURL || "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
+				  displayName: "user" + Date.now(),
+				  photoURL: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
 				});
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
@@ -79,7 +79,7 @@ class ProfileButtonToggle extends Component {
 						<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 									<div>
-										<Link id='edit-button' className='btn yellow-button job-text hidden-sm hidden-xs' to={`/edit/${profile.id}`}>Edit Profile</Link>
+										<Link id='edit-button' className='btn yellow-button job-text hidden-sm hidden-xs' to={`/edit/${profile.id}`}><span className='glyphicon glyphicon-pencil'></span>&nbsp;&nbsp;Edit Profile</Link>
 										<Link id='edit-button' className='signup-link job-text visible-xs visible-sm' to={`/edit/${profile.id}`}>Edit Profile</Link>
 									</div>
 									: 

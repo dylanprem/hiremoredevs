@@ -95,7 +95,7 @@ class RecruiterSignupRequests extends Component {
 					{this.state.isAdmin ? 
 						<div>
 							<h1 className="text-center job-text">RECRUITER REGISTRATION REQUESTS</h1>
-							<table class='table  job-text'>
+							<table class='table job-text'>
 								<thead>
 									<tr>
 										<th></th>
@@ -110,33 +110,40 @@ class RecruiterSignupRequests extends Component {
 									return(
 									<tr key={req.id}>
 										
+										<td>
 										{this.state.Profiles.map((profile) => { return(
-											<td key={profile.id}>
-											{profile.uid === req.uid ? <img src={profile.profilePicture} className='img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
-											</td>
+											<div key={profile.id}>
+											{profile.uid === req.uid ? <img src={profile.profilePicture} className='profile-pic img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
+											</div>
 										);})}
+										</td>
 										
 
 										
+										<td>
 										{this.state.Profiles.map((profile) => { return(
-											<td key={profile.id}>
-											{profile.uid === req.uid ? profile.name : null }
-											</td>
+											<div key={profile.id}>
+											{profile.uid === req.uid ? <p>{profile.name}</p> : null }
+											</div>
 										);})}
+										</td>
 										
 										
+										<td>
 										{this.state.Profiles.map((profile) => { return(
-											<td key={profile.id}>
+											<div key={profile.id}>
 											{profile.uid === req.uid ? <Link to={`/admin-view-recruiter-request/${req.id}`} className='btn yellow-button btn-sm'>View</Link> : null }
-											</td>
+											</div>
 										);})}
+										</td>
 										
 										
-										{this.state.Profiles.map((profile) => { return(
-											<td key={profile.id}>
+										<td>{this.state.Profiles.map((profile) => { return(
+											<div key={profile.id}>
 											{profile.uid === req.uid ? <Link to={req.linkedin} className='btn btn-primary btn-sm'>LinkedIn</Link> : null }
-											</td>
+											</div>
 										);})}
+										</td>
 										
 										<td><button className='btn btn-danger job-text btn-block' onClick={() => this.removeItem(req.id)}>Deny</button></td>
 									</tr>
@@ -146,7 +153,7 @@ class RecruiterSignupRequests extends Component {
 								
 							</table>
 						</div> 
-					: <h1 className='job-text text-danger'>YOU DO NOT HAVE ACCESS TO THIS PAGE</h1> }
+					: <h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }
 				</div>
 			</div>
 			: null }
