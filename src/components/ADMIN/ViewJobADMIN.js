@@ -44,7 +44,7 @@ class ViewJobADMIN extends Component{
 
 	handleSubmit(e) {
 	  e.preventDefault();
-	  const JobPostToDelete = firebase.database().ref('JobPostRequests' + '/' + this.state.currentJobADMIN);
+	  const JobPostToDelete = firebase.database().ref('JobPostRequests/' + this.state.currentJobADMIN);
 	  const JobsRef = firebase.database().ref('JobPosts');
 	  const JobPosts = {
 	    companyName: this.companyName.value,
