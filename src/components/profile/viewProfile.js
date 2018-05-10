@@ -103,12 +103,13 @@ class viewProfile extends Component {
 		    		  				<div key={project.id} >
 				    		  		{project.uid === profile.uid ?
 				    		  			<div className='panel-group col-md-3'>
-				    		  			<div className='panel panel-default'>
-									    <div className='panel-body'>
-					                      <h2 className='text-warning'>{project.projectName}</h2>
-					                      <div className='text-center job-text'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
-					                      <p className='job-text text-black'>{project.projectInfo}</p>
-					                      <div className='text-center job-text'>{project.uid === this.state.authUser.uid ?
+				    		  			<div className='panel panel-default col-md-12'>
+									    <div className='panel-body col-md-12 job-text text-black'>
+
+					                      <div className='row'><h2 className='text-warning'>{project.projectName}</h2></div>
+					                      <div className='text-center job-text row'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
+					                      <div className='row'><p>{project.projectInfo}</p></div>
+					                      <div className='text-center job-text row'>{project.uid === this.state.authUser.uid ?
 		               						 <button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
 		               					  </div>
 					                    </div>

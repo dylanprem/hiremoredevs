@@ -1,10 +1,11 @@
-A WAY TO TRACK JOBS YOU'VE POSTED
 IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
-
-
-ERROR MESSGAE IF JOB SEARCH IS EMPTY
-
 
 create I want to collab button 
 
 create a flag user option
+
+forgot and reset password option
+
+view jobs you've applied to
+
+recruiters can sort by state or other fields on a job post

@@ -57,12 +57,11 @@ class ProfileButtonToggle extends Component {
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
 					uid: this.state.authUser.uid,
-					name: this.state.authUser.displayName,
-					profilePicture: this.state.authUser.photoURL, 
+					name: "user" + Date.now(),
+					profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
 					email: this.state.authUser.email
 				}
 				profilesRef.push(Profiles);
-				this.props.history.push(routes.CURRENT_FEED);
 				window.location.reload();
 			}
 		});
