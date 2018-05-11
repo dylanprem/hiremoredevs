@@ -6,6 +6,8 @@ create a flag user option
 
 forgot and reset password option
 
-view jobs you've applied to
+//view jobs you've applied to COMPLETED
 
 recruiters can sort by state or other fields on a job post
+
+TRACK COLLABS

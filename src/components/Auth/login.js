@@ -53,9 +53,6 @@ class SignInForm extends Component {
     .catch(error => {
         this.setState(byPropKey('error', error));
     })
-    .then(() => {
-        this.props.history.push(routes.CURRENT_FEED);
-    });
   }
 
   loginWithGoogle() {
@@ -107,7 +104,7 @@ class SignInForm extends Component {
     return (
     <div className='row dark-bg-login'>
       {this.state.authUser ? 
-      null 
+      null
       :
       <div>
         <div className='col-md-12 text-center text-black'>

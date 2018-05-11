@@ -55,6 +55,13 @@ class ViewCollab extends Component {
 			commentBody:'',
 			time:'',
 	  });
+
+	const NotificationRef = firebase.database().ref('CollabNotifications');
+	const CollabNotifications = {
+		uid: this.state.authUser.uid,
+		post: this.state.currentCollab
+	}
+
 	window.location.reload();
 }
 

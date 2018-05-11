@@ -33,7 +33,7 @@ class RecruiterSignupRequests extends Component {
 	  const reqref = firebase.database().ref('RECRUITERSignupRequests');
 	  reqref.on('value', (snapshot) => {
 	  	let RECRUITERSignupRequests = snapshot.val();
-	  	console.log(snapshot.val());
+	  	
 	  	let newState = [];
 	  	for (let req in RECRUITERSignupRequests){
 	      newState.push({
