@@ -41,14 +41,8 @@ class ViewJob extends Component{
     	
 	}
 	  removeItem(postId) {
-	  	const rootRef = firebase.database().ref();
-	  	const appliedRef = firebase.database().ref('AppliedJobs').orderByChild('jobID').equalTo(this.state.currentJob);
 	    const postRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + `/postsFromUsers/${postId}`);
-	    const updates = {
-	    	appliedRef: null,
-	    	postRef: null,
-	    }
-	    rootRef.update(updates);
+	    postRef.remove();
 	    window.location.reload();
 	  }
 
@@ -171,6 +165,16 @@ class ViewJob extends Component{
 		      this.setState({ isInterested:true });
 		    } else {
 		      this.setState({ isInterested:false });
+		      firebase.database().ref('AppliedJobs')
+		      	.orderByChild('jobID')
+		      	.equalTo(this.state.currentJob)
+		      	.on("child_added", snapshot => {
+		      		const data = snapshot.val();
+		      		if (data.uid === this.state.authUser.uid) {
+		      			snapshot.key.delete();
+		      		}
+		      });
+
 			}
 		});
 	    }
@@ -390,9 +394,9 @@ class ViewJob extends Component{
 					                      })}
 					                      </td>
 									      <td>{post.uid === this.state.authUser.uid ?
-		               						 <button type='submit' className="btn btn-danger btn-sm hidden-xs" onClick={() => this.removeItem()}><span className='glyphicon glyphicon-trash'></span> DELETE&nbsp;</button> : null}
+		               						 <button type='submit' className="btn btn-danger btn-sm hidden-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span> DELETE&nbsp;</button> : null}
 		               						 {post.uid === this.state.authUser.uid ?
-		               						 <button type='submit' className="btn btn-danger btn-sm visible-xs" onClick={() => this.removeItem()}><span className='glyphicon glyphicon-trash'></span></button> : null}
+		               						 <button type='submit' className="btn btn-danger btn-sm visible-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span></button> : null}
 		               					  </td>
 					                    </tr>
 					                    

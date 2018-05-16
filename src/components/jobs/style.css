@@ -32,3 +32,7 @@
     padding: 1px !important;
     border-top:none !important;
 }
+
+.table>tbody+tbody {
+    border: none !important;
+}

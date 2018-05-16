@@ -15,8 +15,12 @@ class JobsOfInterest extends Component {
 			Profiles:[],
 	    	authUser: null,
 	    	hasApplied: false
+		}
+		this.checkInterest = this.checkInterest.bind(this); 	
+	}
 
-		} 	
+	checkInterest(){
+		firebase.database().ref('JobPosts')
 	}
 
 	componentDidMount() {

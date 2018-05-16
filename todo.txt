@@ -11,3 +11,7 @@ forgot and reset password option
 recruiters can sort by state or other fields on a job post
 
 TRACK COLLABS
+
+.table>tbody+tbody {
+    /* border-top: 2px solid #ddd; */
+}
