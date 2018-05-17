@@ -57,7 +57,6 @@ class ViewJob extends Component{
 	  }
 
 	  handleSubmit(e) {
-	  	  const jobsAppliedRef = firebase.database().ref('AppliedJobs');
 		  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
 		  const postsFromUsers = { 
 		  	uid: this.state.authUser.uid,
@@ -75,12 +74,12 @@ class ViewJob extends Component{
 		    relocate: '',
 		  });
 
-		  const AppliedJobs = {
-		  	uid:this.state.authUser.uid,
-		  	jobID: this.state.currentJob
-		  }
-
-		  jobsAppliedRef.push(AppliedJobs);
+		  // const pushRef = firebase.database().ref('AppliedJobs');
+  		//   const AppliedJobs = {
+  		// 		jobID: this.state.currentJob,
+  		// 		uid: this.state.authUser.uid,
+  		// 	}
+  		//   pushRef.push(AppliedJobs);
 		}
 
 	componentDidMount() {
@@ -162,25 +161,41 @@ class ViewJob extends Component{
         firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
 		    const userData = snapshot.val();
 		    if (userData){
-		      this.setState({ isInterested:true });
+		      this.setState({ isInterested:true });	
 		    } else {
 		      this.setState({ isInterested:false });
-		      firebase.database().ref('AppliedJobs')
+			}
+		});
+		if (this.state.isInterested) {
+			console.log(this.state.isInterested);
+			firebase.database().ref('AppliedJobs')
+		      	.orderByChild('jobID')
+		      	.equalTo(this.state.currentJob)
+		      	.on("child_added", snapshot => {
+		      		const checkData = snapshot.val();
+		      	});
+		      	const pushApply = firebase.database().ref('AppliedJobs');
+		      	const AppliedJobs = {
+      				jobID: this.state.currentJob,
+      				uid: this.state.authUser.uid
+      			}
+	      		pushApply.push(AppliedJobs);
+	      	} else {
+	      		 firebase.database().ref('AppliedJobs')
 		      	.orderByChild('jobID')
 		      	.equalTo(this.state.currentJob)
 		      	.on("child_added", snapshot => {
 		      		const data = snapshot.val();
-		      		if (data.uid === this.state.authUser.uid) {
-		      			snapshot.key.delete();
-		      		}
+		      		if (data.uid === this.state.authUser.uid && data.jobID === this.state.currentJob) {
+		      			firebase.database().ref('AppliedJobs/' + snapshot.key).remove();
+		      		} 
 		      });
-
-			}
-		});
+	      	}
 	    }
 	});
 
 	}
+
 
 
 
