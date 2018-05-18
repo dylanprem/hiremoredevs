@@ -13,6 +13,7 @@ class JobsOfInterest extends Component {
 			JobPosts: [],
 			AppliedJobs:[],
 			Profiles:[],
+			postsFromUsers:[],
 	    	authUser: null,
 	    	hasApplied: false
 		}	
@@ -20,8 +21,8 @@ class JobsOfInterest extends Component {
 
 
 	componentDidMount() {
-	const JobsOfInterestRef = firebase.database().ref('JobPosts');
-	   JobsOfInterestRef.on('value', (snapshot) => {
+	  const JobsRef = firebase.database().ref('JobPosts');
+	   JobsRef.on('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
 	    let newState = [];
 	    for (let post in JobPosts) {
@@ -43,7 +44,7 @@ class JobsOfInterest extends Component {
 	  });
 
 	  const appliedRef = firebase.database().ref('AppliedJobs');
-	   appliedRef.on('value', (snapshot) => {
+	   appliedRef.once('value', (snapshot) => {
 	    let AppliedJobs = snapshot.val();
 	    let newState = [];
 	    for (let a in AppliedJobs) {
@@ -61,7 +62,6 @@ class JobsOfInterest extends Component {
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-
 	        firebase.database().ref('AppliedJobs').orderByChild('uid').equalTo(this.state.authUser.uid).once('value', (snapshot) => {
 	        	let data = snapshot.val();
 	        	if (data) {
@@ -72,6 +72,7 @@ class JobsOfInterest extends Component {
 	        });
 			} 
     	});
+
 	}
 
 
@@ -82,7 +83,7 @@ class JobsOfInterest extends Component {
 				{this.state.authUser ?
 			    <div className='col-md-12 job-text'>
 			    	{this.state.hasApplied ?
-			    	<div>
+			    	<div className='col-md-10 col-md-offset-1'>
 			    		<h2 className='job-text text-center'>JOBS YOU'VE EXPRESSED INTEREST IN</h2>
 				    	<table className="table">
 						    <thead>
@@ -96,15 +97,15 @@ class JobsOfInterest extends Component {
 						    </thead>
 						    {this.state.AppliedJobs.map((a) => {return(
 						    <tbody key={a.id}>
-						    	{a.uid === this.state.authUser.uid ? this.state.JobPosts.map((post) => {return(
+						    	{this.state.JobPosts.map((post) => {return(
 							    <tr key={post.id}>
-			                      <td>{post.id === a.jobID && a.uid === this.state.authUser.uid  ? <p>{post.companyName}</p> : null}</td>
-			                      <td>{post.id === a.jobID && a.uid === this.state.authUser.uid  ? <p>{post.position}</p> : null }</td>
-			                      <td>{post.id === a.jobID && a.uid === this.state.authUser.uid  ? <p>{post.State}</p> : null }</td>
-			                      <td>{post.id === a.jobID && a.uid === this.state.authUser.uid  ? <p>{post.zip}</p> : null }</td>
-			                      <td>{post.id === a.jobID && a.uid === this.state.authUser.uid  ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.companyName}</p> : null}</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.position}</p> : null }</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.State}</p> : null }</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.zip}</p> : null }</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td>
 			                    </tr>
-			                    );}) : null }     
+			                    );})}     
 						    </tbody>
 						    );})}
 						</table>

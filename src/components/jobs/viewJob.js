@@ -34,6 +34,7 @@ class ViewJob extends Component{
 	    	linkedin:'',
 	    	isInterested: false,
 	    	authUser: null,
+	    	appliedJobKey:''
 
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -41,8 +42,10 @@ class ViewJob extends Component{
     	
 	}
 	  removeItem(postId) {
-	    const postRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + `/postsFromUsers/${postId}`);
+	    const postRef = firebase.database().ref('JobPosts/' + this.state.currentJob + `/postsFromUsers/${postId}`);
+	    const appliedRefDeletionRef = firebase.database().ref('AppliedJobs/' + this.state.appliedJobKey);
 	    postRef.remove();
+	    appliedRefDeletionRef.remove();
 	    window.location.reload();
 	  }
 
@@ -74,12 +77,12 @@ class ViewJob extends Component{
 		    relocate: '',
 		  });
 
-		  // const pushRef = firebase.database().ref('AppliedJobs');
-  		//   const AppliedJobs = {
-  		// 		jobID: this.state.currentJob,
-  		// 		uid: this.state.authUser.uid,
-  		// 	}
-  		//   pushRef.push(AppliedJobs);
+		  const pushRef = firebase.database().ref('AppliedJobs');
+  		  const AppliedJobs = {
+  				jobID: this.state.currentJob,
+  				uid: this.state.authUser.uid,
+  			}
+  		  pushRef.push(AppliedJobs);
 		}
 
 	componentDidMount() {
@@ -158,39 +161,26 @@ class ViewJob extends Component{
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
-        firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+        firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", (snapshot) => {
 		    const userData = snapshot.val();
 		    if (userData){
-		      this.setState({ isInterested:true });	
+		      this.setState({ isInterested:true });
 		    } else {
 		      this.setState({ isInterested:false });
+		 
 			}
 		});
-		if (this.state.isInterested) {
-			console.log(this.state.isInterested);
-			firebase.database().ref('AppliedJobs')
-		      	.orderByChild('jobID')
-		      	.equalTo(this.state.currentJob)
-		      	.on("child_added", snapshot => {
-		      		const checkData = snapshot.val();
-		      	});
-		      	const pushApply = firebase.database().ref('AppliedJobs');
-		      	const AppliedJobs = {
-      				jobID: this.state.currentJob,
-      				uid: this.state.authUser.uid
-      			}
-	      		pushApply.push(AppliedJobs);
-	      	} else {
-	      		 firebase.database().ref('AppliedJobs')
-		      	.orderByChild('jobID')
-		      	.equalTo(this.state.currentJob)
-		      	.on("child_added", snapshot => {
-		      		const data = snapshot.val();
-		      		if (data.uid === this.state.authUser.uid && data.jobID === this.state.currentJob) {
-		      			firebase.database().ref('AppliedJobs/' + snapshot.key).remove();
-		      		} 
-		      });
-	      	}
+
+		const appliedRef = firebase.database().ref('AppliedJobs').orderByChild('jobID').equalTo(this.state.currentJob);
+			appliedRef.once("value", (snapshot) => {
+		    const appliedData = snapshot.val();
+			    if(appliedData){
+			    	if (appliedData.uid === this.state.authUser.uid){
+			    		this.setState({appliedJobKey: snapshot.key});
+			    	}
+			    	
+			    }
+			});
 	    }
 	});
 
