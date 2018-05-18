@@ -42,8 +42,9 @@ class ViewJob extends Component{
     	
 	}
 	  removeItem(postId) {
+	  	const rootRef = firebase.database().ref();
 	    const postRef = firebase.database().ref('JobPosts/' + this.state.currentJob + `/postsFromUsers/${postId}`);
-	    const appliedRefDeletionRef = firebase.database().ref('AppliedJobs/' + this.state.appliedJobKey);
+	    const appliedRefDeletionRef = firebase.database().ref('AppliedJobs/'+this.state.appliedJobKey);
 	    postRef.remove();
 	    appliedRefDeletionRef.remove();
 	    window.location.reload();
@@ -172,11 +173,12 @@ class ViewJob extends Component{
 		});
 
 		const appliedRef = firebase.database().ref('AppliedJobs').orderByChild('jobID').equalTo(this.state.currentJob);
-			appliedRef.once("value", (snapshot) => {
+			appliedRef.once("child_added", (snapshot) => {
 		    const appliedData = snapshot.val();
 			    if(appliedData){
 			    	if (appliedData.uid === this.state.authUser.uid){
 			    		this.setState({appliedJobKey: snapshot.key});
+			    		
 			    	}
 			    	
 			    }
