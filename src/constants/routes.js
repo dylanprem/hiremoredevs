@@ -31,5 +31,6 @@ export const NOTIFICATION = '/view-notifications';
 
 
 export const JOBS_OF_INTEREST = '/myJobs';
+export const COLLABS_POSTED = '/myCollabs';
 
 

@@ -26,6 +26,7 @@ import EditComment from './collab/EditComment';
 import RECRUITERPostedJobs from './RECRUITER/RECRUITERPostedJobs';
 import Notifications from './Notifications/Notifications';
 import JobsOfInterest from './USER/JobsOfInterest';
+import CollabsPosted from './USER/CollabsPosted';
 
 
 import * as routes from '../constants/routes';
@@ -61,6 +62,7 @@ const App = () =>
       <Route exact path={routes.VIEW_POSTED_JOBS_BY_USER} component={RECRUITERPostedJobs} />
       <Route exact path={routes.NOTIFICATION} component={Notifications} />
       <Route exact path={routes.JOBS_OF_INTEREST} component={JobsOfInterest} />
+      <Route exact path={routes.COLLABS_POSTED} component={CollabsPosted} />
       <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
     </div>
   </Router>

@@ -11,7 +11,8 @@ class RECRUITERPostedJobs extends Component {
 		RECRUITER: [],
 		Profiles:[],
 		authUser: null,
-		isRecruiter: false
+		isRecruiter: false,
+		hasPosts: false
 		}
 	this.removeItem = this.removeItem.bind(this);
 
@@ -62,6 +63,15 @@ class RECRUITERPostedJobs extends Component {
 				    	this.setState({isRecruiter:false});
 				    }
 				});
+
+	        firebase.database().ref("JobPosts").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				    const postData = snapshot.val();
+				    if (postData) {
+						this.setState({hasPosts:true});
+				    } else {
+				    	this.setState({hasPosts:false});
+				    }
+				});
 	        
 			} 
     	});
@@ -79,6 +89,7 @@ class RECRUITERPostedJobs extends Component {
 			<div className='col-md-12'>
 				{this.state.isRecruiter ?
 				<div>
+					{this.state.hasPosts ?
 					<div>
 						<h1 className="text-center job-text">JOBS POSTED BY YOU</h1>
 						<table className="table jobs-table">
@@ -95,18 +106,20 @@ class RECRUITERPostedJobs extends Component {
 							    {this.state.JobPosts.map((post) => {
 			    		  			return(
 								    <tr className='active' key={post.id}>
-				                      <td className='text-warning'>{post.companyName}</td>
-				                      <td>{post.position}</td>
-				                      <td>{post.State}</td>
-				                      <td>{post.zip}</td> 
-				                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td> 
-			                      	  <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td> 
+				                      <td className='text-warning'>{post.uid === this.state.authUser.uid ? post.companyName : null}</td>
+				                      <td>{post.uid === this.state.authUser.uid ? post.position : null}</td>
+				                      <td>{post.uid === this.state.authUser.uid ? post.State : null}</td>
+				                      <td>{post.uid === this.state.authUser.uid ? post.zip : null}</td> 
+				                      <td>{post.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td> 
+			                      	  <td>{post.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> : null}</td>
 				                    </tr>
 					                    );
-				          			})}         
+				          			})}
+				          		      
 							    </tbody>
 						</table>
 					</div>
+					: <h1 className='job-text text-center'>You haven't posted any jobs yet.</h1> }
 				</div>
 				: <h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }	
 			</div>
