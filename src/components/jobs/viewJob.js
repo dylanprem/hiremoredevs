@@ -173,7 +173,7 @@ class ViewJob extends Component{
 		});
 
 		const appliedRef = firebase.database().ref('AppliedJobs').orderByChild('jobID').equalTo(this.state.currentJob);
-			appliedRef.once("child_added", (snapshot) => {
+			appliedRef.on("child_added", (snapshot) => {
 		    const appliedData = snapshot.val();
 			    if(appliedData){
 			    	if (appliedData.uid === this.state.authUser.uid){
