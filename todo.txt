@@ -1,17 +1,12 @@
 IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
 
-create I want to collab button 
-
-create a flag user option
-
+create I want to collab functionalitly same as expressing interest 
+create a flag post option
 forgot and reset password option
 
 //view jobs you've applied to COMPLETED
+recruiters can sort by state or other fields on a job post from postsfromusers
 
-recruiters can sort by state or other fields on a job post
 
 TRACK COLLABS
 
-.table>tbody+tbody {
-    /* border-top: 2px solid #ddd; */
-}
