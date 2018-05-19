@@ -10,3 +10,6 @@ recruiters can sort by state or other fields on a job post from postsfromusers
 
 TRACK COLLABS
 
+MAKE ALL ADMIN STUFF ONE PAGE
+MAKE ALL ACCOUNT STUFF ONE PAGE
+

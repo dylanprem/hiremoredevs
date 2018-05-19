@@ -151,7 +151,7 @@ class JobFeed extends Component {
 			<div className='row dark-bg-feed'>
 			
 			{this.state.authUser ? 
-			<div className='col-md-12 jobs-container'>
+			<div className='col-md-10 col-md-offset-1 jobs-container'>
 			<div className='row job-text'>
 				<div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
 					<div className='form-group'>
@@ -244,7 +244,7 @@ class JobFeed extends Component {
 				    {this.state.JobPosts.map((post) => {
     		  			return(
 					    <tr className='active' key={post.id}>
-	                      <td className='text-warning'>{post.companyName}</td>
+	                      <td className='text-white'>{post.companyName}</td>
 	                      <td>{post.position}</td>
 	                      <td>{post.State}</td>
 	                      <td>{post.zip}</td>

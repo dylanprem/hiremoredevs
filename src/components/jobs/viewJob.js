@@ -172,16 +172,14 @@ class ViewJob extends Component{
 			}
 		});
 
-		const appliedRef = firebase.database().ref('AppliedJobs').orderByChild('jobID').equalTo(this.state.currentJob);
-			appliedRef.on("child_added", (snapshot) => {
-		    const appliedData = snapshot.val();
-			    if(appliedData){
-			    	if (appliedData.uid === this.state.authUser.uid){
-			    		this.setState({appliedJobKey: snapshot.key});
-			    		
+		firebase.database().ref('AppliedJobs')	
+		.once("value", (snapshot) => {
+			    snapshot.forEach((childSnapshot) => {
+			    	let childData = childSnapshot.val();
+			    	if (childSnapshot.child("uid").val() === this.state.authUser.uid && childSnapshot.child("jobID").val() === this.state.currentJob) {
+			    		this.setState({appliedJobKey:childSnapshot.key});
 			    	}
-			    	
-			    }
+			    	});
 			});
 	    }
 	});

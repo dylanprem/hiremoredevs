@@ -69,13 +69,14 @@ class CollabsPosted extends Component {
 			<div className='col-md-12'>
 				<div>
 					{this.state.hasPosts ?
-					<div>
+					<div className='col-md-10 col-md-offset-1'>
 						<h1 className="text-center job-text">COLLABS POSTED BY YOU</h1>
 						<table className="table jobs-table">
 							    <thead>
 							      <tr>
 							      	<th>Title</th>
 							        <th>View Details</th>
+							        <th>&nbsp;</th>
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -86,7 +87,7 @@ class CollabsPosted extends Component {
 				                      <td>{c.uid === this.state.authUser.uid ? c.title : null}</td>
 				             
 				                      <td>{c.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`view-collab/${c.id}`}>View Details</Link> : null }</td> 
-			                      	  <td>{c.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(c.id)}>Delete</button> : null}</td>
+			                      	  <td className='pull-right'>{c.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(c.id)}>Delete</button> : null}</td>
 				                    </tr>
 					                    );
 				          			})}
@@ -94,7 +95,7 @@ class CollabsPosted extends Component {
 							    </tbody>
 						</table>
 					</div>
-					: <h1 className='job-text text-center'>You haven't posted any collabs yet.</h1> }
+					: <h1 className='job-text text-center text-uppercase'>You haven't posted any collabs yet.</h1> }
 				</div>
 			</div>
 			:

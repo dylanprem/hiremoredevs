@@ -88,7 +88,7 @@ class viewProfile extends Component {
 						return(
 						<div key={profile.id}>
 							{profile.uid === this.state.authUser.uid ?
-							<div>
+							<div className='col-md-12'>
 								<h3>About Me</h3>
 								<p className='job-text'>{profile.about}</p>
 								<h3>My top three</h3>
@@ -101,7 +101,7 @@ class viewProfile extends Component {
 						       {this.state.Projects.map((project) => {
 		    		  			return(
 		    		  				<div key={project.id} >
-				    		  		{project.uid === profile.uid ?
+				    		  		{project.uid === this.state.authUser.uid ?
 				    		  			<div className='panel-group col-md-3'>
 				    		  			<div className='panel panel-default col-md-12'>
 									    <div className='panel-body col-md-12 job-text text-black'>

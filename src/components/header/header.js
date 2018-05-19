@@ -8,7 +8,7 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
 import ProfileButtonToggle from './ProfileButton';
-import AdminButton from '../ADMIN/AdminButton';
+
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
 import RECRUITERManageJobsButton from '../RECRUITER/RECRUITERManageJobsButton';
 import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
@@ -39,14 +39,11 @@ class Header extends Component {
 			  <Navbar.Header>
 
 			    <Navbar.Brand>
-			      <Link to="/" className="navbar-brand logo hidden-sm hidden-xs">HireMoreDevs</Link>
-			      <Link to="/" className="navbar-brand logo visible-xs visible-sm job-text">HireMoreDevs</Link>
+			      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
 			    </Navbar.Brand>
 			    <Navbar.Toggle />
 			  </Navbar.Header>
 			  <Navbar.Collapse>
-
-			    <AdminButton />
 			    <Nav pullRight>
 			      <NavItem>
 			      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>
@@ -67,7 +64,7 @@ class Header extends Component {
 			    </Nav>
 			    <Nav>
 			    	<NavItem>
-			    		<Link to={routes.JOBS_OF_INTEREST} className='btn job-text yellow-button'><span className='glyphicon glyphicon-cog'></span> &nbsp;&nbsp; Account</Link>
+			    		<Link to={routes.ACCOUNT} className='btn job-text yellow-button'><span className='glyphicon glyphicon-stats'></span> &nbsp;&nbsp; Account</Link>
 			    	</NavItem>
 			    	<NavItem>
 			    		<ProfileButtonToggle />

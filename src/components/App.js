@@ -25,8 +25,9 @@ import ViewSignupRequest from './ADMIN/ViewSignupRequest';
 import EditComment from './collab/EditComment';
 import RECRUITERPostedJobs from './RECRUITER/RECRUITERPostedJobs';
 import Notifications from './Notifications/Notifications';
-import JobsOfInterest from './USER/JobsOfInterest';
-import CollabsPosted from './USER/CollabsPosted';
+import Account from './USER/Account';
+import AdminHeader from './ADMIN/AdminHeader';
+
 
 
 import * as routes from '../constants/routes';
@@ -40,6 +41,7 @@ const App = () =>
   <Router>
     <div className='dark-bg'>
       <Header />
+      <AdminHeader />
       <Route exact path={routes.LANDING} component={Landing} />
       <Route exact path={routes.SIGN_IN} component={SignInForm} />
       <Route exact path={routes.CURRENT_FEED} component={JobFeed} />
@@ -61,8 +63,7 @@ const App = () =>
       <Route exact path={routes.RECRUITER_SIGNUP_REQUESTS} component={RecruiterSignupRequests} />
       <Route exact path={routes.VIEW_POSTED_JOBS_BY_USER} component={RECRUITERPostedJobs} />
       <Route exact path={routes.NOTIFICATION} component={Notifications} />
-      <Route exact path={routes.JOBS_OF_INTEREST} component={JobsOfInterest} />
-      <Route exact path={routes.COLLABS_POSTED} component={CollabsPosted} />
+      <Route exact path={routes.ACCOUNT} component={Account} />
       <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
     </div>
   </Router>

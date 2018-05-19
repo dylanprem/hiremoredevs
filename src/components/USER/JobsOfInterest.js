@@ -85,7 +85,7 @@ class JobsOfInterest extends Component {
 			    	{this.state.hasApplied ?
 			    	<div className='col-md-10 col-md-offset-1'>
 			    		<h2 className='job-text text-center'>JOBS YOU'VE EXPRESSED INTEREST IN</h2>
-				    	<table className="table">
+				    	<table className="table jobs-table">
 						    <thead>
 						      <tr>
 						      	<th>Company</th>

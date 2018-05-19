@@ -85,7 +85,7 @@ class publicProfile extends Component {
 						<div key={profile.id}>
 							
 							<div>
-								<img style={{with:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+								<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 								<p className='job-text'>{profile.name}</p>
 								<p className='job-text'>{profile.email}</p>
 								<h3>About Me</h3>
@@ -98,30 +98,30 @@ class publicProfile extends Component {
 								<h3>My Best Work</h3>
 								
 							</div>
-							<table className="table text-left job-text">
-								    <thead>
-								      <tr>
-								      	<th>Project Name</th>
-								        <th>View Demo</th>
-								        <th>Description</th>
-								      </tr>
-								    </thead>
-								    
+							<div className='projects'>
 						       {this.state.Projects.map((project) => {
 		    		  			return(
-		    		  				<tbody key={project.id}>
+		    		  				<div key={project.id} >
 				    		  		{project.uid === profile.uid ?
-									    <tr className='active' >
-					                      <td className='text-warning'>{project.projectName}</td>
-					                      <td><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </td>
-					                      <td>{project.projectInfo}</td>
-					                    </tr>
+				    		  			<div className='panel-group col-md-3'>
+				    		  			<div className='panel panel-default col-md-12'>
+									    <div className='panel-body col-md-12 job-text text-black'>
+
+					                      <div className='row'><h2 className='text-warning'>{project.projectName}</h2></div>
+					                      <div className='text-center job-text row'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
+					                      <div className='row'><p>{project.projectInfo}</p></div>
+					                      <div className='text-center job-text row'>{project.uid === this.state.authUser.uid ?
+		               						 <button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
+		               					  </div>
+					                    </div>
+					                    </div>
+					                    </div>
 					                :
-					                      null}   
-								    </tbody>
+					                null}   
+								    </div>
 								       );
-					          			})}
-								</table>
+					          		})}
+								</div>
 							
 						</div>
 					);

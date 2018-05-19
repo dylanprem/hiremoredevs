@@ -121,42 +121,49 @@ class editProfile extends Component {
 			<div className='row profile-container'>
 			{this.state.authUser ?
 				<div className='col-md-12 text-center'>
-					{this.state.Profiles.map((profile) => {return(
-					<div>
-					<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
-					<p className='job-text'>{this.state.authUser.displayName}</p>
-					<p className='job-text'>{this.state.authUser.email}</p>
+					{this.state.Profiles.map((profile) => { return (
+					<div key={profile.id}>
+						{profile.uid === this.state.authUser.uid ?
+						<div className='col-md-12'>
+							<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+							<p className='job-text'>{this.state.authUser.displayName}</p>
+							<p className='job-text'>{this.state.authUser.email}</p>
 
-					<div className='form-group col-md-6 col-md-offset-3 job-text'>
-						<label>Full Name</label>
-						<input type='text' name='name' defaultValue={profile.name} ref={(name) => this.name = name} onChange={this.handleChange} className='form-control' placeholder='Your Name' />
-					</div>
+							<div className='form-group col-md-6 col-md-offset-3 job-text'>
+								<label>Full Name</label>
+								<input type='text' name='name' defaultValue={profile.name} ref={(name) => this.name = name} onChange={this.handleChange} className='form-control' placeholder='Your Name' />
+							</div>
 
-					<div className='form-group col-md-6 col-md-offset-3 job-text'>
-						<label>Photo URL</label>
-						<input type='text' name='profilePicture' defaultValue={profile.profilePicture} ref={(profilePicture) => this.profilePicture = profilePicture} onChange={this.handleChange} className='form-control' placeholder='https://pathToPhoto.com' />
-					</div>
-					
-					<div className='form-group col-md-6 col-md-offset-3 job-text'>
-						<h3>About Me</h3>
-						<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} ref={(about) => this.about = about}  defaultValue={profile.about} placeholder='I am awesome!' required />
-					</div>
+							<div className='form-group col-md-6 col-md-offset-3 job-text'>
+								<label>Photo URL</label>
+								<input type='text' name='profilePicture' defaultValue={profile.profilePicture} ref={(profilePicture) => this.profilePicture = profilePicture} onChange={this.handleChange} className='form-control' placeholder='https://pathToPhoto.com' />
+							</div>
+							
+							<div className='form-group col-md-6 col-md-offset-3 job-text'>
+								<h3>About Me</h3>
+								<textarea type='text' className='form-control' rows='5' name='about' onChange={this.handleChange} ref={(about) => this.about = about}  defaultValue={profile.about} placeholder='I am awesome!' required />
+							</div>
 
-					<div className='form-group col-md-6 col-md-offset-3 job-text'>
-						<h3>My top three frameworks</h3>
-						<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} defaultValue={profile.frameworkOne} ref={(frameworkOne) => this.frameworkOne = frameworkOne} placeholder='React' required />
-						<br />
-						<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} defaultValue={profile.frameworkTwo} ref={(frameworkTwo) => this.frameworkTwo = frameworkTwo} placeholder='Javascript' required />
-						<br />
-						<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} defaultValue={profile.frameworkThree} ref={(frameworkThree) => this.frameworkThree = frameworkThree} placeholder='Firebase' required />
-					</div>
-					
-					<div className='col-md-12'>
-						<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
-					</div>
-					<div className='col-md-12'>
-						<button className='btn btn-danger job-text' onClick={this.deleteProfile}>Delete profile</button>
-					</div>
+							<div className='form-group col-md-6 col-md-offset-3 job-text'>
+								<h3>My top three frameworks</h3>
+								<input type='text' className='form-control' name='frameworkOne' onChange={this.handleChange} defaultValue={profile.frameworkOne} ref={(frameworkOne) => this.frameworkOne = frameworkOne} placeholder='React' required />
+								<br />
+								<input type='text' className='form-control' name='frameworkTwo' onChange={this.handleChange} defaultValue={profile.frameworkTwo} ref={(frameworkTwo) => this.frameworkTwo = frameworkTwo} placeholder='Javascript' required />
+								<br />
+								<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} defaultValue={profile.frameworkThree} ref={(frameworkThree) => this.frameworkThree = frameworkThree} placeholder='Firebase' required />
+							</div>
+							
+							<div className='col-md-12'>
+								<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
+							</div>
+							<div className='col-md-12'>
+								<button className='btn btn-danger job-text' onClick={this.deleteProfile}>Delete profile</button>
+							</div>
+						</div>
+						:
+						<div className='col-md-6 col-md-offset-3'>
+							<h1 className='alert alert-danger job-text text-center'>Hey man, why are you trying to edit someone elses profile? That's not cool bro.</h1>
+						</div> }
 					</div>
 					);})}
 				</div>

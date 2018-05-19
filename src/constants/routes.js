@@ -30,7 +30,7 @@ export const VIEW_POSTED_JOBS_BY_USER = '/view-posted-jobs';
 export const NOTIFICATION = '/view-notifications';
 
 
-export const JOBS_OF_INTEREST = '/myJobs';
-export const COLLABS_POSTED = '/myCollabs';
+export const ACCOUNT = '/myAccount';
+
 
 
