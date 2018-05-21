@@ -16,10 +16,38 @@ class Account extends Component {
 		this.state = {
 	    	authUser: null,
 	    	newPassword:'',
-	    	isSignedInWithGoogle: ''   	
+	    	isSignedInWithGoogle: '' ,
+	    	disabledButton: false  	
 		}
 		this.handleChange = this.handleChange.bind(this);
-		this.updatePassword = this.updatePassword.bind(this);	
+		this.updatePassword = this.updatePassword.bind(this);
+		this.deleteProfile = this.deleteProfile.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);	
+	}
+
+	handleInputChange(event) {
+	    const target = event.target;
+	    const value = target.type === 'checkbox' ? target.checked : target.value;
+	    const name = target.name;
+	    this.setState({
+	      [name]: value
+	    });
+	  }
+
+	deleteProfile(){
+		const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
+		profileToDelete.remove()
+		.then(() => {
+			const user = firebase.auth().currentUser;
+			user.delete();
+		})
+		.then(() => {
+			firebase.auth().signOut();
+			this.props.history.push(routes.LANDING);
+		})
+		.then(() => {
+			window.location.reload();
+		})
 	}
 
 	handleChange(e) {
@@ -67,11 +95,24 @@ class Account extends Component {
 							<div className='col-md-4'>
 								<h1 className='job-text'>Update Password</h1>
 								<input type='password' className='form-control' name='newPassword' value={this.state.newPassword} onChange={this.handleChange} />
+								<br />
 								<div className='text-center'>
 									<button className='yellow-button btn job-text' onClick={this.updatePassword}>Update Password</button>
 								</div>
 							</div>
 							 }
+						</div>
+						<div className='col-md-12'>
+							<div className='col-md-4'>
+								<h1 className='job-text'>Delete Account</h1>
+								<div className='checkbox'>
+									<label className='job-text'><input type="checkbox" checked={this.state.disabledButton} onChange={this.handleInputChange} name='disabledButton'  />I want to delete my account</label>
+								</div>
+
+								<div className='col-md-4'>
+									<button className={this.state.disabledButton ? 'btn btn-danger job-text' : 'btn btn-danger job-text disabled'} onClick={this.deleteProfile}>Delete profile</button>
+								</div>
+							</div>
 						</div>
 						<div className='col-md-12'>
 					    	<div className='col-md-6'>

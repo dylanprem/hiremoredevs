@@ -25,7 +25,7 @@ class editProfile extends Component {
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.deleteProfile = this.deleteProfile.bind(this);
+    
 	}
 
 	deleteProfile(){
@@ -156,9 +156,7 @@ class editProfile extends Component {
 							<div className='col-md-12'>
 								<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
 							</div>
-							<div className='col-md-12'>
-								<button className='btn btn-danger job-text' onClick={this.deleteProfile}>Delete profile</button>
-							</div>
+							
 						</div>
 						:
 						<div className='col-md-6 col-md-offset-3'>
