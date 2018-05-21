@@ -28,7 +28,8 @@ class PostJobForm extends Component {
 	    reqThree:'',
 	    authUser:null,
 	    RECRUITER:[],
-	    isRecruiter: false
+	    isRecruiter: false,
+	    hasJobPending: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -103,6 +104,14 @@ componentDidMount(){
       firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
+        firebase.database().ref('JobPostRequests').orderByChild("uid").equalTo(this.state.authUser.uid).once("value", (snapshot) =>{
+        	const data = snapshot.val();
+        	if (data) {
+        		this.setState({hasJobPending: true});
+        	} else {
+        		this.setState({hasJobPending: false});
+        	}
+        });
       } 
     });
 }
@@ -110,9 +119,13 @@ componentDidMount(){
 		return(
 			<div>
 			{this.state.authUser ?
+			<div>
+			{this.state.hasJobPending ? <h1 className='text-center job-text'>You currently have one job post pending. Please wait until it is approved to post another.</h1> :
 			<div className='row job-form'>
 			{this.state.RECRUITER.map((r) => {return(
 			<div className='col-md-6 col-md-offset-3'>
+
+			<div>
 				{r.uid === this.state.authUser.uid ?
 				<div>
 				<h1 className='text-center'>Please fill out this form to post this Job</h1>
@@ -228,9 +241,12 @@ componentDidMount(){
 				</div>
 				:
 				null }
+			</div>
 				{this.state.isRecruiter ? null : <h1 className='text-center job-text'>ONLY REGISTERED RECRUITERS CAN POST JOBS. PLEASE CLICK ON THE RECRUITER REGISTRATION BUTTON TO REGISTER YOUR ACCOUNT AS A RECRUITER</h1> }
 			</div>
 			);})}
+			</div>
+			}
 			</div>
 			:
 			null

@@ -43,26 +43,26 @@ class JobsOfInterest extends Component {
 	    });
 	  });
 
-	  const appliedRef = firebase.database().ref('AppliedJobs');
+	  const appliedRef = firebase.database().ref('postsFromUsers');
 	   appliedRef.once('value', (snapshot) => {
-	    let AppliedJobs = snapshot.val();
+	    let postsFromUsers = snapshot.val();
 	    let newState = [];
-	    for (let a in AppliedJobs) {
+	    for (let a in postsFromUsers) {
 	      newState.push({
 	        id: a,
-	        jobID: AppliedJobs[a].jobID,
-		    uid: AppliedJobs[a].uid,
+	        jobID:postsFromUsers[a].jobID,
+		    uid: postsFromUsers[a].uid,
 	      });
 	    }
 	    this.setState({
-	      AppliedJobs: newState
+	      postsFromUsers: newState
 	    });
 	  });
 
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-	        firebase.database().ref('AppliedJobs').orderByChild('uid').equalTo(this.state.authUser.uid).once('value', (snapshot) => {
+	        firebase.database().ref('postsFromUsers').orderByChild('uid').equalTo(this.state.authUser.uid).once('value', (snapshot) => {
 	        	let data = snapshot.val();
 	        	if (data) {
 	        		this.setState({hasApplied:true});
@@ -95,7 +95,7 @@ class JobsOfInterest extends Component {
 						        <th>View Details</th>
 						      </tr>
 						    </thead>
-						    {this.state.AppliedJobs.map((a) => {return(
+						    {this.state.postsFromUsers.map((a) => {return(
 						    <tbody key={a.id}>
 						    	{this.state.JobPosts.map((post) => {return(
 							    <tr key={post.id}>

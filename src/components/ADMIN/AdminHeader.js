@@ -46,8 +46,12 @@ class AdminHeader extends Component {
 				{this.state.isAdmin ?
 				<div>
 					<Navbar inverse collapseOnSelect>
+					  <Navbar.Toggle />
 					  <Navbar.Collapse>
-					    <AdminButton />
+					  	<Nav>
+					    	<NavItem><Link to={routes.ADMIN_APPROVE_JOB} class='job-text btn btn-info '>JOB POST REQUESTS</Link></NavItem>
+							<NavItem><Link to={routes.RECRUITER_SIGNUP_REQUESTS} class='job-text btn btn-info'>RECRUITER SIGNUP REQUESTS</Link></NavItem>
+					    </Nav>
 					  </Navbar.Collapse>
 					</Navbar>
 				</div>

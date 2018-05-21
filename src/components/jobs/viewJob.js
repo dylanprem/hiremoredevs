@@ -25,7 +25,7 @@ class ViewJob extends Component{
 	    	name:'',
 	    	email:'',
 		    position: '',
-		    state: '',
+		    State: '',
 		    zip:'',
 		    city: '',
 		    relocate: '',
@@ -34,24 +34,18 @@ class ViewJob extends Component{
 	    	linkedin:'',
 	    	isInterested: false,
 	    	authUser: null,
-	    	appliedJobKey:''
 
 		}
 		this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
     	
 	}
-	  removeItem(postId) {
-	  	const rootRef = firebase.database().ref();
-	    const postRef = firebase.database().ref('JobPosts/' + this.state.currentJob + `/postsFromUsers/${postId}`);
-	    const appliedRefDeletionRef = firebase.database().ref('AppliedJobs/'+this.state.appliedJobKey);
-	    postRef.remove();
-	    appliedRefDeletionRef.remove();
-	    window.location.reload();
-	  }
 
-
-	 
+	removeItem(id){
+	 	const refToRemove = firebase.database().ref(`postsFromUsers/${id}`);
+	 	refToRemove.remove();
+	 	window.location.reload();
+	 }
 
 
 	 handleChange(e) {
@@ -61,13 +55,14 @@ class ViewJob extends Component{
 	  }
 
 	  handleSubmit(e) {
-		  const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers/');
+		  const JobPostsCandidatesRef = firebase.database().ref('postsFromUsers');
 		  const postsFromUsers = { 
 		  	uid: this.state.authUser.uid,
 		    position: this.state.position,
-		    state: this.state.state,
+		    State: this.state.State,
 		    city: this.state.city,
 		    relocate: this.state.relocate,
+		    jobID: this.state.currentJob
 		  }
 
 		  JobPostsCandidatesRef.push(postsFromUsers);
@@ -77,13 +72,6 @@ class ViewJob extends Component{
 		    city: '',
 		    relocate: '',
 		  });
-
-		  const pushRef = firebase.database().ref('AppliedJobs');
-  		  const AppliedJobs = {
-  				jobID: this.state.currentJob,
-  				uid: this.state.authUser.uid,
-  			}
-  		  pushRef.push(AppliedJobs);
 		}
 
 	componentDidMount() {
@@ -114,7 +102,7 @@ class ViewJob extends Component{
 	    });
 	  });
 
-	const JobPostsCandidatesRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' );
+	const JobPostsCandidatesRef = firebase.database().ref('postsFromUsers');
 	JobPostsCandidatesRef.once('value', (snapshot) => {
 		let postsFromUsers = snapshot.val();
 		let newState = [];
@@ -126,12 +114,13 @@ class ViewJob extends Component{
 	        name: postsFromUsers[post].name,
 		    email: postsFromUsers[post].email,
 		    position: postsFromUsers[post].position,
-		    state: postsFromUsers[post].state,
+		    State: postsFromUsers[post].State,
 		    city: postsFromUsers[post].city,
 		    relocate: postsFromUsers[post].relocate,
 		    about: postsFromUsers[post].about,
 		    github: postsFromUsers[post].github,
 		    linkedin: postsFromUsers[post].linkedin,
+		    jobID: postsFromUsers[post].jobID
 	      });
 	    }
 		this.setState({
@@ -162,29 +151,21 @@ class ViewJob extends Component{
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         this.setState({ authUser });
-        firebase.database().ref('JobPosts' + '/' + this.state.currentJob + '/' + 'postsFromUsers' ).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", (snapshot) => {
-		    const userData = snapshot.val();
-		    if (userData){
-		      this.setState({ isInterested:true });
-		    } else {
-		      this.setState({ isInterested:false });
-		 
-			}
+        firebase.database().ref('postsFromUsers' ).orderByChild("jobID").equalTo(this.state.currentJob).once("value", (snapshot) => {
+		    snapshot.forEach((childSnapshot) => {
+		    	if (childSnapshot.child("uid").val() === this.state.authUser.uid){
+		    		this.setState({isInterested: true});
+		    	} else {
+		    		this.setState({isInterested:false});
+		    	}
+		    });
 		});
-
-		firebase.database().ref('AppliedJobs')	
-		.once("value", (snapshot) => {
-			    snapshot.forEach((childSnapshot) => {
-			    	let childData = childSnapshot.val();
-			    	if (childSnapshot.child("uid").val() === this.state.authUser.uid && childSnapshot.child("jobID").val() === this.state.currentJob) {
-			    		this.setState({appliedJobKey:childSnapshot.key});
-			    	}
-			    	});
-			});
 	    }
 	});
 
 	}
+
+
 
 
 
@@ -249,7 +230,7 @@ class ViewJob extends Component{
 							<div className='form-group'>
 								<label>I'm located in:</label>
 								<p>State</p>
-								<select required className='form-control' name='state' onChange={this.handleChange} value={this.state.state}>
+								<select required className='form-control' name='State' onChange={this.handleChange} value={this.state.State}>
 									<option value="" disabled selected>Select an option</option>
 									<option value="AL">Alabama</option>
 									<option value="AK">Alaska</option>
@@ -349,7 +330,7 @@ class ViewJob extends Component{
 											{this.state.Profiles.map((profile) => {
 											return(
 												<div key={profile.id} className='hidden-xs'>
-												{post.uid === profile.uid ? 
+												{post.uid === profile.uid && post.jobID === this.state.currentJob  ? 
 												<img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 												:
 												null}
@@ -361,7 +342,7 @@ class ViewJob extends Component{
 											{this.state.Profiles.map((profile) => {
 											return(
 												<div key={profile.id}>
-												{post.uid === profile.uid ? 
+												{post.uid === profile.uid && post.jobID === this.state.currentJob ? 
 												<p>{profile.name}</p>
 												:
 												null}
@@ -373,7 +354,7 @@ class ViewJob extends Component{
 											{this.state.Profiles.map((profile) => {
 											return(
 												<div key={profile.id}>
-												{post.uid === profile.uid ? 
+												{post.uid === profile.uid && post.jobID === this.state.currentJob ? 
 												<strong className='text-primary'>{profile.email}</strong>
 												:
 												null}
@@ -381,14 +362,14 @@ class ViewJob extends Component{
 												);
 											})}
 											</td>
-											<td className='hidden-xs'>{post.position}</td>
-											<td className='hidden-xs'>{post.city}, {post.state}</td>
-											<td className='hidden-xs'>{post.relocate}</td>
+											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.position}</p> : null}</td>
+											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.city}, {post.State}</p> : null}</td>
+											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.relocate}</p> : null}</td>
 											<td>
 					                      {this.state.Profiles.map((profile) => {
 					                      	return(
 					                      		<div key={profile.id}>
-					                      		{post.uid === profile.uid ?
+					                      		{post.uid === profile.uid && post.jobID === this.state.currentJob ?
 					                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}>View</Link>
 					                      		:
 					                      		null
@@ -398,9 +379,9 @@ class ViewJob extends Component{
 					                      	);
 					                      })}
 					                      </td>
-									      <td>{post.uid === this.state.authUser.uid ?
+									      <td>{post.uid === this.state.authUser.uid && post.jobID === this.state.currentJob ?
 		               						 <button type='submit' className="btn btn-danger btn-sm hidden-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span> DELETE&nbsp;</button> : null}
-		               						 {post.uid === this.state.authUser.uid ?
+		               						 {post.uid === this.state.authUser.uid && post.jobID === this.state.currentJob ?
 		               						 <button type='submit' className="btn btn-danger btn-sm visible-xs" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span></button> : null}
 		               					  </td>
 					                    </tr>

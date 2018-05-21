@@ -90,7 +90,7 @@ class RECRUITERPostedJobs extends Component {
 				{this.state.isRecruiter ?
 				<div>
 					{this.state.hasPosts ?
-					<div>
+					<div className='col-md-10 col-md-offset-1'>
 						<h1 className="text-center job-text">JOBS POSTED BY YOU</h1>
 						<table className="table jobs-table">
 							    <thead>
@@ -100,6 +100,7 @@ class RECRUITERPostedJobs extends Component {
 							        <th>State</th>
 							        <th>Zip</th>
 							        <th>View Details</th>
+							        <th>&nbsp;</th>
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -111,7 +112,7 @@ class RECRUITERPostedJobs extends Component {
 				                      <td>{post.uid === this.state.authUser.uid ? post.State : null}</td>
 				                      <td>{post.uid === this.state.authUser.uid ? post.zip : null}</td> 
 				                      <td>{post.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td> 
-			                      	  <td>{post.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> : null}</td>
+			                      	  <td className='text-right'>{post.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> : null}</td>
 				                    </tr>
 					                    );
 				          			})}

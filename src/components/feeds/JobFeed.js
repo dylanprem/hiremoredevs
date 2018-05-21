@@ -238,6 +238,7 @@ class JobFeed extends Component {
 				        <th>State</th>
 				        <th>Zip</th>
 				        <th>View Details</th>
+				        <th>&nbsp;</th>
 				      </tr>
 				    </thead>
 				    <tbody>
@@ -252,9 +253,9 @@ class JobFeed extends Component {
 	                      
 	                      {this.state.ADMIN.map((admins) => {
 	                      	return(
-	                      		<td key={admins.id}>
+	                      		<td key={admins.id} className='pull-right'>
 		                  		{this.state.authUser.uid === admins.uid ?
-						 			<button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> 
+						 			<button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</button> 
 						 		: null}
 							  	</td> 
 	                      	);
