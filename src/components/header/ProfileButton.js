@@ -54,12 +54,14 @@ class ProfileButtonToggle extends Component {
 				  displayName: "user" + Date.now(),
 				  photoURL: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
 				});
+
 		    	const profilesRef = firebase.database().ref('Profiles');
 				const Profiles  = {
 					uid: this.state.authUser.uid,
 					name: "user" + Date.now(),
 					profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
-					email: this.state.authUser.email
+					email: this.state.authUser.email,
+ 
 				}
 				profilesRef.push(Profiles);
 				window.location.reload();

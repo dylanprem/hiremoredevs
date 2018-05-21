@@ -15,7 +15,8 @@ class Account extends Component {
 		super(props);
 		this.state = {
 	    	authUser: null,
-	    	newPassword:''	    	
+	    	newPassword:'',
+	    	isSignedInWithGoogle: ''   	
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.updatePassword = this.updatePassword.bind(this);	
@@ -31,7 +32,6 @@ class Account extends Component {
 		const newPassword = this.state.newPassword;
 		auth.currentUser.updatePassword(newPassword).then(function(){
 			window.location.reload();
-			alert('updated');
 		}).catch(error => {
         this.setState(byPropKey('error', error));
     	});
@@ -42,7 +42,12 @@ class Account extends Component {
 	   firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
-			} 
+		        if(this.state.authUser.providerData[0].providerId === 'google.com'){
+		        	this.setState({isSignedInWithGoogle: true});
+		        } else {
+		        	this.setState({isSignedInWithGoogle:false});
+		        }
+	    	}
     	});
 
 	}
@@ -58,13 +63,15 @@ class Account extends Component {
 							<div className='col-md-12 text-center text-black'>
 					          { this.state.error && <p className='text-danger job-text'>{this.state.error.message}</p> }
 					        </div>
+					        {this.state.isSignedInWithGoogle ? null :
 							<div className='col-md-4'>
 								<h1 className='job-text'>Update Password</h1>
 								<input type='password' className='form-control' name='newPassword' value={this.state.newPassword} onChange={this.handleChange} />
 								<div className='text-center'>
-									<button className='yellow-button btn job-text' onSubmit={this.updatePassword}>Update Password</button>
+									<button className='yellow-button btn job-text' onClick={this.updatePassword}>Update Password</button>
 								</div>
 							</div>
+							 }
 						</div>
 						<div className='col-md-12'>
 					    	<div className='col-md-6'>
