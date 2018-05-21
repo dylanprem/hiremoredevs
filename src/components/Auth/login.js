@@ -135,6 +135,9 @@ class SignInForm extends Component {
             </div>
             
           </div>
+          <div className='text-center'>
+            <Link to={routes.FORGOT_PW} className='signup-link job-text'>Forgot Password</Link>
+          </div>
         </div>
         <div className='col-md-4 col-md-offset-2 login'>
           <div className='panel-group'>

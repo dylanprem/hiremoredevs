@@ -1,5 +1,6 @@
 export const REGISTER = '/register';
 export const SIGN_IN = '/login';
+export const FORGOT_PW = '/forgotPassword';
 export const LANDING = '/';
 export const CURRENT_FEED = '/latest';
 export const PASSWORD_CHANGE = '/pw-change';

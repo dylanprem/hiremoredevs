@@ -59,7 +59,7 @@ class Account extends Component {
 	updatePassword(){
 		const newPassword = this.state.newPassword;
 		auth.currentUser.updatePassword(newPassword).then(function(){
-			window.location.reload();
+			document.getElementById("success-msg").innerHTML = "Password successfully updated!"
 		}).catch(error => {
         this.setState(byPropKey('error', error));
     	});
@@ -88,9 +88,6 @@ class Account extends Component {
 				{this.state.authUser ?
 					<div>
 						<div className='col-md-12'>
-							<div className='col-md-12 text-center text-black'>
-					          { this.state.error && <p className='text-danger job-text'>{this.state.error.message}</p> }
-					        </div>
 					        {this.state.isSignedInWithGoogle ? null :
 							<div className='col-md-4'>
 								<h1 className='job-text'>Update Password</h1>
@@ -99,6 +96,10 @@ class Account extends Component {
 								<div className='text-center'>
 									<button className='yellow-button btn job-text' onClick={this.updatePassword}>Update Password</button>
 								</div>
+								<div className='col-md-12 text-center'>
+						          { this.state.error && <p className='text-danger job-text'>{this.state.error.message}</p> }
+						          <p id="success-msg" className='job-text'></p>
+						        </div>
 							</div>
 							 }
 						</div>
