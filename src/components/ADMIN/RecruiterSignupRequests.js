@@ -93,15 +93,16 @@ class RecruiterSignupRequests extends Component {
 			<div>
 				<div className="col-md-12 jobs-container" >
 					{this.state.isAdmin ? 
-						<div>
+						<div className='col-md-10 col-md-offset-1'>
 							<h1 className="text-center job-text">RECRUITER REGISTRATION REQUESTS</h1>
 							<table class='table job-text'>
 								<thead>
 									<tr>
-										<th></th>
+										<th>&nbsp;</th>
 										<th>Name</th>
 										<th>Info</th>
 										<th>LinkedIn</th>
+										<td>Deny Request</td>
 									</tr>
 								</thead>
 								
@@ -145,7 +146,7 @@ class RecruiterSignupRequests extends Component {
 										);})}
 										</td>
 										
-										<td><button className='btn btn-danger job-text btn-block' onClick={() => this.removeItem(req.id)}>Deny</button></td>
+										<td><button className='btn btn-danger job-text btn-sm' onClick={() => this.removeItem(req.id)}><span className='glyphicon glyphicon-remove'></span> Deny</button></td>
 									</tr>
 										);
 									})}

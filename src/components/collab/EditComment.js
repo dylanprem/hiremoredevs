@@ -16,7 +16,8 @@ class EditComment extends Component {
 			Profiles:[],
 			commentBody:'',
 			time:'',
-			currentComment: this.props.match.params.currentComment
+			currentComment: this.props.match.params.currentComment,
+			isOwnComment: false
 	}
 
 	this.handleChange = this.handleChange.bind(this);
@@ -58,6 +59,7 @@ class EditComment extends Component {
 			newState.push({
 				id: this.state.currentComment,
 				commentBody: snapshot.val().commentBody,
+				uid: snapshot.val().uid
 			});
 			
 			this.setState({
@@ -103,25 +105,42 @@ class EditComment extends Component {
 								<tr>
 									<td>
 										<div className='col-md-4 col-md-offset-4 text-center job-text'>
+											
 											<div>
-											{this.state.Comments.map((comment) => {
-												return(
-												<div key={comment.id}>
-													<h1 className='job-text text-center'>Edit Your Comment</h1>
-													{comment.id === this.state.currentComment ?
-													<textarea className='comment form-control' name='commentBody' defaultValue={comment.commentBody} ref={(commentBody) => this.commentBody = commentBody} onChange={this.handleChange}></textarea>
-													:
-													null
-													}
+												<div>
+												{this.state.Comments.map((comment) => {
+													return(
+													<div key={comment.id}>
+														<div>
+														{comment.uid === this.state.authUser.uid ?
+														<div>
+														<h1 className='job-text text-center'>Edit Your Comment</h1>
+														{comment.id === this.state.currentComment ?
+														<textarea className='comment form-control' name='commentBody' defaultValue={comment.commentBody} ref={(commentBody) => this.commentBody = commentBody} onChange={this.handleChange}></textarea>
+														:
+														null
+														}
+														</div> 
+														: 
+														<div><h1 className='job-text alert alert-danger'>Why are you trying to edit someone elses comment man? That's not cool bro.</h1></div>
+														}
+														</div>
+														{comment.uid === this.state.authUser.uid ?
+														<div className='text-center row'>
+															<div className='btn-group'>
+																<button className='btn btn-success job-text ' onClick={this.saveComment}><span className='glyphicon glyphicon-pencil'></span>  SAVE</button>
+																<Link to={"/view-collab/" + this.state.currentCollab} className='btn btn-danger job-text '><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
+															</div>
+														</div>
+														:
+														null}
+													</div>
+													);})}
 												</div>
-												);})}
+												
 											</div>
-											<div className='text-center row'>
-												<div className='btn-group'>
-													<button className='btn btn-success job-text ' onClick={this.saveComment}><span className='glyphicon glyphicon-pencil'></span>  SAVE</button>
-													<Link to={"/view-collab/" + this.state.currentCollab} className='btn btn-danger job-text '><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
-												</div>
-											</div>
+											
+											
 										</div>
 									</td>
 								</tr>

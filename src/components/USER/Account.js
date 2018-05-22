@@ -111,7 +111,7 @@ class Account extends Component {
 								</div>
 
 								<div className='col-md-4'>
-									<button className={this.state.disabledButton ? 'btn btn-danger job-text' : 'btn btn-danger job-text disabled'} onClick={this.deleteProfile}>Delete profile</button>
+									<button className={this.state.disabledButton ? 'btn btn-danger job-text' : 'btn btn-danger job-text disabled'} onClick={this.deleteProfile}>Delete Account</button>
 								</div>
 							</div>
 						</div>

@@ -75,7 +75,7 @@ class ApproveJob extends Component {
 			{this.state.authUser ? 
 			<div className='col-md-12 jobs-container'>
 				{this.state.isAdmin ?
-				<div>
+				<div className='col-md-10 col-md-offset-1'>
 					<h1 className="text-center job-text">JOB POST REQUESTS</h1>
 					<table className="table jobs-table">
 					    <thead>
@@ -85,6 +85,7 @@ class ApproveJob extends Component {
 					        <th>State</th>
 					        <th>Zip</th>
 					        <th>View Details</th>
+					        <th>&nbsp;</th>
 					      </tr>
 					    </thead>
 					    <tbody>
@@ -96,9 +97,7 @@ class ApproveJob extends Component {
 		                      <td>{post.state}</td>
 		                      <td>{post.zip}</td>
 		                      <td><Link className='btn black-button btn-sm' to={`admin-view-job/${post.id}`}>View Details</Link></td>
-		                      <td><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button></td>
-		                      
-		                      			          
+		                      <td className='text-right'><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span> Delete</button></td> 			          
 		                    </tr>
 		                    );
 		                 })}       

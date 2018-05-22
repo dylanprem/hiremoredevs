@@ -60,9 +60,19 @@ class CollabList extends Component {
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
+	         firebase.database().ref("ADMIN").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", snapshot => {
+				const userDataAlt = snapshot.val();
+				    if (userDataAlt) {
+						this.setState({isAdmin:true});
+				    } else {
+				    	this.setState({isAdmin:false});
+				    }
+				});
 	      } 
     	});
 	}
+
+
 
 	render(){
 		return(
@@ -94,7 +104,7 @@ class CollabList extends Component {
 								
 								<p>{collab.time}</p>
 								<p><Link className='btn yellow-button' to={`/view-collab/${collab.id}`}>View</Link></p>
-								<p>{collab.uid === this.state.authUser.uid ?
+								<p>{collab.uid === this.state.authUser.uid || this.state.isAdmin ?
 									<button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button>
 									:
 									null
