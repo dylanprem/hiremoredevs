@@ -7,12 +7,13 @@ import './style.css';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
-import ProfileButtonToggle from './ProfileButton';
+
 
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
 import RECRUITERManageJobsButton from '../RECRUITER/RECRUITERManageJobsButton';
 import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
 import LogoutButton from '../Auth/Logout';
+import AccountButton from './AccountButton';
 
 
 class Header extends Component {
@@ -39,7 +40,7 @@ class Header extends Component {
 			  <Navbar.Header>
 
 			    <Navbar.Brand>
-			      <Link to="/" className="navbar-brand logo">HireMoreDevs</Link>
+			      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
 			    </Navbar.Brand>
 			    <Navbar.Toggle />
 			  </Navbar.Header>
@@ -64,11 +65,9 @@ class Header extends Component {
 			    </Nav>
 			    <Nav>
 			    	<NavItem>
-			    		<Link to={routes.ACCOUNT} className='btn job-text yellow-button'><span className='glyphicon glyphicon-stats'></span> &nbsp;&nbsp; Account</Link>
+			    		<AccountButton />
 			    	</NavItem>
-			    	<NavItem>
-			    		<ProfileButtonToggle />
-			    	</NavItem>
+			    	
 			    </Nav>
 			    
 			    <LoggedInAs />

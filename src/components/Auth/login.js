@@ -26,7 +26,9 @@ class SignInForm extends Component {
       regEmail:'',
       regPassword:'',
       profilePicture:'',
-      error: null
+      error: null,
+      profileCreated: false,
+      hasProfile: false
     }
     this.loginWithEmailAndPassword = this.loginWithEmailAndPassword.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this); 
@@ -79,12 +81,9 @@ class SignInForm extends Component {
           const token = result.credential.accessToken;
           const authUser = result.authUser;
           this.setState({ authUser });
-      })  
+      })
       .catch(error => {
           this.setState(byPropKey('error', error));
-      })
-      .then(() => {
-          this.props.history.push(routes.CURRENT_FEED);
       });
     }
 
@@ -92,10 +91,35 @@ class SignInForm extends Component {
       firebase.auth().onAuthStateChanged((authUser) => {
         if (authUser) {
           this.setState({ authUser });
+          firebase.database().ref('Profiles').orderByChild('uid').equalTo(this.state.authUser.uid).once("value", (snapshot) => {
+            let data = snapshot.val();
+            if (data) {
+              this.setState({hasProfile:true});
+              this.props.history.push(routes.CURRENT_FEED);
+            } else {
+              firebase.auth().currentUser.updateProfile({
+                displayName: "user" + Date.now(),
+                photoURL: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png"
+              });
+              const profilesRef = firebase.database().ref('Profiles');
+              const Profiles  = {
+                uid: this.state.authUser.uid,
+                name: "user" + Date.now(),
+                profilePicture: "https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-256.png",
+                email: this.state.authUser.email,
+       
+              }
+              profilesRef.push(Profiles);
+              this.setState({profileCreated:true});
+              window.location.reload();
+            }
+          });
+          if (this.state.profileCreated) {
+            this.props.history.push(routes.CURRENT_FEED);
+          }
         } 
       });
     }
-
 
 
 

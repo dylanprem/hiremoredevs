@@ -14,10 +14,12 @@ class AddProject extends Component{
 			projectName:'',
 			projectLink:'',
 			projectInfo:'',
-			Projects:[]
+			Projects:[],
+			showForm: false
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showFormOnClick = this.showFormOnClick.bind(this);
 	}
 
 
@@ -26,6 +28,10 @@ class AddProject extends Component{
 	    this.setState({
 	    	[e.target.name]: e.target.value
 	    });
+	}
+
+	showFormOnClick(){
+		this.setState({showForm:true});
 	}
 
 
@@ -43,6 +49,7 @@ class AddProject extends Component{
 			projectLink:'',
 			projectInfo:'',
 	  });
+	  this.setState({showForm: false});
 	  window.location.reload();
 	  
 	}
@@ -60,19 +67,25 @@ class AddProject extends Component{
 			<div className='row'>
 				{this.state.authUser ?
 				<div className='col-md-4 col-md-offset-4 text-center'>
-					<h3>Add a project</h3>
+					{this.state.showForm ?
 					<div className='job-text'>
+						<h3>Add a project</h3>
 						<input type='text' className='form-control' placeholder='Project Name' name='projectName' onChange={this.handleChange} value={this.state.projectName} />
 						<br />
 						<input type='text' className='form-control' placeholder='e.g. http://myapp.com' name='projectLink' onChange={this.handleChange} value={this.state.projectLink} />
 						<br />
-						<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} value={this.state.projectInfo} />
+						<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} value={this.state.projectInfo} maxlength="60" />
 						<br />
 
 						<div className='col-md-12'>
 							<button className='btn yellow-button' onClick={this.handleSubmit}>Add Project</button>
 						</div>
 					</div>
+					:
+					<div className='jobs-container'>
+					<button className='btn yellow-button job-text margins' onClick={this.showFormOnClick}>Add a project</button>
+					</div>
+					}
 				</div>
 				:
 				null

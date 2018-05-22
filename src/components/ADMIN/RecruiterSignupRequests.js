@@ -102,7 +102,7 @@ class RecruiterSignupRequests extends Component {
 										<th>Name</th>
 										<th>Info</th>
 										<th>LinkedIn</th>
-										<td>Deny Request</td>
+										<th>Deny Request</th>
 									</tr>
 								</thead>
 								

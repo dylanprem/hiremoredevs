@@ -8,9 +8,6 @@ import JobFeed from './feeds/JobFeed';
 import PostJobForm from './jobs/PostJob';
 import viewJob from './jobs/viewJob';
 import Landing from './Landing/landing';
-import viewProfile from './profile/viewProfile';
-import createProfile from './profile/createProfile';
-import editProfile from './profile/editProfile';
 import publicProfile from './profile/publicProfile';
 import CollabCorner from './collab/CollabCorner';
 import AddCollab from './collab/AddCollab';
@@ -48,9 +45,6 @@ const App = () =>
       <Route exact path={routes.CURRENT_FEED} component={JobFeed} />
       <Route exact path={routes.POST_JOB} component={PostJobForm} />
       <Route exact path="/job/:viewJob" component={viewJob} />
-      <Route exact path="/profile/:viewProfile" component={viewProfile} />
-      <Route exact path={routes.CREATE_PROFILE} component={createProfile} />
-      <Route exact path="/edit/:editProfile" component={editProfile} />
       <Route exact path="/user/:userProfile" component={publicProfile} />
       <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />

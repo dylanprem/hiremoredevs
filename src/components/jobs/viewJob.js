@@ -303,7 +303,7 @@ class ViewJob extends Component{
 					}
 				</div>
 	
-				<div className='row'>
+				<div className='col-md-12'>
 					<div className='col-md-12 col-sm-12 col-xs-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>
 						<div className='table-responsive'>

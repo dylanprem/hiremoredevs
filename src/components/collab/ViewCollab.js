@@ -77,7 +77,11 @@ class ViewCollab extends Component {
 				description: snapshot.val().description,
 				name: snapshot.val().name,
 				time: snapshot.val().time,
-				uid: snapshot.val().uid
+				uid: snapshot.val().uid,
+				frameworkOne: snapshot.val().frameworkOne,
+				frameworkTwo: snapshot.val().frameworkTwo,
+				frameworkThree: snapshot.val().frameworkThree,
+				lookingFor: snapshot.val().lookingFor,
 			});
 			
 			this.setState({
@@ -134,12 +138,13 @@ class ViewCollab extends Component {
 			{this.state.authUser ?
 			<div>
 				<div className='col-md-12'>
+					<div className='col-md-4 col-sm-4 col-xs-12'>
 					{this.state.Collabs.map((collab) => {
 						return(
 						<div key={collab.id}>
 							{this.state.Profiles.map((profile) => {
 		                      	return(
-		                      		<div key={profile.id}>
+		                      		<div key={profile.id} className='col-md-12'>
 		                      		{collab.uid === profile.uid ?
 		                      		<div className='job-text text-center'>
 		                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle profile-pic' style={{width:80, height:80}} /></Link>
@@ -155,10 +160,36 @@ class ViewCollab extends Component {
 							<h1 className='text-center'>Idea:</h1>
 							<h1 className='job-text text-center'>{collab.title}</h1>
 							<h1 className='text-center'>Description:</h1>
-							<h3 className='text-center job-text'>{collab.description}</h3>
+							<div className='row'>
+								<div className='col-md-12'><p className='text-center job-text description'>{collab.description}</p></div>
+							</div>
 						</div>
 						);
 					})}
+					</div>
+					<div className='col-md-4 col-sm-4 col-xs-12'>
+					{this.state.Collabs.map((collab) => {
+						return(
+						<div key={collab.id}>
+							<h1 className='text-center'>Frameworks:</h1>
+							<h1 className='job-text text-center'>{collab.frameworkOne}</h1>
+							<h1 className='job-text text-center'>{collab.frameworkTwo}</h1>
+							<h1 className='job-text text-center'>{collab.frameworkThree}</h1>
+							
+						</div>
+						);
+					})}
+					</div>
+					<div className = 'col-md-4'>
+					{this.state.Collabs.map((collab) => {
+						return(
+						<div key={collab.id}>
+							<h1 className='text-center'>Looking For:</h1>
+							<h3 className='job-text text-center'>{collab.lookingFor}</h3>
+						</div>
+						);
+					})}
+					</div>
 				</div>
 				<div className='col-md-4 col-md-offset-4 profile-container'>
 					<label className='job-text'>Leave a comment</label>

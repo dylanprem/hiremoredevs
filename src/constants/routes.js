@@ -7,10 +7,10 @@ export const PASSWORD_CHANGE = '/pw-change';
 export const PASSWORD_FORGET = '/pw-forget';
 export const POST_JOB = '/post-job';
 export const VIEW_JOB = '/latest/:viewJob';
-export const VIEW_PROFILE = '/profile/:viewProfile';
+
 export const EDIT_PROFILE = '/edit/:editProfile';
 export const EDIT_BASIC_INFO = '/edit-info/:editInfo';
-export const CREATE_PROFILE = '/create-profile';
+
 export const VIEW_PUBLIC_PROFILE = '/user/:userProfile';
 export const ADD_PROJECT = '/add-project';
 export const COLLAB_CORNER = '/collab-corner';
@@ -31,7 +31,7 @@ export const VIEW_POSTED_JOBS_BY_USER = '/view-posted-jobs';
 export const NOTIFICATION = '/view-notifications';
 
 
-export const ACCOUNT = '/myAccount';
+export const ACCOUNT = '/myAccount/:profileId';
 
 
 

@@ -123,9 +123,9 @@ componentDidMount(){
 			{this.state.hasJobPending ? <h1 className='text-center job-text'>You currently have one job post pending. Please wait until it is approved to post another.</h1> :
 			<div className='row job-form'>
 			{this.state.RECRUITER.map((r) => {return(
-			<div className='col-md-6 col-md-offset-3'>
+			<div className='col-md-6 col-md-offset-3 col-sm-12 col-xs-12'>
 
-			<div>
+			<div className='col-md-12'>
 				{r.uid === this.state.authUser.uid ?
 				<div>
 				<h1 className='text-center'>Please fill out this form to post this Job</h1>

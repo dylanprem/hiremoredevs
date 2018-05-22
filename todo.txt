@@ -1,6 +1,4 @@
 IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
-
-create I want to collab functionalitly same as expressing interest 
 create a flag post option
 forgot and reset password option
 
@@ -8,8 +6,21 @@ forgot and reset password option
 recruiters can sort by state or other fields on a job post from postsfromusers
 
 
-TRACK COLLABS
+edit collabs
+edit projects
+posted by area for each job detail page to highlight recruiter
+redirect after email/pw login
+hide paths
 
-MAKE ALL ADMIN STUFF ONE PAGE
-MAKE ALL ACCOUNT STUFF ONE PAGE
+When an account is deleted,
+delete profile
+delete collabs
+delete comments
+delete jobinterests
+jobPosts
+jobpostrequests
+projects
+recruiter
+basically all refs
 
+email verification
