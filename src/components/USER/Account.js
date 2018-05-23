@@ -32,7 +32,8 @@ class Account extends Component {
 			authUsersUID:'',
 			Collabs:[],
 			postsFromUsers:[],
-			Profiles:[]
+			Profiles:[],
+			dataDeleted: false
 	    	
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -89,7 +90,6 @@ class Account extends Component {
 	  }
 
 	deleteProfile(){
-		
 		const rootRef1 = firebase.database().ref('Collabs');
 		const collabsToDelete = firebase.database().ref('Collabs').orderByChild("uid").equalTo(this.state.authUsersUID);
 		collabsToDelete.once("value", (snapshot) =>{
@@ -99,19 +99,15 @@ class Account extends Component {
 			});
 			rootRef1.update(updates);
 		});
-		const commentsToDelete = firebase.database().ref('Collabs');
+		const rootRef = firebase.database().ref('Comments');
+		const commentsToDelete = firebase.database().ref('Comments').orderByChild("uid").equalTo(this.state.authUsersUID);
 		commentsToDelete.once("value", (snapshot) => {
-		const updates = {};
-		snapshot.forEach((childSnapshot) => {
-				childSnapshot.child("comments").child("uid").forEach((grandChildSnapshot) => {
-					updates[grandChildSnapshot.key] = null;
-				});
-				rootRef1.update(updates);
+			const updates = {};
+			snapshot.forEach((childSnapshot) => {
+				updates[childSnapshot.key] = null;
 			});
+			rootRef.update(updates);
 		});
-			
-
-
 		const rootRef2 = firebase.database().ref('postsFromUsers');
 		const postsToDelete = firebase.database().ref('postsFromUsers').orderByChild("uid").equalTo(this.state.authUsersUID);
 		postsToDelete.once("value", (snapshot) =>{
@@ -157,10 +153,9 @@ class Account extends Component {
 			});
 			rootRef6.update(updates);
 		})
-		.then(() => {
-			const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
-			profileToDelete.remove()
-		})
+		
+		const profileToDelete = firebase.database().ref('Profiles/' + this.state.currentProfile);
+		profileToDelete.remove()
 		.then(() => {
 			const user = firebase.auth().currentUser;
 			user.delete();

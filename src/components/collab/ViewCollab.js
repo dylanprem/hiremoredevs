@@ -16,8 +16,7 @@ class ViewCollab extends Component {
 			Profiles:[],
 			commentBody:'',
 			time:'',
-			isEditing: false,
-			editedcommentBody:'',
+			hasComments: false
 	}
 
 	this.handleChange = this.handleChange.bind(this);
@@ -30,7 +29,7 @@ class ViewCollab extends Component {
 
 
 	removeComment(commentId) {
-	    const commentsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + `/Comments/${commentId}`);
+	    const commentsRef = firebase.database().ref(`Comments/${commentId}`);
 	    commentsRef.remove();
 	    window.location.reload();
 	}
@@ -42,26 +41,18 @@ class ViewCollab extends Component {
 	}
 
 	handleSubmit(e) {
-	  const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments');
-	  const Collabs = {
+	  const commentsRef = firebase.database().ref('Comments');
+	  const Comments = {
 	  		uid: this.state.authUser.uid,
 			commentBody: this.state.commentBody,
-			time: new Date().toLocaleString()
-
+			time: new Date().toLocaleString(),
+			collabId: this.state.currentCollab
 	}
-
-	collabsRef.push(Collabs);
-	  this.setState({
+	commentsRef.push(Comments);
+	    this.setState({
 			commentBody:'',
 			time:'',
-	  });
-
-	const NotificationRef = firebase.database().ref('CollabNotifications');
-	const CollabNotifications = {
-		uid: this.state.authUser.uid,
-		post: this.state.currentCollab
-	}
-
+	    });
 	window.location.reload();
 }
 
@@ -89,7 +80,7 @@ class ViewCollab extends Component {
 			});
 		});
 
-		const commentsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments');
+		const commentsRef = firebase.database().ref('Comments');
 		commentsRef.once('value', (snapshot) => {
 			let Comments = snapshot.val();
 			let newState = [];
@@ -99,6 +90,7 @@ class ViewCollab extends Component {
 				uid: Comments[comment].uid,
 				commentBody: Comments[comment].commentBody,
 				time: Comments[comment].time,
+				collabId: Comments[comment].collabId
 			});
 			}
 			this.setState({
@@ -128,6 +120,14 @@ class ViewCollab extends Component {
 		firebase.auth().onAuthStateChanged((authUser) => {
 	      if (authUser) {
 	        this.setState({ authUser });
+	        firebase.database().ref('Comments').orderByChild('collabId').equalTo(this.state.currentCollab).once('value', (snapshot) => {
+	        	let commentData = snapshot.val();
+	        	if (commentData) {
+	        		this.setState({hasComments: true});
+	        	} else {
+	        		this.setState({hasComments:false});
+	        	}
+	        });
 	      } 
     	});
 	}
@@ -138,7 +138,7 @@ class ViewCollab extends Component {
 			{this.state.authUser ?
 			<div>
 				<div className='col-md-12'>
-					<div className='col-md-4 col-sm-4 col-xs-12'>
+					<div className='col-md-3 col-sm-3 col-xs-12'>
 					{this.state.Collabs.map((collab) => {
 						return(
 						<div key={collab.id}>
@@ -157,6 +157,14 @@ class ViewCollab extends Component {
 		                      		</div>
 		                      	);
 		                      })}
+						</div>
+						);
+					})}
+					</div>
+					<div className='col-md-3 col-sm-3 col-xs-12'>
+					{this.state.Collabs.map((collab) => {
+						return(
+						<div key={collab.id}>
 							<h1 className='text-center'>Idea:</h1>
 							<h1 className='job-text text-center'>{collab.title}</h1>
 							<h1 className='text-center'>Description:</h1>
@@ -167,7 +175,7 @@ class ViewCollab extends Component {
 						);
 					})}
 					</div>
-					<div className='col-md-4 col-sm-4 col-xs-12'>
+					<div className='col-md-3 col-sm-3 col-xs-12'>
 					{this.state.Collabs.map((collab) => {
 						return(
 						<div key={collab.id}>
@@ -180,7 +188,7 @@ class ViewCollab extends Component {
 						);
 					})}
 					</div>
-					<div className = 'col-md-4'>
+					<div className='col-md-3 col-sm-3 col-xs-12'>
 					{this.state.Collabs.map((collab) => {
 						return(
 						<div key={collab.id}>
@@ -200,11 +208,14 @@ class ViewCollab extends Component {
 					</div>
 				</div>
 				<div className='row text-center'>
+					{this.state.hasComments ?
 					<div>
 						{this.state.Comments.map((comment) => {
 						return(
 						<div key={comment.id} className='col-md-12'>
+
 							<table className='table'>
+								{comment.collabId === this.state.currentCollab ? 
 								<tbody>
 									<tr>
 										<td>
@@ -212,7 +223,7 @@ class ViewCollab extends Component {
 												{this.state.Profiles.map((profile) => {
 							                      	return(
 							                      		<div key={profile.id} className='col-md-12'>
-							                      		{comment.uid === profile.uid ?
+							                      		{comment.uid === profile.uid && comment.collabId === this.state.currentCollab ?
 							                      		<div>
 							                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='profile-pic center-block img-responsive img-circle' style={{width:40, height:40}} /></Link>
 							                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
@@ -225,7 +236,7 @@ class ViewCollab extends Component {
 							                      	);
 							                      })}
 												
-												<p>{comment.time}</p>
+												{comment.collabId === this.state.currentCollab ? <p>{comment.time}</p> : null}
 											</div>
 											<div className='panel-group col-md-4'>
 												<div className='panel panel-default col-md-12'>
@@ -240,7 +251,7 @@ class ViewCollab extends Component {
 															}
 															
 															{comment.uid === this.state.authUser.uid ? 
-																<Link to={"/edit-comment/" + this.state.currentCollab + '/' + `${comment.id}`} className='btn btn-warning job-text text-black'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
+																<Link to={`/edit-comment/${comment.id}`} className='btn btn-warning job-text text-black'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
 																: 
 																null
 															}
@@ -252,10 +263,16 @@ class ViewCollab extends Component {
 										</td>
 									</tr>
 								</tbody>
+								: null }
 							</table>
 						</div>
 						);})}
 					</div>
+					:
+					<div className='col-md-12 jobs-container'>
+						<h1 className='text-center job-text'>No comments here yet</h1>
+					</div>
+					}
 				</div>
 			</div>
 			:

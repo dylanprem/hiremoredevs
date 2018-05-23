@@ -27,7 +27,7 @@ class EditComment extends Component {
 
 
 	saveComment(e){
-	  const updateRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments/' + this.state.currentComment);
+	  const updateRef = firebase.database().ref('Comments/' + this.state.currentComment);
 	  const Collabs = {
   		commentBody: this.commentBody.value,
 		time: new Date().toLocaleString()
@@ -51,7 +51,7 @@ class EditComment extends Component {
 
 
 	componentDidMount(){
-		const commentsRef = firebase.database().ref('Collabs/' + this.state.currentCollab + '/Comments/' + this.state.currentComment);
+		const commentsRef = firebase.database().ref('Comments/' + this.state.currentComment);
 		commentsRef.once('value', (snapshot) => {
 			let Comments = snapshot.val();
 			let newState = [];

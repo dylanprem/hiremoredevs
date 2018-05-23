@@ -187,7 +187,7 @@ class ViewJobADMIN extends Component{
 							         );
 				        		})}		        	       
 						</div>
-					: <h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1> }
+					: <div className='col-md-4 col-md-offset-4 text-center'><h1 className="job-text alert alert-danger">OOPS! YOU DO NOT HAVE ACCESS TO THIS PAGE.</h1></div> }
 				</div>  	
 				</div>
 				:
