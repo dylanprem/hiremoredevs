@@ -19,6 +19,7 @@ class ViewJob extends Component{
 			postsFromUsers:[],
 			Profiles:[],
 			AppliedJobs:[],
+			RECRUITER:[],
 			currentJob: props.match.params.viewJob,
 			uid:'',
 			pic:'',
@@ -34,6 +35,10 @@ class ViewJob extends Component{
 	    	linkedin:'',
 	    	isInterested: false,
 	    	authUser: null,
+	    	isOwnPost: false,
+	    	postUID: '',
+	    	recUID:'',
+	    	isRecruiter:false
 
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -75,6 +80,11 @@ class ViewJob extends Component{
 		}
 
 	componentDidMount() {
+	  const recUID = this.state.recUID;
+	  const postUID = this.state.postUID;
+	  if (recUID === postUID){
+	  	this.setState({ isOwnPost: true });
+	  }
 
 
 	  const JobPostsRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob);
@@ -94,7 +104,8 @@ class ViewJob extends Component{
 	        reqOne:snapshot.val().reqOne,
 	        reqTwo: snapshot.val().reqTwo,
 	        reqThree: snapshot.val().reqThree,
-	        applyLink: snapshot.val().applyLink
+	        applyLink: snapshot.val().applyLink,
+	        uid: snapshot.val().uid
 	      });
 	    
 	    this.setState({
@@ -147,6 +158,23 @@ class ViewJob extends Component{
 	    });
 	  });
 
+	const recRef = firebase.database().ref('RECRUITER');
+	recRef.once('value', (snapshot) => {
+	    let RECRUITER = snapshot.val();
+	    let newState = [];
+	    for (let r in RECRUITER){
+	      newState.push({
+	        id: r,
+	        uid: RECRUITER[r].uid,
+	        companyName: RECRUITER[r].companyName,
+	        linkedin: RECRUITER[r].linkedin
+	       });
+	    }
+	    this.setState({
+	      RECRUITER: newState
+	    });
+	  });
+
 
 	firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -155,6 +183,34 @@ class ViewJob extends Component{
 		    snapshot.forEach((childSnapshot) => {
 		    	if (childSnapshot.child("uid").val() === this.state.authUser.uid){
 		    		this.setState({isInterested: true});
+		    	} else {
+		    		this.setState({isInterested:false});
+		    	}
+		    });
+		});
+
+		firebase.database().ref("RECRUITER").orderByChild("uid").equalTo(this.state.authUser.uid).once("value", (snapshot) => {
+		    snapshot.forEach((childSnapshot) => {
+		    	if (childSnapshot.child("uid").val() === this.state.authUser.uid){
+		    		this.setState({
+		    			isRecruiter: true,
+		    			recUID: childSnapshot.child("uid").val()
+		    		});
+
+		    	} else {
+		    		this.setState({isRecruiter:false});
+		    	}
+		    });
+		});
+
+		firebase.database().ref('JobPosts/' + this.state.currentJob).orderByChild("uid").equalTo(this.state.authUser.uid).once("value", (snapshot) => {
+		    snapshot.forEach((childSnapshot) => {
+		    	if (childSnapshot.child("uid").val() === this.state.authUser.uid){
+		    		this.setState({
+		    			isInterested: true,
+		    			postUID: childSnapshot.child("uid").val()
+		    		});
+
 		    	} else {
 		    		this.setState({isInterested:false});
 		    	}
@@ -180,6 +236,25 @@ class ViewJob extends Component{
 					{this.state.JobPosts.map((post) => {
 				    		return(
 		                    <div className="success text-center" key={post.id}>
+		                       {this.state.Profiles.map((profile) =>{return(
+									<div key={profile.id}>
+									{this.state.RECRUITER.map((r) => {return(
+										<div key={r.id}>
+											<div>
+												{profile.uid === r.uid && post.uid === r.uid  ?
+												<div> 
+												<h1>Posted by:</h1>
+												<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+												<p className='job-text'>{profile.name}</p>
+												<Link to={r.linkedin} className='btn btn-primary job-text'>LinkedIn</Link>
+												<p className='job-text'>Recruiter at: <span className='text-white'> {r.companyName}</span></p>
+												</div>	
+												: null}
+											</div>
+										</div>
+									);})}
+									</div>
+								);})}
 						       <h3>Company: </h3>
 						       <p className='job-text'>{post.companyName}</p>
 						       
@@ -202,13 +277,14 @@ class ViewJob extends Component{
 						       <p className='job-text'>{post.reqOne}</p>
 						       <p className='job-text'>{post.reqTwo}</p>
 						       <p className='job-text'>{post.reqThree}</p>
-						       <Link target='_new' className='btn yellow-button' to={`${post.applyLink}`}>Apply</Link>
+						       <Link target='_new' className='btn yellow-button job-text' to={`${post.applyLink}`}>Apply</Link>
 					        </div>
 
 					         );
 		        		})}
 		        	       
 				</div>
+				{this.state.isOwnPost ? null :
 				<div>
 					{this.state.isInterested ?
 					<div className='col-md-12 col-sm-12 col-xs-12 post-box' id="thanks-box">
@@ -302,7 +378,7 @@ class ViewJob extends Component{
 					</div>
 					}
 				</div>
-	
+				}
 				<div className='col-md-12'>
 					<div className='col-md-12 col-sm-12 col-xs-12'>
 					<h1 className='text-center'>Members interested in this job:</h1>

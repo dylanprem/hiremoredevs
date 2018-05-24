@@ -78,9 +78,8 @@ class ViewProfile extends Component {
 
 	render() {
 		return (
-			<div className='row jobs-container'>
+			<div className='row'>
 			{this.state.authUser ?
-				
 				<div className='col-md-12 text-center'>
 					<div className='col-md-12'>
 						<h1 className='job-text text-center'>Your Profile</h1>

@@ -301,9 +301,10 @@ class Account extends Component {
 							);})}
 						</div> 
 						:
-						<div className='jobs-container'>
-						<div className='col-md-4 col-md-offset-4 text-center'><button className='btn yellow-button job-text' onClick={this.isEditing}><span className='glyphicon glyphicon-pencil'></span> Edit Profile</button></div>
-						<ViewProfile />
+						<div>
+							<div className='col-md-4 col-md-offset-4 text-center profile-container'><button className='btn yellow-button job-text' onClick={this.isEditing}><span className='glyphicon glyphicon-pencil'></span> Edit Profile</button></div>
+							<ViewProfile />
+						
 						</div>
 						}
 						<div className='col-md-12'>

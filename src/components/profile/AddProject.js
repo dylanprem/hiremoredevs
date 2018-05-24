@@ -83,7 +83,7 @@ class AddProject extends Component{
 					</div>
 					:
 					<div className='jobs-container'>
-					<button className='btn yellow-button job-text margins' onClick={this.showFormOnClick}>Add a project</button>
+					<button className='btn yellow-button job-text margins' onClick={this.showFormOnClick}><span className='glyphicon glyphicon-plus'></span> Add a project</button>
 					</div>
 					}
 				</div>

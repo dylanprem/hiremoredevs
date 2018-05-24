@@ -75,7 +75,7 @@ class publicProfile extends Component {
 
 	render() {
 		return (
-			<div className='row profile-container'>
+			<div className='row'>
 			{this.state.authUser ?
 				<div className='col-md-12 text-center'>
 

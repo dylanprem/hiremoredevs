@@ -12,15 +12,4 @@ posted by area for each job detail page to highlight recruiter
 redirect after email/pw login
 hide paths
 
-When an account is deleted,
-delete profile
-delete collabs
-delete comments
-delete jobinterests
-jobPosts
-jobpostrequests
-projects
-recruiter
-basically all refs
-
 email verification
