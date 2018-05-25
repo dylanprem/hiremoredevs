@@ -2,5 +2,6 @@ IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
 create a flag post option
 //view jobs you've applied to COMPLETED
 recruiters can sort by state or other fields on a job post from postsfromusers
-edit collabs
+
 edit projects
+different profiles for recruiter

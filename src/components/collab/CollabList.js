@@ -105,7 +105,10 @@ class CollabList extends Component {
 								<p>{collab.time}</p>
 								<p><Link className='btn yellow-button' to={`/view-collab/${collab.id}`}>View</Link></p>
 								<p>{collab.uid === this.state.authUser.uid || this.state.isAdmin ?
+									<div className='btn-group'>
 									<button className='btn btn-danger' onClick={() => this.removeItem(collab.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button>
+									<Link to={`edit-collab/${collab.id}`} className='btn btn-warning'><span className='glyphicon glyphicon-pencil'></span> Edit</Link>
+									</div>
 									:
 									null
 								}

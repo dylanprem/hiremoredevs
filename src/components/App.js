@@ -25,6 +25,7 @@ import Notifications from './Notifications/Notifications';
 import Account from './USER/Account';
 import AdminHeader from './ADMIN/AdminHeader';
 import ForgotPassword from './Auth/ForgotPassword';
+import EditCollab from './collab/EditCollab';
 
 
 
@@ -50,6 +51,7 @@ const App = () =>
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />
       <Route exact path="/view-collab/:currentCollab" component={ViewCollab} />
       <Route exact path="/edit-comment/:currentCollab?/:currentComment?" component={EditComment} />
+      <Route exact path="/edit-collab/:currentCollab" component={EditCollab} />
       <Route exact path={routes.THANK_YOU} component={ThankYou} />
       <Route exact path={routes.THANK_YOU_REC} component={ThankYouRec} />
       <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
