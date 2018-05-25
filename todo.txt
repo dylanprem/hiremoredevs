@@ -1,15 +1,6 @@
 IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
 create a flag post option
-forgot and reset password option
-
 //view jobs you've applied to COMPLETED
 recruiters can sort by state or other fields on a job post from postsfromusers
-
-
 edit collabs
 edit projects
-posted by area for each job detail page to highlight recruiter
-redirect after email/pw login
-hide paths
-
-email verification
