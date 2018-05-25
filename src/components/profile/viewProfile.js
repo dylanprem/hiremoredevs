@@ -114,7 +114,12 @@ class ViewProfile extends Component {
 						                      <div className='text-center job-text row'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
 						                      <div className='row'><p>{project.projectInfo}</p></div>
 						                      <div className='text-center job-text row'>{project.uid === this.state.authUser.uid ?
-			               						 <button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> : null}
+						                      	<div>
+			               							<button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> 
+			               							<Link className='btn btn-warning pull-left' to={`/edit-project/${project.id}/${profile.id}`}><span className='glyphicon glyphicon-pencil'></span> Edit</Link>
+			               						</div>
+			               						 : null}
+
 			               					  </div>
 						                    </div>
 						                    </div>
