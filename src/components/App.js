@@ -27,6 +27,7 @@ import AdminHeader from './ADMIN/AdminHeader';
 import ForgotPassword from './Auth/ForgotPassword';
 import EditCollab from './collab/EditCollab';
 import Message from './Messenger/Message';
+import MessageList from './Messenger/MessageList';
 
 
 
@@ -65,6 +66,7 @@ const App = () =>
       <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
       <Route exact path={routes.FORGOT_PW} component={ForgotPassword} />
       <Route exact path="/message/:userToMessageUID" component={Message} />
+      <Route exact path="/messages" component={MessageList} />
     </div>
   </Router>
 

@@ -35,12 +35,9 @@ class Message extends Component {
 	handleSubmit(e) {
 	  const messageRef = firebase.database().ref('Messages');
 	  const Messages = {
-	  		messengerOneUID: this.state.authUser.uid,
-	  		messengerTwoUID: this.state.userToMessage,
-	  		messages: {
-	  			message: this.state.message,
-	  			uid: this.state.authUser.uid
-	  		}
+	  		messengerFromUID: this.state.authUser.uid,
+	  		messengerToUID: this.state.userToMessage,
+	  		message: this.state.message
 			
 	}
 
@@ -58,12 +55,9 @@ class Message extends Component {
 			for (let m in Messages){
 				newState.push({
 					id: m,
-					messengerOneUID: Messages[m].messengerOneUID,
-					messengerTwoUID: Messages[m].messengerTwoUID,
-					messages: {
-						message: Messages[m].messages.message,
-						uid: Messages[m].messages.uid,
-					}
+					messengerFromUID: Messages[m].messengerFromUID,
+					messengerToUID: Messages[m].messengerToUID,
+					message: Messages[m].message
 				});
 			}
 		});
@@ -86,7 +80,7 @@ class Message extends Component {
 
     	firebase.database().ref('Messages').once('value', (snapshot) => {
     		snapshot.forEach((childSnapshot) => {
-    			if (childSnapshot.child("messengerTwoUID").val() === this.state.userToMessage && childSnapshot.child("messengerOneUID").val() === this.state.authUsersUID) {
+    			if (childSnapshot.child("messengerFromUID").val() === this.state.authUsersUID || childSnapshot.child("messengerToUID").val() === this.state.authUsersUID) {
     				this.setState({canView: true});
     			}
     		});
@@ -109,17 +103,10 @@ class Message extends Component {
 						</div>
 						<br />
 						<div className='text-center'>
-							<button className='btn yellow-button' onClick={this.handleSubmit}>Post</button>
+							<button className='btn yellow-button' onClick={this.handleSubmit}>Send</button>
 						</div>
 						<br />
 					</form>
-				</div>
-				<div>
-				{this.state.Messages.map((m) => {return(
-				<div key={m.id}>
-					<p>m.me</p>
-				</div>
-				);})}
 				</div>
 			</div>
 			:

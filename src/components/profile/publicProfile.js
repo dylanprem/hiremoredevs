@@ -94,7 +94,7 @@ class publicProfile extends Component {
 								<p className='job-text'>{profile.frameworkOne}</p>
 								<p className='job-text'>{profile.frameworkTwo}</p>
 								<p className='job-text'>{profile.frameworkThree}</p>
-								
+								<Link className='yellow-button btn job-text' to={`/message/${profile.uid}`}>Message</Link>
 								<h3>My Best Work</h3>
 								
 							</div>
@@ -122,7 +122,7 @@ class publicProfile extends Component {
 								       );
 					          		})}
 								</div>
-								<Link className='yellow-button btn job-text' to={`/message/${profile.uid}`}>Message</Link>
+								
 						</div>
 					);
 					})}
