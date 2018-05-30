@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { auth } from '../../firebase';
 import './profile.css';
 import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import SignInForm from '../Auth/login';
 
 class publicProfile extends Component {
@@ -122,7 +122,7 @@ class publicProfile extends Component {
 								       );
 					          		})}
 								</div>
-							
+								<Link className='yellow-button btn job-text' to={`/message/${profile.uid}`}>Message</Link>
 						</div>
 					);
 					})}
@@ -136,4 +136,4 @@ class publicProfile extends Component {
 	}
 }
 
-export default publicProfile;
+export default withRouter(publicProfile);

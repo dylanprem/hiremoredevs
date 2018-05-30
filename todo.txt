@@ -5,3 +5,18 @@ recruiters can sort by state or other fields on a job post from postsfromusers
 
 edit projects
 different profiles for recruiter
+
+
+
+messagesDB {
+	jkljkljlkljk{
+		messengerOneUID:
+		messengerTwoUID:
+		messages:{
+			hiuhuih44hj{
+				message:
+				uid:
+			}
+		}
+	}
+}
