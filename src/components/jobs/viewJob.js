@@ -220,7 +220,7 @@ class ViewJob extends Component{
 												<h1>Posted by:</h1>
 												<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 												<p className='job-text'>{profile.name}</p>
-												<Link to={r.linkedin} className='btn btn-primary job-text'>LinkedIn</Link>
+												<Link to={r.linkedin} className='btn btn-primary job-text' target="_blank">LinkedIn</Link>
 												<p className='job-text'>Recruiter at: <span className='text-white'> {r.companyName}</span></p>
 												</div>	
 												: null}

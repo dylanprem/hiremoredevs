@@ -83,7 +83,6 @@ class publicProfile extends Component {
 					{this.state.Profiles.map((profile) => {
 						return(
 						<div key={profile.id}>
-							
 							<div>
 								<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 								<p className='job-text'>{profile.name}</p>

@@ -75,20 +75,23 @@ class EditProject extends Component{
 		return(
 			<div className='row'>
 				{this.state.authUser ?
-				<div className='col-md-4 col-md-offset-4 text-center'>
+				<div className='col-md-4 col-md-offset-4 '>
 					{this.state.Projects.map((project)=>{return(
 					<div className='job-text' key={project.id}>
 						{project.uid === this.state.authUser.uid ?
 						<div>
-							<h3>Edit this project</h3>
+							<h3 className='text-center'>Edit this project</h3>
+							<p className='job-text'>Project Name</p>
 							<input type='text' className='form-control' placeholder='Project Name' name='projectName' onChange={this.handleChange} defaultValue={project.projectName} ref={(projectName) => this.projectName = projectName}/>
 							<br />
+							<p className='job-text'>Project URL</p>
 							<input type='text' className='form-control' placeholder='e.g. http://myapp.com' name='projectLink' onChange={this.handleChange} defaultValue={project.projectLink} ref={(projectLink) => this.projectLink = projectLink}/>
 							<br />
+							<p className='job-text'>Project info</p>
 							<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} defaultValue={project.projectInfo} maxlength="60" ref={(projectInfo) => this.projectInfo = projectInfo} />
 							<br />
 
-							<div className='col-md-12'>
+							<div className='col-md-12 text-center'>
 								<button className='btn yellow-button' onClick={this.handleSubmit}>Save</button>
 							</div>
 						</div>

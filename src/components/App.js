@@ -26,8 +26,8 @@ import Account from './USER/Account';
 import AdminHeader from './ADMIN/AdminHeader';
 import ForgotPassword from './Auth/ForgotPassword';
 import EditCollab from './collab/EditCollab';
-import Message from './Messenger/Message';
-import MessageList from './Messenger/MessageList';
+import EditProject from './profile/EditProject';
+
 
 
 
@@ -54,6 +54,7 @@ const App = () =>
       <Route exact path="/view-collab/:currentCollab" component={ViewCollab} />
       <Route exact path="/edit-comment/:currentCollab?/:currentComment?" component={EditComment} />
       <Route exact path="/edit-collab/:currentCollab" component={EditCollab} />
+      <Route exact path="/edit-project/:currentProject?/:currentProfile?" component={EditProject} />
       <Route exact path={routes.THANK_YOU} component={ThankYou} />
       <Route exact path={routes.THANK_YOU_REC} component={ThankYouRec} />
       <Route exact path={routes.ADMIN_APPROVE_JOB} component={ApproveJob} />
@@ -65,8 +66,6 @@ const App = () =>
       <Route exact path={routes.ACCOUNT} component={Account} />
       <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
       <Route exact path={routes.FORGOT_PW} component={ForgotPassword} />
-      <Route exact path="/message/:userToMessageUID" component={Message} />
-      <Route exact path="/messages" component={MessageList} />
     </div>
   </Router>
 

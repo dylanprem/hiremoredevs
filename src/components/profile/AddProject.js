@@ -20,6 +20,7 @@ class AddProject extends Component{
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showFormOnClick = this.showFormOnClick.bind(this);
+    this.hideFormOnClick = this.hideFormOnClick.bind(this);
 	}
 
 
@@ -32,6 +33,10 @@ class AddProject extends Component{
 
 	showFormOnClick(){
 		this.setState({showForm:true});
+	}
+
+	hideFormOnClick(){
+		this.setState({showForm:false});
 	}
 
 
@@ -77,8 +82,9 @@ class AddProject extends Component{
 						<textarea type='text' className='form-control' rows='5' placeholder='Brief description of this project' name='projectInfo' onChange={this.handleChange} value={this.state.projectInfo} maxlength="60" />
 						<br />
 
-						<div className='col-md-12'>
+						<div className='col-md-12 btn-group'>
 							<button className='btn yellow-button' onClick={this.handleSubmit}>Add Project</button>
+							<button className='btn btn-danger' onClick={this.hideFormOnClick}>Cancel</button>
 						</div>
 					</div>
 					:

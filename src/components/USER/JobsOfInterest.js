@@ -17,8 +17,15 @@ class JobsOfInterest extends Component {
 	    	authUser: null,
 	    	hasApplied: false
 		}	
+	this.removeItem = this.removeItem.bind(this);
 	}
 
+
+	removeItem(Id) {
+	    const collabRef = firebase.database().ref(`postsFromUsers/${Id}`);
+	    collabRef.remove();
+	    // window.location.reload();
+	}
 
 	componentDidMount() {
 	  const JobsRef = firebase.database().ref('JobPosts');
@@ -93,6 +100,7 @@ class JobsOfInterest extends Component {
 						        <th>State</th>
 						        <th>Zip</th>
 						        <th>View Details</th>
+						        <th></th>
 						      </tr>
 						    </thead>
 						    {this.state.postsFromUsers.map((a) => {return(
@@ -103,7 +111,8 @@ class JobsOfInterest extends Component {
 			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.position}</p> : null }</td>
 			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.State}</p> : null }</td>
 			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.zip}</p> : null }</td>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td>
+			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <Link className='btn black-button btn-sm' to={`/job/${post.id}`}>View Details</Link> : null }</td>
+			                      <td><button className='btn btn-danger job-text' onClick={() => this.removeItem(a.id)}><span className='glyphicon glyphicon-trash'></span> Not interested</button></td>
 			                    </tr>
 			                    );})}     
 						    </tbody>
