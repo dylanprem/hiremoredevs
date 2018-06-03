@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../hiremoredevs');
+var app = require('../app');
 var debug = require('debug')('mean-app:server');
 var http = require('http');
 

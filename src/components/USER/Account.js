@@ -5,7 +5,7 @@ import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import CollabsPosted from './CollabsPosted';
 import JobsOfInterest from './JobsOfInterest';
-import ViewProfile from '../profile/ViewProfile';
+import ViewProfile from '../profile/viewProfile';
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
