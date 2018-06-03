@@ -149,7 +149,6 @@ class EditJob extends Component{
       if (authUser) {
         this.setState({ authUser });
         firebase.database().ref('JobPosts/' + this.state.currentJob).once("value", (snapshot) => {
-				console.log(snapshot.val());
 		    	if (snapshot.child("uid").val() === this.state.authUser.uid){
 		    		this.setState({isOwnPost: true});
 		    	} else {

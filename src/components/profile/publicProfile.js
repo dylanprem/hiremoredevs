@@ -77,7 +77,7 @@ class publicProfile extends Component {
 		return (
 			<div className='row'>
 			{this.state.authUser ?
-				<div className='col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 job-text text-center'>
+				<div className='col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 job-text text-center'>
 
 					
 					{this.state.Profiles.map((profile) => {
@@ -88,15 +88,19 @@ class publicProfile extends Component {
 								<p className='job-text'>{profile.name}</p>
 								<p className='job-text'>{profile.email}</p>
 								<h3>About Me</h3>
-								<p className='job-text'>{profile.about}</p>
-								<h3>My top three</h3>
-								<p className='job-text'>{profile.frameworkOne}</p>
-								<p className='job-text'>{profile.frameworkTwo}</p>
-								<p className='job-text'>{profile.frameworkThree}</p>
-								<h3>My Best Work</h3>
+								<div className="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+									<p className='job-text'>{profile.about}</p>
+								</div>
+								<div className='col-md-12 col-sm-12 col-xs-12'>
+									<h3>My top three</h3>
+									<p className='job-text'>{profile.frameworkOne}</p>
+									<p className='job-text'>{profile.frameworkTwo}</p>
+									<p className='job-text'>{profile.frameworkThree}</p>
+								</div>
+								<div className='row col-md-12 col-xs-12 col-sm-12'><h3>My Best Work</h3></div>
 								
 							</div>
-							<div className='projects'>
+							<div className='projects col-md-12 col-xs-12 col-sm-12'>
 						       {this.state.Projects.map((project) => {
 		    		  			return(
 		    		  				<div key={project.id} >
@@ -119,7 +123,7 @@ class publicProfile extends Component {
 								    </div>
 								       );
 					          		})}
-								</div>
+							</div>
 								
 						</div>
 					);

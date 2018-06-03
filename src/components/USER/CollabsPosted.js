@@ -77,6 +77,8 @@ class CollabsPosted extends Component {
 							      	<th>Title</th>
 							        <th>View Details</th>
 							        <th>&nbsp;</th>
+							        <th>&nbsp;</th>
+
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -86,8 +88,9 @@ class CollabsPosted extends Component {
 				            
 				                      <td>{c.uid === this.state.authUser.uid ? c.title : null}</td>
 				             
-				                      <td>{c.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`view-collab/${c.id}`}>View Details</Link> : null }</td> 
+				                      <td>{c.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`/view-collab/${c.id}`}>View Details</Link> : null }</td> 
 			                      	  <td className='pull-right'>{c.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(c.id)}>Delete</button> : null}</td>
+			                      	  <td className='pull-right'>{c.uid === this.state.authUser.uid ? <Link className="btn btn-warning" to={`/edit-collab/${c.id}`}>Edit</Link> : null}</td>
 				                    </tr>
 					                    );
 				          			})}

@@ -210,7 +210,6 @@ class Account extends Component {
 	      if (authUser) {
 	        this.setState({ authUser });
 	        	this.setState({authUsersUID: this.state.authUser.uid});
-	        	console.log(this.state.authUsersUID);
 		        if(this.state.authUser.providerData[0].providerId === 'google.com'){
 		        	this.setState({isSignedInWithGoogle: true});
 		        } else {
@@ -225,7 +224,7 @@ class Account extends Component {
 		firebase.database().ref("Profiles").orderByChild("uid").equalTo(this.state.authUser.uid).once("value",snapshot => {
 		    const userData = snapshot.val();
 		    if (userData){
-		      console.log("exists!");
+		      console.log("loaded");
 		    } else {
 				firebase.auth().currentUser.updateProfile({
 				  displayName: "user" + Date.now(),

@@ -15,3 +15,9 @@
 .panel-group .panel{
 	background: #C0C0C0 !important;
 }
+
+
+.CollabRow h1 {
+	font-size: 32px;
+	color: #fff;
+}

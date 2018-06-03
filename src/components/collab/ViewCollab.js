@@ -134,7 +134,7 @@ class ViewCollab extends Component {
 
 	render(){
 		return(
-			<div className='row'>
+			<div className='row job-text CollabRow'>
 			{this.state.authUser ?
 			<div>
 				<div className='col-md-12'>
@@ -166,7 +166,7 @@ class ViewCollab extends Component {
 						return(
 						<div key={collab.id}>
 							<h1 className='text-center'>Idea:</h1>
-							<h1 className='job-text text-center'>{collab.title}</h1>
+							<p className='job-text text-center'>{collab.title}</p>
 							<h1 className='text-center'>Description:</h1>
 							<div className='row'>
 								<div className='col-md-12'><p className='text-center job-text description'>{collab.description}</p></div>
@@ -180,9 +180,9 @@ class ViewCollab extends Component {
 						return(
 						<div key={collab.id}>
 							<h1 className='text-center'>Frameworks:</h1>
-							<h1 className='job-text text-center'>{collab.frameworkOne}</h1>
-							<h1 className='job-text text-center'>{collab.frameworkTwo}</h1>
-							<h1 className='job-text text-center'>{collab.frameworkThree}</h1>
+							<p className='job-text text-center'>{collab.frameworkOne}</p>
+							<p className='job-text text-center'>{collab.frameworkTwo}</p>
+							<p className='job-text text-center'>{collab.frameworkThree}</p>
 							
 						</div>
 						);
