@@ -6,7 +6,7 @@ import Header from './header/header';
 import SignInForm from './Auth/login';
 import JobFeed from './feeds/JobFeed';
 import PostJobForm from './jobs/PostJob';
-import viewJob from './jobs/viewJob';
+import ViewJob from './jobs/viewJob';
 import Landing from './Landing/landing';
 import publicProfile from './profile/publicProfile';
 import CollabCorner from './collab/CollabCorner';
@@ -27,6 +27,7 @@ import AdminHeader from './ADMIN/AdminHeader';
 import ForgotPassword from './Auth/ForgotPassword';
 import EditCollab from './collab/EditCollab';
 import EditProject from './profile/EditProject';
+import EditJob from './jobs/EditJob';
 
 
 
@@ -47,7 +48,8 @@ const App = () =>
       <Route exact path={routes.SIGN_IN} component={SignInForm} />
       <Route exact path={routes.CURRENT_FEED} component={JobFeed} />
       <Route exact path={routes.POST_JOB} component={PostJobForm} />
-      <Route exact path="/job/:viewJob" component={viewJob} />
+      <Route exact path="/job/:viewJob" component={ViewJob} />
+      <Route exact path="/edit-job/:viewJob" component={EditJob} />
       <Route exact path="/user/:userProfile" component={publicProfile} />
       <Route exact path={routes.COLLAB_CORNER} component={CollabCorner} />
       <Route exact path={routes.ADD_COLLAB} component={AddCollab} />

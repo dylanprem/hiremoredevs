@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Employers from './Employers';
+import TopBlock from './TopBlock';
 import Jobseekers from './Jobseekers';
 import About from './About';
 import CollabBlock from './collabBlock';
@@ -8,8 +8,8 @@ class Landing extends Component {
 	render(){
 		return(
 			<div class='container-fluid'>
+				<TopBlock />
 				<About />
-				<Employers />
 				<Jobseekers />
 				<CollabBlock />
 			</div>

@@ -1,5 +1,10 @@
 .jobs-table{
 	font-family: 'Yanone Kaffeesatz', sans-serif;
+
+}
+
+.jobs-table th{
+	font-weight: normal !important;
 }
 
 .dark-bg-feed{

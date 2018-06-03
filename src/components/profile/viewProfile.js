@@ -91,44 +91,49 @@ class ViewProfile extends Component {
 							<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 								<div className='col-md-12'>
-									<h3>About Me</h3>
-									<p className='job-text'>{profile.about}</p>
+									<div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+										<h3>About Me</h3>
+										<p className='job-text'>{profile.about}</p>
+									</div>
+									<div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 									<h3>My top three</h3>
 									<p className='job-text'>{profile.frameworkOne}</p>
 									<p className='job-text'>{profile.frameworkTwo}</p>
 									<p className='job-text'>{profile.frameworkThree}</p>
+									</div>
 									
-									
-									<div className='projects'>
-									<h1 className='text-center job-text'>Your Projects</h1>
-									<AddProject />
-							       {this.state.Projects.map((project) => {
-			    		  			return(
-			    		  				<div key={project.id} >
-					    		  		{project.uid === this.state.authUser.uid ?
-					    		  			<div className='panel-group col-md-3'>
-					    		  			<div className='panel panel-default col-md-12'>
-										    <div className='panel-body col-md-12 job-text text-black'>
+									<div className='projects col-md-12 col-sm-12 col-xs-12'>
+										<h1 className='text-center job-text'>Your Projects</h1>
+										<AddProject />
+								       {this.state.Projects.map((project) => {
+				    		  			return(
+				    		  				<div key={project.id} >
+						    		  		{project.uid === this.state.authUser.uid ?
+						    		  			<div className='panel-group col-md-3 col-sm-12 col-xs-12'>
+						    		  			<div className='panel panel-default col-md-12 col-sm-12 col-xs-12'>
+											    <div className='panel-body col-md-12 col-sm-12 col-xs-12 job-text text-black'>
 
-						                      <div className='row'><h2 className='text-warning'>{project.projectName}</h2></div>
-						                      <div className='text-center job-text row'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
-						                      <div className='row'><p>{project.projectInfo}</p></div>
-						                      <div className='text-center job-text row'>{project.uid === this.state.authUser.uid ?
-						                      	<div>
-			               							<button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> 
-			               							<Link className='btn btn-warning pull-left' to={`/edit-project/${project.id}/${profile.id}`}><span className='glyphicon glyphicon-pencil'></span> Edit</Link>
-			               						</div>
-			               						 : null}
+							                      <div className='row'><h2 className='text-warning'>{project.projectName}</h2></div>
+							                      <div className='text-center job-text row'><Link to={project.projectLink} target='_blank' className='btn black-button'>View</Link> </div>
+							                      <div className='row'>
+							                      	<p>{project.projectInfo}</p>
+							                      </div>
+							                      <div className='text-center job-text row'>{project.uid === this.state.authUser.uid ?
+							                      	<div>
+				               							<button type='submit' className="btn btn-danger pull-right" onClick={() => this.removeItem(project.id)}><span className='glyphicon glyphicon-trash'></span> DELETE</button> 
+				               							<Link className='btn btn-warning pull-left' to={`/edit-project/${project.id}/${profile.id}`}><span className='glyphicon glyphicon-pencil'></span> Edit</Link>
+				               						</div>
+				               						 : null}
 
-			               					  </div>
-						                    </div>
-						                    </div>
-						                    </div>
-						                :
-						                null}   
-									    </div>
-									       );
-						          		})}
+				               					  </div>
+							                    </div>
+							                    </div>
+							                    </div>
+							                :
+							                null}   
+										    </div>
+										       );
+							          		})}
 									</div>
 									
 								</div>

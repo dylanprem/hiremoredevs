@@ -3,6 +3,14 @@
 	transition: all .5s ease; 
 }
 
+.non-auth-link{
+	font-size: 24px;
+}
+
+.landingLogo{
+	font-size:72px;
+}
+
 .signup-link:hover, .login-link:hover {
 	color: 	#fff !important;
 	opacity: 5;
@@ -32,6 +40,13 @@
     height: 500px;
 }
 
+.about-img{
+	background: url('./images/blur.jpg') no-repeat;
+    background-position: center; 
+    min-height: 500px;
+    /*height: 500px;*/
+}
+
 .collab-img{
 	background: url('./images/jl.jpg') no-repeat;
     background-position: center; 
@@ -43,22 +58,29 @@
 }
 
 .dark-bg{
-	background-color: #363738;
+	background-color: #363738 ;
 	min-height: 500px;
 	font-family: 'Lobster', cursive;
-	color: 	#DAA520;
+	color:#DAA520;
 }
 
 .opacity{
-	background-color: hsla(0, 0%, 28%, 0.71);
+	background-color: hsla(340, 2%, 34%, 0.82);
 	height: 100%;
 	color: 	#DAA520;
 	font-family: 'Lobster', cursive;
 	min-height: 500px;
 }
 
+ul li{
+	border: transparent !important;
+}
+
 .inner{
 	padding: 1%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .about-text{

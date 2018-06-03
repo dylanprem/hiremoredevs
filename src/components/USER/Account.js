@@ -255,7 +255,7 @@ class Account extends Component {
 				{this.state.authUser ?
 					<div>
 						{this.state.isEditing ?
-						<div className='col-md-12 text-center'>
+						<div className='col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1'>
 							{this.state.Profiles.map((profile) => { return (
 							<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?

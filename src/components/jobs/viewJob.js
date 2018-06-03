@@ -26,7 +26,7 @@ class ViewJob extends Component{
 	    	name:'',
 	    	email:'',
 		    position: '',
-		    State: '',
+		    state: '',
 		    zip:'',
 		    city: '',
 		    relocate: '',
@@ -64,7 +64,7 @@ class ViewJob extends Component{
 		  const postsFromUsers = { 
 		  	uid: this.state.authUser.uid,
 		    position: this.state.position,
-		    State: this.state.State,
+		    state: this.state.state,
 		    city: this.state.city,
 		    relocate: this.state.relocate,
 		    jobID: this.state.currentJob
@@ -97,6 +97,16 @@ class ViewJob extends Component{
 	        reqOne:snapshot.val().reqOne,
 	        reqTwo: snapshot.val().reqTwo,
 	        reqThree: snapshot.val().reqThree,
+	        jobDuty1:snapshot.val().jobDuty1,
+		    jobDuty2:snapshot.val().jobDuty2,
+		    jobDuty3:snapshot.val().jobDuty3,
+		    jobDuty4:snapshot.val().jobDuty4,
+		    jobDuty5:snapshot.val().jobDuty5,
+		    jobDuty6:snapshot.val().jobDuty6,
+		    jobDuty7:snapshot.val().jobDuty7,
+		    jobDuty8:snapshot.val().jobDuty8,
+		    jobDuty9:snapshot.val().jobDuty9,
+		    jobDuty10:snapshot.val().jobDuty10,
 	        applyLink: snapshot.val().applyLink,
 	        uid: snapshot.val().uid
 	      });
@@ -206,10 +216,11 @@ class ViewJob extends Component{
 			<div className='row'>
 				{this.state.authUser ?
 				<div>
-				<div className='col-md-12 col-sm-12 col-xs-12 dark-bg-company-info company-info'>
+				<div className='col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 dark-bg-company-info company-info job-text'>
 					{this.state.JobPosts.map((post) => {
 				    		return(
 		                    <div className="success text-center" key={post.id}>
+		                    	{this.state.isOwnPost ? <Link className='btn yellow-button job-text' to={`/edit-job/${this.state.currentJob}`}><span className='glyphicon glyphicon-pencil'></span> Edit this Job Post</Link> : null }
 		                       {this.state.Profiles.map((profile) =>{return(
 									<div key={profile.id}>
 									{this.state.RECRUITER.map((r) => {return(
@@ -242,10 +253,26 @@ class ViewJob extends Component{
 						       <p className='job-text'>{post.position}</p>
 
 						       <h3>Job Location</h3>
-						       <p className='job-text'>{post.state}, {post.zip}</p>
+						       <p className='job-text'>{post.state}</p>
 
 						       <h3>About the Job:</h3>
 						       <p className='job-text'>{post.about}</p>
+
+						       <h3 className='text-left job-text'>Job Duties and Responsibilites:</h3>
+						       <div className='col-md-12 col-sm-12 col-xs-12'>
+							       <ul className='list-group text-left job-text'>
+							       	  {post.jobDuty1 != '' ? <li>{post.jobDuty1}</li> : null}
+							       	  {post.jobDuty2 != '' ? <li>{post.jobDuty2}</li> : null}
+							       	  {post.jobDuty3 != '' ? <li>{post.jobDuty3}</li> : null}
+							       	  {post.jobDuty4 != '' ? <li>{post.jobDuty4}</li> : null}
+							       	  {post.jobDuty5 != '' ? <li>{post.jobDuty5}</li> : null}
+							       	  {post.jobDuty6 != '' ? <li>{post.jobDuty6}</li> : null}
+							       	  {post.jobDuty7 != '' ? <li>{post.jobDuty7}</li> : null}
+							       	  {post.jobDuty8 != '' ? <li>{post.jobDuty8}</li> : null}
+							       	  {post.jobDuty9 != '' ? <li>{post.jobDuty9}</li> : null}
+							       	  {post.jobDuty10 != '' ? <li>{post.jobDuty10}</li> : null}		
+							       </ul>
+							   </div>
 
 						       <h3>Requirements</h3>
 						       <p className='job-text'>{post.reqOne}</p>
@@ -258,7 +285,14 @@ class ViewJob extends Component{
 		        		})}
 		        	       
 				</div>
-				{this.state.isOwnPost ? <div className='profile-container'><h1 className='text-center'>You posted this job.</h1></div> :
+				{this.state.isOwnPost 
+					? 
+					<div className= 'row job-text text-white'>
+						<div className='col-md-12 col-sm-12 col-xs-12'>
+						<h1 className='text-center'>You posted this job.</h1>
+						</div>
+					</div> 
+					:
 					<div>
 						{this.state.isInterested ?
 						<div className='col-md-12 col-sm-12 col-xs-12 post-box' id="thanks-box">
@@ -355,7 +389,7 @@ class ViewJob extends Component{
 				}
 				<div className='col-md-12'>
 					<div className='col-md-12 col-sm-12 col-xs-12'>
-					<h1 className='text-center'>Members interested in this job:</h1>
+					<h1 className='text-center job-text'>Members interested in this job:</h1>
 						<div className='table-responsive'>
 							<table className="table table-text col-md-12 col-sm-12 col-xs-12">
 								    <thead>

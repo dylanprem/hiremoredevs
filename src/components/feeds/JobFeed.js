@@ -47,7 +47,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    State: JobPosts[post].State,
+		    state: JobPosts[post].state,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -76,7 +76,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    State: JobPosts[post].State,
+		    state: JobPosts[post].state,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -107,7 +107,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    State: JobPosts[post].State,
+		    state: JobPosts[post].state,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -122,7 +122,6 @@ class JobFeed extends Component {
 	  const ADMINref = firebase.database().ref('ADMIN');
 	  ADMINref.on('value', (snapshot) => {
 	  	let ADMIN = snapshot.val();
-	  	console.log(snapshot.val());
 	  	let newState = [];
 	  	for (let admins in ADMIN){
 	      newState.push({
@@ -155,7 +154,7 @@ class JobFeed extends Component {
 			<div className='row job-text'>
 				<div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
 					<div className='form-group'>
-							<label>Search By State</label>
+							<h1>Search By State</h1>
 							<select className='form-control' name='searchedState' onChange={this.handleChange} value={this.state.searchedState} >
 								<option value="" disabled selected>Select an option</option>
 								<option value="Alabama">Alabama</option>
@@ -219,7 +218,7 @@ class JobFeed extends Component {
 			<div className='row job-text'>
 				<div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
 					<div className='form-group'>
-						<label>Search by Zip Code</label>
+						<h1>Search by Zip Code</h1>
 						<input type='text' className='form-control' name='searchedZip' value={this.state.searchedZip} onChange={this.handleChange} />
 					</div>
 					<div className='text-center'>
@@ -247,7 +246,7 @@ class JobFeed extends Component {
 					    <tr className='active' key={post.id}>
 	                      <td className='text-white'>{post.companyName}</td>
 	                      <td>{post.position}</td>
-	                      <td>{post.State}</td>
+	                      <td>{post.state}</td>
 	                      <td>{post.zip}</td>
 	                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td>
 	                      

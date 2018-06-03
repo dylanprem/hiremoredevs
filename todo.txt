@@ -1,22 +1,4 @@
-IF JOBS UID === RECRUITERS UID SHOW THEM AND BE ABLE TO EDIT AND/OR DELETE THEM
-create a flag post option
-//view jobs you've applied to COMPLETED
-recruiters can sort by state or other fields on a job post from postsfromusers
+Posting Jobs:
 
-edit projects
-different profiles for recruiter
-
-
-
-messagesDB {
-	jkljkljlkljk{
-		messengerOneUID:
-		messengerTwoUID:
-		messages:{
-			hiuhuih44hj{
-				message:
-				uid:
-			}
-		}
-	}
-}
+Add duties one ata time
+Add Skills and Qualifications one at a time

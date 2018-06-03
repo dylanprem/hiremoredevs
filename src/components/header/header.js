@@ -76,21 +76,8 @@ class Header extends Component {
 
 			:
 
-			<Navbar inverse collapseOnSelect>
-			  <Navbar.Header>
-			    <Navbar.Brand>
-			      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
-			    </Navbar.Brand>
-			    <Navbar.Toggle />
-			  </Navbar.Header>
-			  <Navbar.Collapse>
-			    <Nav pullRight>
-			      <NavItem eventKey={2} to='/login'>
-			        <Link to='/login' className='login-link job-text'> Login</Link>
-			      </NavItem>
-			    </Nav>
-			  </Navbar.Collapse>
-			</Navbar> 
+			null
+			 
 
 			}
 			</div>

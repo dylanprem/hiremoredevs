@@ -77,7 +77,7 @@ class publicProfile extends Component {
 		return (
 			<div className='row'>
 			{this.state.authUser ?
-				<div className='col-md-12 text-center'>
+				<div className='col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 job-text text-center'>
 
 					
 					{this.state.Profiles.map((profile) => {

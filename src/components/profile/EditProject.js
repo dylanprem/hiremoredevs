@@ -17,6 +17,7 @@ class EditProject extends Component{
 			Projects:[],
 			currentProject: props.match.params.currentProject,
 			currentProfile: props.match.params.currentProfile,
+			canEdit: false
 		}
 	this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

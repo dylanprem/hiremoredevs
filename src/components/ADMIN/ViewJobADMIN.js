@@ -24,6 +24,16 @@ class ViewJobADMIN extends Component{
 		    reqOne:'',
 			reqTwo:'',
 			reqThree:'',
+			jobDuty1:'',
+		    jobDuty2:'',
+		    jobDuty3:'',
+		    jobDuty4:'',
+		    jobDuty5:'',
+		    jobDuty6:'',
+		    jobDuty7:'',
+		    jobDuty8:'',
+		    jobDuty9:'',
+		    jobDuty10:'',
 			uid:'',
 			JobPostRequests: [],
 			JobPosts:[],
@@ -58,6 +68,16 @@ class ViewJobADMIN extends Component{
 	    reqOne:this.reqOne.value,
 		reqTwo:this.reqTwo.value,
 		reqThree:this.reqThree.value,
+		jobDuty1: this.jobDuty1.value,
+	    jobDuty2: this.jobDuty2.value,
+	    jobDuty3:this.jobDuty3.value,
+	    jobDuty4: this.jobDuty4.value,
+	    jobDuty5: this.jobDuty5.value,
+	    jobDuty6:this.jobDuty6.value,
+	    jobDuty7:this.jobDuty7.value,
+	    jobDuty8:this.jobDuty8.value,
+	    jobDuty9:this.jobDuty9.value,
+	    jobDuty10:this.jobDuty10.value,
 		uid: this.state.uid
 	  }
 
@@ -75,6 +95,16 @@ class ViewJobADMIN extends Component{
 	    reqOne:'',
 		reqTwo:'',
 		reqThree:'',
+		jobDuty1:'',
+	    jobDuty2:'',
+	    jobDuty3:'',
+	    jobDuty4:'',
+	    jobDuty5:'',
+	    jobDuty6:'',
+	    jobDuty7:'',
+	    jobDuty8:'',
+	    jobDuty9:'',
+	    jobDuty10:'',
 		uid:'',
 	  });
 
@@ -104,6 +134,16 @@ class ViewJobADMIN extends Component{
 	        reqTwo: snapshot.val().reqTwo,
 	        reqThree: snapshot.val().reqThree,
 	        applyLink: snapshot.val().applyLink,
+	        jobDuty1:snapshot.val().jobDuty1,
+		    jobDuty2:snapshot.val().jobDuty2,
+		    jobDuty3:snapshot.val().jobDuty3,
+		    jobDuty4:snapshot.val().jobDuty4,
+		    jobDuty5:snapshot.val().jobDuty5,
+		    jobDuty6:snapshot.val().jobDuty6,
+		    jobDuty7:snapshot.val().jobDuty7,
+		    jobDuty8:snapshot.val().jobDuty8,
+		    jobDuty9:snapshot.val().jobDuty9,
+		    jobDuty10:snapshot.val().jobDuty10,
 	        uid: snapshot.val().uid
 	      });
 	    
@@ -183,6 +223,28 @@ class ViewJobADMIN extends Component{
 								       <h3>UID</h3>
 								       <input type='text' className='job-text form-control' name='uid' value={this.state.uid = post.uid} />
 								       <button onClick={this.handleSubmit} className='btn btn-info'>Approve</button>
+
+								       <h3>Job Duties</h3>
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty1' ref={(jobDuty1) => this.jobDuty1 = jobDuty1} defaultValue={post.jobDuty1} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty2' ref={(jobDuty2) => this.jobDuty2 = jobDuty2} defaultValue={post.jobDuty2} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty3' ref={(jobDuty3) => this.jobDuty3 = jobDuty3} defaultValue={post.jobDuty3} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty4' ref={(jobDuty4) => this.jobDuty4 = jobDuty4} defaultValue={post.jobDuty4} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty5' ref={(jobDuty5) => this.jobDuty5 = jobDuty5} defaultValue={post.jobDuty5} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty6' ref={(jobDuty6) => this.jobDuty6 = jobDuty6} defaultValue={post.jobDuty6} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty7' ref={(jobDuty7) => this.jobDuty7 = jobDuty7} defaultValue={post.jobDuty7} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty8' ref={(jobDuty8) => this.jobDuty8 = jobDuty8} defaultValue={post.jobDuty8} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty9' ref={(jobDuty9) => this.jobDuty9 = jobDuty9} defaultValue={post.jobDuty9} />
+								       <br />
+								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty10' ref={(jobDuty10) => this.jobDuty10 = jobDuty10} defaultValue={post.jobDuty10} />
+								       <br />
 							        </div>
 							         );
 				        		})}		        	       
