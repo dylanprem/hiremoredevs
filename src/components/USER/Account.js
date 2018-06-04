@@ -307,7 +307,7 @@ class Account extends Component {
 						</div>
 						}
 						<div className='col-md-12'>
-					        {this.state.isSignedInWithGoogle ? null :
+					        {this.state.isSignedInWithGoogle || this.state.authUser.email === "demouser@test.com" ? null :
 							<div className='col-md-4'>
 								<h1 className='job-text'>Update Password</h1>
 								<input type='password' className='form-control' name='newPassword' value={this.state.newPassword} onChange={this.handleChange} />
