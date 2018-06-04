@@ -33,10 +33,11 @@ class LogoutButton extends Component {
   render() {
 
     return (
-            <NavItem>
-                  <button className='btn yellow-button job-text' onClick={this.logout}>Logout</button>
-                  
-            </NavItem>
+           <form className="navbar-form navbar-right">
+            <button className='btn yellow-button job-text' onClick={this.logout}>Logout</button>
+          </form>
+              
+         
     );
   }
 }

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase/firebase.js';
-import * as routes from '../../constants/routes';
 import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
-import JobFeed from '../feeds/JobFeed';
-import { Modal } from 'react-bootstrap';
 import './style.css';
-import SignInForm from '../Auth/login';
 
 
 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
-import * as routes from '../../constants/routes';
-import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
+import { withRouter, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import SignInForm from '../Auth/login';
 

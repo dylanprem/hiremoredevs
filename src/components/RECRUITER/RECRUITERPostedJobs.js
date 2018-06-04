@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import SignInForm from '../Auth/login';
+
 
 class RECRUITERPostedJobs extends Component {
 	constructor(props){

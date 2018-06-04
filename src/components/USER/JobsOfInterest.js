@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase/firebase.js';
-import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
+import {  Link, withRouter } from 'react-router-dom';
 
 
 

@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { auth } from '../../firebase';
-import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import './style.css';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
-
-
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
 import RECRUITERManageJobsButton from '../RECRUITER/RECRUITERManageJobsButton';
 import RECRUITERSignup from '../RECRUITER/RECRUITERSignup';
@@ -20,9 +15,12 @@ class Header extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			authUser:null
+			authUser:null,
+			onBottom: false
 		}
 	}
+
+	
 
 	componentDidMount(){
 		firebase.auth().onAuthStateChanged((authUser) => {
@@ -36,43 +34,33 @@ class Header extends Component {
 		return(
 			<div>
 			{this.state.authUser ? 
-			<Navbar inverse collapseOnSelect>
-			  <Navbar.Header>
+			<nav className="navbar navbar-inverse">
+			  <div className="container-fluid">
+			    <div className="navbar-header">
+			      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span className="icon-bar"></span>
+			        <span className="icon-bar"></span>
+			        <span className="icon-bar"></span>                        
+			      </button>
+			      <Link className='signup-link job-text navbar-brand' to="/">HireMoreDevs</Link>
+			    </div>
+			    <div className="collapse navbar-collapse" id="myNavbar">
+			      <ul className="nav navbar-nav">
+			        <li><Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link></li>
+			        <li><Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link></li>
+			      </ul>
 
-			    <Navbar.Brand>
-			      <Link to="/" className="navbar-brand">HireMoreDevs</Link>
-			    </Navbar.Brand>
-			    <Navbar.Toggle />
-			  </Navbar.Header>
-			  <Navbar.Collapse>
-			    <Nav pullRight>
-			      <NavItem>
-			      	<Link className='signup-link job-text' to={routes.CURRENT_FEED}>Jobs</Link>
-			      </NavItem>
-			      <NavItem>
-			      	<Link className='job-text signup-link' to={routes.COLLAB_CORNER}>Collab Corner</Link>
-			      </NavItem>
-			      <NavItem>
-			      	<RECRUITERButton />
-			      </NavItem>
-			      <NavItem>
-			      	<RECRUITERManageJobsButton />
-			      </NavItem>
-			      <NavItem>
-			      	<RECRUITERSignup />
-			      </NavItem>
-			      <LogoutButton />
-			    </Nav>
-			    <Nav>
-			    	<NavItem>
-			    		<AccountButton />
-			    	</NavItem>
-			    	
-			    </Nav>
-			    
-			    <LoggedInAs />
-			  </Navbar.Collapse>
-			</Navbar>
+			      <RECRUITERButton />
+		          <RECRUITERManageJobsButton />
+		          <RECRUITERSignup />
+		          <LogoutButton />
+		          <AccountButton />
+
+			    </div>
+			   
+			  </div>
+			</nav>
+			
 
 			:
 

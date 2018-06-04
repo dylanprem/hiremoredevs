@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import * as routes  from '../../constants/routes';
-import SignInForm from '../Auth/login';
+import { Link } from 'react-router-dom';
 
 
 class RECRUITERButton extends Component {
@@ -43,19 +39,17 @@ class RECRUITERButton extends Component {
 
 	render() {
 		return (
-			<div>
+			<ul className="nav navbar-nav">
 			{this.state.authUser ?
-				<div>
+				<li>
 					{this.state.isRecruiter ?
-					      <div>
-					        <Link to='/post-job' className='signup-link job-text'> Post Job Ad</Link>
-					      </div>
+						<Link  to='/post-job' className='signup-link job-text'>Post Job</Link>
 					: null }
-				</div>
+				</li>
 				:
 				null
 			}
-			</div>
+			</ul>
 
 		);
 	}

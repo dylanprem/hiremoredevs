@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
-import { auth,db } from '../../firebase';
+import { db } from '../../firebase';
 import Phone from 'react-phone-number-input';
 import rrui from 'react-phone-number-input/rrui.css';
 import rpni from 'react-phone-number-input/style.css';

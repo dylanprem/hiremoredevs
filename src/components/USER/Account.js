@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { auth } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import CollabsPosted from './CollabsPosted';
 import JobsOfInterest from './JobsOfInterest';
 import ViewProfile from '../profile/viewProfile';
@@ -188,7 +188,6 @@ class Account extends Component {
 	componentDidMount() {
 	   const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
 		profilesRef.once('value', (snapshot) => {
-	    let Profiles = snapshot.val();
 	    let newState = [];
 	      newState.push({
 	        id: this.state.currentProfile,
@@ -259,7 +258,7 @@ class Account extends Component {
 							<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
 								<div className='col-md-12 text-center'>
-									<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+									<img alt="profile-pic" style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 									<p className='job-text'>{this.state.authUser.displayName}</p>
 									<p className='job-text'>{this.state.authUser.email}</p>
 

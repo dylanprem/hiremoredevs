@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
 import './profile.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import * as routes from '../../constants/routes';
-import SignInForm from '../Auth/login';
+
+
 
 class EditProject extends Component{
 	constructor(props){
@@ -52,7 +50,6 @@ class EditProject extends Component{
 	componentDidMount(){
 	  const projectsRef = firebase.database().ref('Projects/'+this.state.currentProject);
 		projectsRef.once('value', (snapshot) => {
-	    let Projects = snapshot.val();
 	    let newState = [];
 	      newState.push({
 			projectName: snapshot.val().projectName,

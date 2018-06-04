@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './landing.css';
-import { BrowserRouter as BrowserHistory, Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as routes from '../../constants/routes'; 
 import * as firebase from 'firebase';
 

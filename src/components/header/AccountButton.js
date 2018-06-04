@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
-import * as routes  from '../../constants/routes';
+import {  Link, withRouter } from 'react-router-dom';
 
 
 class AccountButton extends Component {
@@ -42,25 +39,18 @@ class AccountButton extends Component {
 		return (
 			<div>
 			{this.state.authUser ?
-				<div>
-					{this.state.Profiles.map((profile) => {
-						return(
-						<div key={profile.id}>
-								{profile.uid === this.state.authUser.uid ?
-									<div>
-										<Link id='edit-button' className='btn yellow-button job-text hidden-sm hidden-xs' to={`/myAccount/${profile.id}`}><span className='glyphicon glyphicon-stats'></span>&nbsp;&nbsp;Account</Link>
-										<Link id='edit-button' className='signup-link job-text visible-xs visible-sm' to={`/myAccount/${profile.id}`}><span className='glyphicon glyphicon-stats'></span> Account</Link>
-									</div>
-									: 
-									null
-								}
-						</div>
-					);
-					})}
-				</div>
-				:
-				null
-			}
+			<ul className="nav navbar-nav">
+				{this.state.Profiles.map((profile) => {return(
+				<li key={profile.id}>
+				{profile.uid === this.state.authUser.uid ?
+				<Link  key={profile.id} id='edit-button' className='signup-link job-text' to={`/myAccount/${profile.id}`}><span className='glyphicon glyphicon-stats'></span>&nbsp;&nbsp;Account</Link>
+				: null }
+
+				</li>
+				   );
+				})}		
+			</ul>
+			: null }
 			</div>
 
 		);

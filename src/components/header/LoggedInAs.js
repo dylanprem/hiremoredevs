@@ -25,14 +25,14 @@ class LoggedInAs extends Component {
 		return(
 			<div>
 			{this.state.authUser ?
-			<Nav>
-				<NavItem>
-					<p class='logged-in-as'>Logged in as: {this.state.authUser.displayName}</p>
-				</NavItem>
-				<NavItem className='hidden-sm hidden-xs'>
+				 <nav className="navbar navbar-inverse navbar-fixed-bottom">
+				  <div className="container-fluid">
+				    <div className="navbar-header">
+				      <p className='logged-in-as'>Logged in as: {this.state.authUser.displayName}</p>
 					<img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
-				</NavItem>
-			</Nav>
+				    </div>
+				  </div>
+				</nav> 
 			:
 			null }
 			</div>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import * as routes from '../../constants/routes';
-import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-import SignInForm from '../Auth/login';
+import { withRouter } from 'react-router-dom';
+
 
 
 
@@ -115,12 +113,8 @@ class ViewJobADMIN extends Component{
 
 
 	componentDidMount() {
-
-	  const JobPostsRef = firebase.database().ref('JobPostRequests' + '/' + this.state.currentJobADMIN);
-	  JobPostsRef.once('value', (snapshot) => {
-	    let JobPostRequests = snapshot.val();
+	  firebase.database().ref('JobPostRequests/' + this.state.currentJobADMIN).once('value', (snapshot) => {
 	    let newState = [];
-	    
 	      newState.push({
 	        id: this.state.currentJobADMIN,
 	        companyName: snapshot.val().companyName,
@@ -221,7 +215,7 @@ class ViewJobADMIN extends Component{
 								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='applyLink' ref={(applyLink) => this.applyLink = applyLink} defaultValue={post.applyLink} />
 
 								       <h3>UID</h3>
-								       <input type='text' className='job-text form-control' name='uid' value={this.state.uid = post.uid} />
+								       <input type='text' className='job-text form-control' name='uid' value={this.state.uid} />
 								       <button onClick={this.handleSubmit} className='btn btn-info'>Approve</button>
 
 								       <h3>Job Duties</h3>
@@ -261,6 +255,6 @@ class ViewJobADMIN extends Component{
 }
 
 
-export default ViewJobADMIN;
+export default withRouter(ViewJobADMIN);
 
 

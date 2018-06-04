@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
 import './profile.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import * as routes from '../../constants/routes';
-import SignInForm from '../Auth/login';
+
 
 class AddProject extends Component{
 	constructor(props){

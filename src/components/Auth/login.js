@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.js';
 import * as routes from '../../constants/routes';
 import * as firebase from 'firebase';
 import './auth.css';
 import gmail from './auth-images/gmail.png';
-import facebook from './auth-images/facebook.png';
-import profilePicture from './auth-images/profile.png';
+
 
 
 const byPropKey = (propertyName, value) => () => ({
@@ -48,7 +47,6 @@ class SignInForm extends Component {
     const userPassword = this.state.userPassword;
     auth.signInWithEmailAndPassword(userEmail, userPassword)
     .then((result) => {
-        const token = result.credential.accessToken;
         const authUser = result.authUser;
         this.setState({ authUser });
     })
@@ -61,7 +59,6 @@ class SignInForm extends Component {
       const provider = new firebase.auth.GoogleAuthProvider(); 
       auth.signInWithPopup(provider) 
         .then((result) => {
-          const token = result.credential.accessToken;
           const authUser = result.authUser;
           this.setState({ authUser });
         })
@@ -78,7 +75,6 @@ class SignInForm extends Component {
       const regPassword = this.state.regPassword;
       firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
       .then(function(result) {
-          const token = result.credential.accessToken;
           const authUser = result.authUser;
           this.setState({ authUser });
       })
@@ -152,7 +148,7 @@ class SignInForm extends Component {
                   </div>
 
                   <div className='text-center'>
-                    <button className="btn btn-danger google-btn margins" onClick={this.loginWithGoogle}><span><img src={gmail} /></span> Login With Gmail</button>
+                    <button className="btn btn-danger google-btn margins" onClick={this.loginWithGoogle}><span><img alt="gmail" src={gmail} /></span> Login With Gmail</button>
                   </div>
                   
               </div>

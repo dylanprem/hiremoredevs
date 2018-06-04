@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import * as routes  from '../../constants/routes';
-import SignInForm from '../Auth/login';
+import { Link } from 'react-router-dom';
+
 
 
 class RECRUITERManageJobsButton extends Component {
@@ -42,20 +39,17 @@ class RECRUITERManageJobsButton extends Component {
 
 	render() {
 		return (
-			<div>
+			<ul className="nav navbar-nav">
 			{this.state.authUser ?
-				<div>
+				<li>
 					{this.state.isRecruiter ?
-					      <div>
-					        <Link to='/view-posted-jobs' className='btn yellow-button job-text hidden-sm hidden-xs'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
-					        <Link to='/view-posted-jobs' className='signup-link job-text visible-sm visible-xs'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
-					      </div>
+						<Link  to='/view-posted-jobs' className='signup-link job-text'><span className='glyphicon glyphicon-cog'></span> Manage Jobs</Link>
 					: null}
-				</div>
+				</li>
 				:
 				null
 			}
-			</div>
+			</ul>
 
 		);
 	}
