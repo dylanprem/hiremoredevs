@@ -36,7 +36,7 @@ class JobFeed extends Component {
 	}
 
 	orderByState(){
-		const stateRef = firebase.database().ref("JobPosts").orderByChild("State").equalTo(this.state.searchedState);
+		const stateRef = firebase.database().ref("JobPosts").orderByChild("state").equalTo(this.state.searchedState);
 		stateRef.on('value', (snapshot) => {
 	    let JobPosts = snapshot.val();
 	    let newState = [];
