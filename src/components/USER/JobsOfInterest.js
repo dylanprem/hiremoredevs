@@ -24,7 +24,7 @@ class JobsOfInterest extends Component {
 	removeItem(Id) {
 	    const collabRef = firebase.database().ref(`postsFromUsers/${Id}`);
 	    collabRef.remove();
-	    // window.location.reload();
+	    window.location.reload();
 	}
 
 	componentDidMount() {
@@ -39,7 +39,7 @@ class JobsOfInterest extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    State: JobPosts[post].State,
+		    state: JobPosts[post].state,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -103,18 +103,18 @@ class JobsOfInterest extends Component {
 						        <th></th>
 						      </tr>
 						    </thead>
-						    {this.state.postsFromUsers.map((a) => {return(
-						    <tbody key={a.id}>
-						    	{this.state.JobPosts.map((post) => {return(
-							    <tr key={post.id}>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.companyName}</p> : null}</td>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.position}</p> : null }</td>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.State}</p> : null }</td>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <p>{post.zip}</p> : null }</td>
-			                      <td>{a.uid === this.state.authUser.uid && post.id === a.jobID ? <Link className='btn black-button btn-sm' to={`/job/${post.id}`}>View Details</Link> : null }</td>
-			                      <td><button className='btn btn-danger job-text' onClick={() => this.removeItem(a.id)}><span className='glyphicon glyphicon-trash'></span> Not interested</button></td>
+						    {this.state.JobPosts.map((post) => {return(
+						    <tbody>
+						    	{this.state.postsFromUsers.map((a) => {return(
+							    <tr key={a.id}>
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.companyName}</td> : null}
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.position}</td> : null }
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.state}</td> : null }
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.zip}</td> : null }
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td><Link className='btn black-button btn-sm' to={`/job/${post.id}`}>View Details</Link></td> : null }
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td><button className='btn btn-danger job-text' onClick={() => this.removeItem(a.id)}><span className='glyphicon glyphicon-trash'></span> Not interested</button></td> : null }
 			                    </tr>
-			                    );})}     
+			                    );})}
 						    </tbody>
 						    );})}
 						</table>

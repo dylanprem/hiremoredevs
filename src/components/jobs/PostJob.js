@@ -175,7 +175,7 @@ componentDidMount(){
 								<div className='form-group'>
 									<label>We are looking for a:</label>
 									<select required className='form-control' name='position' onChange={this.handleChange} value={this.state.position}>
-										<option disabled selected>Select an option</option>
+										<option value="" disabled selected>Select an option</option>
 										<option value="Front End Developer">Front End Developer</option>
 										<option value="Back End Developer">Back End Developer</option>
 										<option value="Full Stack Developer">Full Stack Developer</option>

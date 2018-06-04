@@ -128,7 +128,7 @@ class ViewJob extends Component{
 	        name: postsFromUsers[post].name,
 		    email: postsFromUsers[post].email,
 		    position: postsFromUsers[post].position,
-		    State: postsFromUsers[post].State,
+		    state: postsFromUsers[post].state,
 		    city: postsFromUsers[post].city,
 		    relocate: postsFromUsers[post].relocate,
 		    about: postsFromUsers[post].about,
@@ -313,7 +313,7 @@ class ViewJob extends Component{
 								<div className='form-group'>
 									<label>I'm located in:</label>
 									<p>State</p>
-									<select required className='form-control' name='State' onChange={this.handleChange} value={this.state.State}>
+									<select required className='form-control' name='state' onChange={this.handleChange} value={this.state.state}>
 										<option value="" disabled selected>Select an option</option>
 										<option value="AL">Alabama</option>
 										<option value="AK">Alaska</option>
@@ -446,7 +446,7 @@ class ViewJob extends Component{
 											})}
 											</td>
 											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.position}</p> : null}</td>
-											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.city}, {post.State}</p> : null}</td>
+											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.city}, {post.state}</p> : null}</td>
 											<td className='hidden-xs'>{post.jobID === this.state.currentJob ? <p>{post.relocate}</p> : null}</td>
 											<td>
 					                      {this.state.Profiles.map((profile) => {

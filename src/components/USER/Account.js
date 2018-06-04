@@ -258,7 +258,7 @@ class Account extends Component {
 							{this.state.Profiles.map((profile) => { return (
 							<div key={profile.id}>
 								{profile.uid === this.state.authUser.uid ?
-								<div className='col-md-12'>
+								<div className='col-md-12 text-center'>
 									<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 									<p className='job-text'>{this.state.authUser.displayName}</p>
 									<p className='job-text'>{this.state.authUser.email}</p>
@@ -287,7 +287,7 @@ class Account extends Component {
 										<input type='text' className='form-control' name='frameworkThree' onChange={this.handleChange} defaultValue={profile.frameworkThree} ref={(frameworkThree) => this.frameworkThree = frameworkThree} placeholder='Firebase' required />
 									</div>
 									
-									<div className='col-md-12'>
+									<div className='col-md-12 text-center'>
 										<button className='btn yellow-button job-text' onClick={this.handleSubmit}>Update profile</button>
 									</div>
 									
