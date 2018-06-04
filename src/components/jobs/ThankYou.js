@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './style.css';
 import * as firebase from 'firebase';
-import SignInForm from '../Auth/login';
 
 
 class ThankYou extends Component{

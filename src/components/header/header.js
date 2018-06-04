@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import './style.css';
-import LoggedInAs from './LoggedInAs';
 import * as routes from '../../constants/routes';
 import RECRUITERButton from '../RECRUITER/RECRUITERButton';
 import RECRUITERManageJobsButton from '../RECRUITER/RECRUITERManageJobsButton';
@@ -57,7 +56,7 @@ class Header extends Component {
 		          <AccountButton />
 
 			    </div>
-			   
+			 
 			  </div>
 			</nav>
 			

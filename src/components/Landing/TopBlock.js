@@ -25,7 +25,8 @@ class TopBlock extends Component {
 			<div className='row employers-img' >
 				<div className='col-md-12 opacity'>
 					<div className='col-md-12 inner text-center'>
-						<h1 className='text-center landingLogo'>HireMoreDevs</h1>
+						<h1 className='text-center landingLogo hidden-xs'>HireMoreDevs</h1>
+						<h1 className='text-center hidden-md hidden-sm hidden-lg hidden-xl'>HireMoreDevs</h1>
 						{this.state.authUser ? null : <Link to={routes.SIGN_IN} className='job-text signup-link non-auth-link'>Login/Signup</Link>}
 					</div>
 				</div>

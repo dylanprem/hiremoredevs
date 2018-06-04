@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SignInForm from '../Auth/login';
+import {  Link } from 'react-router-dom';
+
 
 class CollabList extends Component {
 	constructor(props){
@@ -91,7 +90,7 @@ class CollabList extends Component {
 		                      		<div key={profile.id}>
 		                      		{collab.uid === profile.uid ?
 		                      		<div className='job-text text-center collab'>
-		                      		<Link className='btn black-button' to={'/user/' + `${profile.id}`}><img src={profile.profilePicture} className='center-block img-responsive img-circle profile-pic' style={{width:80, height:80}} /></Link>
+		                      		<Link className='btn black-button' to={`/user/${profile.id}`}><img alt="profile-pic" src={profile.profilePicture} className='center-block img-responsive img-circle profile-pic' style={{width:80, height:80}} /></Link>
 		                      		<p><small className='text-muted'>From:</small> {profile.name}</p>
 		                      		</div>
 		                      		:

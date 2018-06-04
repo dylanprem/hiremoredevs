@@ -27,7 +27,7 @@ import ForgotPassword from './Auth/ForgotPassword';
 import EditCollab from './collab/EditCollab';
 import EditProject from './profile/EditProject';
 import EditJob from './jobs/EditJob';
-
+import LoggedInAs from './header/LoggedInAs';
 
 
 
@@ -43,6 +43,7 @@ const App = () =>
     <div className='dark-bg'>
       <Header />
       <AdminHeader />
+      <LoggedInAs />
       <Route exact path={routes.LANDING} component={Landing} />
       <Route exact path={routes.SIGN_IN} component={SignInForm} />
       <Route exact path={routes.CURRENT_FEED} component={JobFeed} />

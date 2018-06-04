@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
-import * as routes from '../../constants/routes';
+import { withRouter } from 'react-router-dom';
 import * as firebase from 'firebase';
 
 const byPropKey = (propertyName, value) => () => ({

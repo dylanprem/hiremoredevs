@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {withRouter, Link } from 'react-router-dom';
 import './collab.css';
-import SignInForm from '../Auth/login';
 
 class ViewCollab extends Component {
 	constructor(props){
@@ -60,7 +58,6 @@ class ViewCollab extends Component {
 	componentDidMount(){
 		const collabsRef = firebase.database().ref('Collabs/' + this.state.currentCollab);
 		collabsRef.once('value', (snapshot) => {
-			let Collabs = snapshot.val();
 			let newState = [];			
 			newState.push({
 				id: this.state.currentCollab,
@@ -282,4 +279,4 @@ class ViewCollab extends Component {
 	}
 }
 
-export default ViewCollab;
+export default withRouter(ViewCollab);

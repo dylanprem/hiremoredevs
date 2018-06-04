@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { withRouter, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-import SignInForm from '../Auth/login';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -109,7 +107,6 @@ class EditJob extends Component{
 
 	  const JobPostsRef = firebase.database().ref('JobPosts/' + this.state.currentJob);
 	  JobPostsRef.once('value', (snapshot) => {
-	    let JobPosts = snapshot.val();
 	    let newState = [];
 	      newState.push({
 	        companyName: snapshot.val().companyName,

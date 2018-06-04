@@ -29,3 +29,10 @@
     color: #fff;
     background-color: transparent !important;
 }
+
+.logged-in-as-navbar{
+	background-color: transparent !important;
+	border-color: transparent !important;
+	background: none !important;
+	background-image: none !important;
+}

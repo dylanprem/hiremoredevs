@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './style.css';
 
 
@@ -74,11 +74,9 @@ class ViewJob extends Component{
 		}
 
 	componentDidMount() {
-	  const JobPostsRef = firebase.database().ref('JobPosts' + '/' + this.state.currentJob);
+	  const JobPostsRef = firebase.database().ref('JobPosts/' + this.state.currentJob);
 	  JobPostsRef.once('value', (snapshot) => {
-	    let JobPosts = snapshot.val();
 	    let newState = [];
-	    
 	      newState.push({
 	        id: this.state.currentJob,
 	        companyName: snapshot.val().companyName,
@@ -222,7 +220,7 @@ class ViewJob extends Component{
 												{profile.uid === r.uid && post.uid === r.uid  ?
 												<div> 
 												<h1>Posted by:</h1>
-												<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+												<img alt="profile-pic" style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 												<p className='job-text'>{profile.name}</p>
 												<Link to={r.linkedin} className='btn btn-primary job-text' target="_blank">LinkedIn</Link>
 												<p className='job-text'>Recruiter at: <span className='text-white'> {r.companyName}</span></p>

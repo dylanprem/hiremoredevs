@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { withRouter, history, Link, BrowserRouter as BrowserHistory, Route } from 'react-router-dom';
-import * as routes  from '../../constants/routes';
-import SignInForm from '../Auth/login';
+import { withRouter, Link } from 'react-router-dom';
+
 
 class RecruiterSignupRequests extends Component {
 	constructor(props){
@@ -114,7 +112,7 @@ class RecruiterSignupRequests extends Component {
 										<td>
 										{this.state.Profiles.map((profile) => { return(
 											<div key={profile.id}>
-											{profile.uid === req.uid ? <img src={profile.profilePicture} className='profile-pic img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
+											{profile.uid === req.uid ? <img alt="profile-pic" src={profile.profilePicture} className='profile-pic img-responsive center-block img-circle' style={{width:50, height:50}} /> : null}
 											</div>
 										);})}
 										</td>
@@ -163,4 +161,4 @@ class RecruiterSignupRequests extends Component {
 	}
 }
 
-export default RecruiterSignupRequests;
+export default withRouter(RecruiterSignupRequests);
