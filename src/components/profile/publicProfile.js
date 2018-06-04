@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
 import './profile.css';
-import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
-import SignInForm from '../Auth/login';
+import { Link, withRouter } from 'react-router-dom';
+
 
 class publicProfile extends Component {
 	constructor(props){
@@ -22,7 +20,6 @@ class publicProfile extends Component {
 	componentDidMount(){		
 		const profilesRef = firebase.database().ref('Profiles/' + this.state.currentProfile);
 		profilesRef.once('value', (snapshot) => {
-	    let Profiles = snapshot.val();
 	    let newState = [];
 	    
 	      newState.push({
@@ -84,7 +81,7 @@ class publicProfile extends Component {
 						return(
 						<div key={profile.id}>
 							<div>
-								<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
+								<img alt="profile-pic" style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={profile.profilePicture} />
 								<p className='job-text'>{profile.name}</p>
 								<p className='job-text'>{profile.email}</p>
 								<h3>About Me</h3>

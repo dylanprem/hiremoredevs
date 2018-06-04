@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './collab.css';
-import SignInForm from '../Auth/login';
+
 
 class EditComment extends Component {
 	constructor(props){
@@ -53,7 +52,7 @@ class EditComment extends Component {
 	componentDidMount(){
 		const commentsRef = firebase.database().ref('Comments/' + this.state.currentComment);
 		commentsRef.once('value', (snapshot) => {
-			let Comments = snapshot.val();
+
 			let newState = [];
 				
 			newState.push({

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { auth } from '../../firebase';
 import './profile.css';
-import * as routes from '../../constants/routes';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
+import {  Link, withRouter } from 'react-router-dom';
 import AddProject from './AddProject';
-import SignInForm from '../Auth/login';
 
 
 
@@ -83,7 +80,7 @@ class ViewProfile extends Component {
 				<div className='col-md-12 text-center'>
 					<div className='col-md-12'>
 						<h1 className='job-text text-center'>Your Profile</h1>
-						<img style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+						<img alt="profile-pic" style={{width:100, height:100}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
 						<p className='job-text'>{this.state.authUser.displayName}</p>
 						<p className='job-text'>{this.state.authUser.email}</p>
 						{this.state.Profiles.map((profile) => {
