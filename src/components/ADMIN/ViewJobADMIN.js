@@ -59,7 +59,7 @@ class ViewJobADMIN extends Component{
 	    email: this.email.value,
 	    position: this.position.value,
 	    about: this.about.value,
-	    State: this.State.value,
+	    state: this.state.value,
 	    zip: this.zip.value,
 	    phone: this.phone.value,
 	    applyLink: this.applyLink.value,
@@ -192,7 +192,7 @@ class ViewJobADMIN extends Component{
 								       <h3>Job Location</h3>
 
 								       <h4 className='text-left'>State</h4>
-								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='State' ref={(State) => this.State = State} defaultValue={post.state} />
+								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='state' ref={(state) => this.state = state} defaultValue={post.state} />
 
 								       <h4 className='text-left'>Zip</h4>
 								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='zip' ref={(zip) => this.zip = zip} defaultValue={post.zip} />

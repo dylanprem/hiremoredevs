@@ -38,7 +38,7 @@ class RECRUITERPostedJobs extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    State: JobPosts[post].State,
+		    state: JobPosts[post].state,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink,
@@ -109,7 +109,7 @@ class RECRUITERPostedJobs extends Component {
 								    <tr className='active' key={post.id}>
 				                      <td className='text-warning'>{post.uid === this.state.authUser.uid ? post.companyName : null}</td>
 				                      <td>{post.uid === this.state.authUser.uid ? post.position : null}</td>
-				                      <td>{post.uid === this.state.authUser.uid ? post.State : null}</td>
+				                      <td>{post.uid === this.state.authUser.uid ? post.state : null}</td>
 				                      <td>{post.uid === this.state.authUser.uid ? post.zip : null}</td> 
 				                      <td>{post.uid === this.state.authUser.uid ? <Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link> : null }</td> 
 			                      	  <td className='text-right'>{post.uid === this.state.authUser.uid ? <button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}>Delete</button> : null}</td>
