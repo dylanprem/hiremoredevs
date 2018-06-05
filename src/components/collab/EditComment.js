@@ -52,11 +52,8 @@ class EditComment extends Component {
 	componentDidMount(){
 		const commentsRef = firebase.database().ref('Comments/' + this.state.currentComment);
 		commentsRef.once('value', (snapshot) => {
-
 			let newState = [];
-				
 			newState.push({
-				id: this.state.currentComment,
 				commentBody: snapshot.val().commentBody,
 				uid: snapshot.val().uid
 			});
@@ -114,11 +111,9 @@ class EditComment extends Component {
 														{comment.uid === this.state.authUser.uid ?
 														<div>
 														<h1 className='job-text text-center'>Edit Your Comment</h1>
-														{comment.id === this.state.currentComment ?
-														<textarea className='comment form-control' name='commentBody' defaultValue={comment.commentBody} ref={(commentBody) => this.commentBody = commentBody} onChange={this.handleChange}></textarea>
-														:
-														null
-														}
+														
+														<textarea className='comment form-control' name='commentBody' defaultValue={comment.commentBody} ref={(commentBody) => this.commentBody = commentBody} onChange={this.handleChange} />
+						
 														</div> 
 														: 
 														<div><h1 className='job-text alert alert-danger'>Why are you trying to edit someone elses comment man? That's not cool bro.</h1></div>
@@ -128,7 +123,7 @@ class EditComment extends Component {
 														<div className='text-center row'>
 															<div className='btn-group'>
 																<button className='btn btn-success job-text ' onClick={this.saveComment}><span className='glyphicon glyphicon-pencil'></span>  SAVE</button>
-																<Link to={"/view-collab/" + this.state.currentCollab} className='btn btn-danger job-text '><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
+																<Link to={`/view-collab/${this.state.currentCollab}`} className='btn btn-danger job-text '><span className='glyphicon glyphicon-warning-sign'></span>  CANCEL</Link>
 															</div>
 														</div>
 														:

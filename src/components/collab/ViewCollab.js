@@ -248,7 +248,7 @@ class ViewCollab extends Component {
 															}
 															
 															{comment.uid === this.state.authUser.uid ? 
-																<Link to={`/edit-comment/${comment.id}`} className='btn btn-warning job-text text-black'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
+																<Link to={`/edit-comment/${this.state.currentCollab}/${comment.id}`} className='btn btn-warning job-text text-black'><span className='glyphicon glyphicon-pencil'></span>  EDIT</Link> 
 																: 
 																null
 															}
