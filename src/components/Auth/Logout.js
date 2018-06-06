@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as BrowserHistory, Router, Route, Link, withRouter } from 'react-router-dom';
-import { auth } from '../../firebase/firebase.js';
+import { withRouter } from 'react-router-dom';
 import * as routes from '../../constants/routes';
 import * as firebase from 'firebase';
 import './auth.css';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import PropTypes from "prop-types";
 
 

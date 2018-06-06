@@ -7,7 +7,7 @@ import CollabBlock from './collabBlock';
 class Landing extends Component {
 	render(){
 		return(
-			<div className='container-fluid'>
+			<div>
 				<TopBlock />
 				<About />
 				<Jobseekers />
