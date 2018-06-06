@@ -44,6 +44,7 @@ const App = () =>
       <Header />
       <AdminHeader />
       <LoggedInAs />
+      <div className="container-fluid">
       <Route exact path={routes.LANDING} component={Landing} />
       <Route exact path={routes.SIGN_IN} component={SignInForm} />
       <Route exact path={routes.CURRENT_FEED} component={JobFeed} />
@@ -67,6 +68,7 @@ const App = () =>
       <Route exact path={routes.ACCOUNT} component={Account} />
       <Route exact path="/admin-view-recruiter-request/:viewReq" component={ViewSignupRequest} />
       <Route exact path={routes.FORGOT_PW} component={ForgotPassword} />
+      </div>
     </div>
   </Router>
 
