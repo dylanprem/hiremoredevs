@@ -27,8 +27,8 @@ class LoggedInAs extends Component {
 			{this.state.authUser ?
 				 <nav className="navbar navbar-inverse logged-in-as-navbar">
 				  <div className="container-fluid">
-				    <div className="navbar-header">
-				      <img style={{width:40, height:40}} className='img-responsive img-circle profile-pic center-block' src={this.state.authUser.photoURL} />
+				    <div className="navbar-header pic-container">
+				      <img style={{width:40, height:40}} className='img-responsive img-circle profile-pic' src={this.state.authUser.photoURL} />
 				      <p className='logged-in-as'>Logged in as: {this.state.authUser.displayName}</p>
 					
 				    </div>
