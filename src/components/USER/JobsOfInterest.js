@@ -37,7 +37,7 @@ class JobsOfInterest extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    jobState: JobPosts[post].jobState,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -107,7 +107,7 @@ class JobsOfInterest extends Component {
 							    <tr key={a.id}>
 			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.companyName}</td> : null}
 			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.position}</td> : null }
-			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.state}</td> : null }
+			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.jobState}</td> : null }
 			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td>{post.zip}</td> : null }
 			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td><Link className='btn black-button btn-sm' to={`/job/${post.id}`}>View Details</Link></td> : null }
 			                      {a.uid === this.state.authUser.uid && post.id === a.jobID ? <td><button className='btn btn-danger job-text' onClick={() => this.removeItem(a.id)}><span className='glyphicon glyphicon-trash'></span> Not interested</button></td> : null }

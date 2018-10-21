@@ -12,7 +12,7 @@ class EditJob extends Component{
 			companyName: '',
 		    email: '',
 		    position: '',
-		    state:'',
+		    jobState:'',
 		    zip:'',
 		    about: '',
 		    phone:'',
@@ -53,7 +53,7 @@ class EditJob extends Component{
 	    email: this.email.value,
 	    position: this.position.value,
 	    about: this.about.value,
-	    state: this.state.state,
+	    jobState: this.state.jobState,
 	    zip: this.zip.value,
 	    phone: this.phone.value,
 	    applyLink: this.applyLink.value,
@@ -78,7 +78,7 @@ class EditJob extends Component{
 		companyName: '',
 	    email: '',
 	    position: '',
-	    state:'',
+	    jobState:'',
 	    zip:'',
 	    about: '',
 	    phone:'',
@@ -113,7 +113,7 @@ class EditJob extends Component{
 	        email: snapshot.val().email,
 	        phone: snapshot.val().phone,
 	        position: snapshot.val().position,
-	        state: snapshot.val().state,
+	        jobState: snapshot.val().jobState,
 	        zip: snapshot.val().zip,
 	        about: snapshot.val().about,
 	        reqOne:snapshot.val().reqOne,
@@ -184,7 +184,7 @@ class EditJob extends Component{
 								       <h4 className='text-left'>State</h4>
 								     
 								       <div className='form-group'>
-										<select className='form-control' onChange={this.handleChange}  name='state' value={this.state.state} >
+										<select className='form-control' onChange={this.handleChange}  name='jobState' value={this.state.jobState} >
 											<option value="" disabled>Select an option</option>
 											<option value="Alabama">Alabama</option>
 											<option value="Alaska">Alaska</option>

@@ -17,7 +17,7 @@ class PostJobForm extends Component {
 	    companyName: '',
 	    email: '',
 	    position: '',
-	   	state: '',
+	   	jobState: '',
 	   	zip:'',
 	    about: '',
 	    apply:'',
@@ -63,7 +63,7 @@ class PostJobForm extends Component {
 	    email: this.state.email,
 	    position: this.state.position,
 	    about: this.state.about,
-	    state: this.state.state,
+	    jobState: this.state.jobState,
 	    zip: this.state.zip,
 	    phone: this.state.phone,
 	    applyLink: this.state.applyLink,
@@ -87,7 +87,7 @@ class PostJobForm extends Component {
 	    companyName: '',
 	    email: '',
 	    position: '',
-	    state:'',
+	    jobState:'',
 	    zip:'',
 	    about: '',
 	    phone:'',
@@ -184,7 +184,7 @@ componentDidMount(){
 								
 								<div className='form-group'>
 									<label>Job location</label>
-									<select className='form-control' name='state' onChange={this.handleChange} value={this.state.state} >
+									<select className='form-control' name='jobState' onChange={this.handleChange} value={this.state.jobState} >
 										<option value="" disabled selected>Select an option</option>
 										<option value="Alabama">Alabama</option>
 										<option value="Alaska">Alaska</option>

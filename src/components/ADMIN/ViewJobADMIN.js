@@ -14,7 +14,7 @@ class ViewJobADMIN extends Component{
 			companyName: '',
 		    email: '',
 		    position: '',
-		    state:'',
+		    jobState:'',
 		    zip:'',
 		    about: '',
 		    phone:'',
@@ -32,13 +32,13 @@ class ViewJobADMIN extends Component{
 		    jobDuty8:'',
 		    jobDuty9:'',
 		    jobDuty10:'',
-			uid:'',
 			JobPostRequests: [],
 			JobPosts:[],
 			ADMIN:[],
 			currentJobADMIN: props.match.params.viewJobADMIN,
 	    	authUser:null,
-	    	isAdmin: false
+	    	isAdmin: false,
+	    	uid:''
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -59,7 +59,7 @@ class ViewJobADMIN extends Component{
 	    email: this.email.value,
 	    position: this.position.value,
 	    about: this.about.value,
-	    state: this.state.value,
+	    jobState: this.jobState.value,
 	    zip: this.zip.value,
 	    phone: this.phone.value,
 	    applyLink: this.applyLink.value,
@@ -76,7 +76,8 @@ class ViewJobADMIN extends Component{
 	    jobDuty8:this.jobDuty8.value,
 	    jobDuty9:this.jobDuty9.value,
 	    jobDuty10:this.jobDuty10.value,
-		uid: this.state.uid
+	    uid: this.uid.value
+		
 	  }
 
 
@@ -85,7 +86,7 @@ class ViewJobADMIN extends Component{
 		companyName: '',
 	    email: '',
 	    position: '',
-	    state:'',
+	    jobState:'',
 	    zip:'',
 	    about: '',
 	    phone:'',
@@ -103,9 +104,9 @@ class ViewJobADMIN extends Component{
 	    jobDuty8:'',
 	    jobDuty9:'',
 	    jobDuty10:'',
-		uid:'',
+	    uid:''
+		
 	  });
-
 	  JobPostToDelete.remove();		
 	  this.props.history.push(routes.ADMIN_APPROVE_JOB);  
 	}
@@ -121,7 +122,7 @@ class ViewJobADMIN extends Component{
 	        email: snapshot.val().email,
 	        phone: snapshot.val().phone,
 	        position: snapshot.val().position,
-	        state: snapshot.val().state,
+	        jobState: snapshot.val().jobState,
 	        zip: snapshot.val().zip,
 	        about: snapshot.val().about,
 	        reqOne:snapshot.val().reqOne,
@@ -138,7 +139,7 @@ class ViewJobADMIN extends Component{
 		    jobDuty8:snapshot.val().jobDuty8,
 		    jobDuty9:snapshot.val().jobDuty9,
 		    jobDuty10:snapshot.val().jobDuty10,
-	        uid: snapshot.val().uid
+		    uid: snapshot.val().uid
 	      });
 	    
 	    this.setState({
@@ -192,7 +193,7 @@ class ViewJobADMIN extends Component{
 								       <h3>Job Location</h3>
 
 								       <h4 className='text-left'>State</h4>
-								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='state' ref={(state) => this.state = state} defaultValue={post.state} />
+								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='jobState' ref={(jobState) => this.jobState = jobState} defaultValue={post.jobState} />
 
 								       <h4 className='text-left'>Zip</h4>
 								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='zip' ref={(zip) => this.zip = zip} defaultValue={post.zip} />
@@ -214,9 +215,7 @@ class ViewJobADMIN extends Component{
 								       <h3>Application Link</h3>
 								       <input type='text' onChange={this.handleChange} className='job-text form-control' name='applyLink' ref={(applyLink) => this.applyLink = applyLink} defaultValue={post.applyLink} />
 
-								       <h3>UID</h3>
-								       <input type='text' className='job-text form-control' name='uid' value={this.state.uid} />
-								       <button onClick={this.handleSubmit} className='btn btn-info'>Approve</button>
+								       
 
 								       <h3>Job Duties</h3>
 								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty1' ref={(jobDuty1) => this.jobDuty1 = jobDuty1} defaultValue={post.jobDuty1} />
@@ -239,6 +238,8 @@ class ViewJobADMIN extends Component{
 								       <br />
 								       <textarea type='text' onChange={this.handleChange} className='job-text form-control' name='jobDuty10' ref={(jobDuty10) => this.jobDuty10 = jobDuty10} defaultValue={post.jobDuty10} />
 								       <br />
+								       <input onChange={this.handleChange} className='job-text form-control' id="disabledInput" disabled name='uid' ref={(uid) => this.uid = uid} defaultValue={post.uid} />
+								       <button onClick={this.handleSubmit} className='btn btn-info'>Approve</button>
 							        </div>
 							         );
 				        		})}		        	       

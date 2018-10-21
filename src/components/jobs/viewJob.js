@@ -20,7 +20,7 @@ class ViewJob extends Component{
 	    	name:'',
 	    	email:'',
 		    position: '',
-		    state: '',
+		    jobState: '',
 		    zip:'',
 		    city: '',
 		    relocate: '',
@@ -58,7 +58,7 @@ class ViewJob extends Component{
 		  const postsFromUsers = { 
 		  	uid: this.state.authUser.uid,
 		    position: this.state.position,
-		    state: this.state.state,
+		    jobState: this.state.jobState,
 		    city: this.state.city,
 		    relocate: this.state.relocate,
 		    jobID: this.state.currentJob
@@ -67,7 +67,7 @@ class ViewJob extends Component{
 		  JobPostsCandidatesRef.push(postsFromUsers);
 		  this.setState({
 		    position: '',
-		    state: '',
+		    jobState: '',
 		    city: '',
 		    relocate: '',
 		  });
@@ -83,7 +83,7 @@ class ViewJob extends Component{
 	        email: snapshot.val().email,
 	        phone: snapshot.val().phone,
 	        position: snapshot.val().position,
-	        state: snapshot.val().state,
+	        jobState: snapshot.val().jobState,
 	        zip: snapshot.val().zip,
 	        about: snapshot.val().about,
 	        reqOne:snapshot.val().reqOne,
@@ -120,7 +120,7 @@ class ViewJob extends Component{
 	        name: postsFromUsers[post].name,
 		    email: postsFromUsers[post].email,
 		    position: postsFromUsers[post].position,
-		    state: postsFromUsers[post].state,
+		    jobState: postsFromUsers[post].jobState,
 		    city: postsFromUsers[post].city,
 		    relocate: postsFromUsers[post].relocate,
 		    about: postsFromUsers[post].about,
@@ -244,7 +244,7 @@ class ViewJob extends Component{
 						       <p className='job-text'>{post.position}</p>
 
 						       <h3>Job Location</h3>
-						       <p className='job-text'>{post.state}</p>
+						       <p className='job-text'>{post.jobState}</p>
 
 						       <h3>About the Job:</h3>
 						       <p className='job-text'>{post.about}</p>

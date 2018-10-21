@@ -35,7 +35,7 @@ class ApproveJob extends Component {
 		    email: JobPostRequests[post].email,
 		    phone: JobPostRequests[post].phone,
 		    position: JobPostRequests[post].position,
-		    state: JobPostRequests[post].state,
+		    jobState: JobPostRequests[post].jobState,
 		    zip: JobPostRequests[post].zip,
 		    about: JobPostRequests[post].about,
 		    applyLink: JobPostRequests[post].applyLink
@@ -92,7 +92,7 @@ class ApproveJob extends Component {
 						    <tr className='active' key={post.id}>
 		                      <td className='text-warning'>{post.companyName}</td>
 		                      <td>{post.position}</td>
-		                      <td>{post.state}</td>
+		                      <td>{post.jobState}</td>
 		                      <td>{post.zip}</td>
 		                      <td><Link className='btn black-button btn-sm' to={`admin-view-job/${post.id}`}>View Details</Link></td>
 		                      <td className='text-right'><button type='submit' className="btn btn-danger" onClick={() => this.removeItem(post.id)}><span className='glyphicon glyphicon-trash'></span> Delete</button></td> 			          

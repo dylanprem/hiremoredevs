@@ -47,7 +47,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    jobState: JobPosts[post].jobState,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -76,7 +76,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    jobState: JobPosts[post].jobState,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -107,7 +107,7 @@ class JobFeed extends Component {
 		    email: JobPosts[post].email,
 		    phone: JobPosts[post].phone,
 		    position: JobPosts[post].position,
-		    state: JobPosts[post].state,
+		    jobState: JobPosts[post].jobState,
 		    zip: JobPosts[post].zip,
 		    about: JobPosts[post].about,
 		    applyLink: JobPosts[post].applyLink
@@ -246,7 +246,7 @@ class JobFeed extends Component {
 					    <tr className='active' key={post.id}>
 	                      <td className='text-white'>{post.companyName}</td>
 	                      <td>{post.position}</td>
-	                      <td>{post.state}</td>
+	                      <td>{post.jobState}</td>
 	                      <td>{post.zip}</td>
 	                      <td><Link className='btn black-button btn-sm' to={`job/${post.id}`}>View Details</Link></td>
 	                      
