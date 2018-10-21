@@ -17,6 +17,22 @@
 	color: #fff;
 }
 
+.logged-in-as-name{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	color: #DAA520;
+}
+
+.logged-in-as-container{
+	padding:1%;
+	margin:1%;
+	position: fixed;
+	top: 15%;
+	left: 0;
+	border-radius: 2%;
+	background-color:#363738; 
+	z-index:1;
+}
+
 .container {
 	width: 100% !important;
 }
